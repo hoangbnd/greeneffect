@@ -22,6 +22,8 @@ using MVCCore.Data;
 using MVCCore.Fakes;
 using MVCCore.Infrastructure;
 using MVCCore.Plugins;
+using GreenEffect.Services.Implement;
+using GreenEffect.Services.Interface;
 
 namespace GreenEffect.Api
 {
@@ -113,6 +115,9 @@ namespace GreenEffect.Api
 
             //register file and email
             builder.RegisterType<FileWrapper>().As<IFile>().InstancePerHttpRequest().InstancePerApiRequest();
+            //services
+            builder.RegisterType<UserServices>().As<IUserServices>().InstancePerHttpRequest().InstancePerApiRequest();
+
 
 
             //register webhelper
