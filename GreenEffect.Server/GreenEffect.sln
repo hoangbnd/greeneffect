@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEffect.Api", "GreenEffect.Api\GreenEffect.Api.csproj", "{6EAA1A55-14E3-4A9F-97B6-1DD58BC894CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEffect.DomainObject", "GreenEffect.DomainObject\GreenEffect.DomainObject.csproj", "{BE9B2169-24BF-4136-A39E-48844E8E486B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEffect.Repository.EF", "GreenEffect.Repository\GreenEffect.Repository.EF.csproj", "{543F5767-911A-4309-B78D-8CBA108F268A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEffect.Services", "GreenEffect.Services\GreenEffect.Services.csproj", "{00E10B68-86D2-4C85-8C02-4DFC3F41C12F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEffect.Web.Framework", "GreenEffect.Web.Framework\GreenEffect.Web.Framework.csproj", "{A7C7A746-2B9A-489E-BAB8-24943A4EEF73}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVCCore", "Core\MVCCore.csproj", "{D3084904-7182-476A-A4C3-3DC5857A23FB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{C2EDCB57-42DE-454A-8798-5B89213D3656}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6EAA1A55-14E3-4A9F-97B6-1DD58BC894CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EAA1A55-14E3-4A9F-97B6-1DD58BC894CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EAA1A55-14E3-4A9F-97B6-1DD58BC894CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EAA1A55-14E3-4A9F-97B6-1DD58BC894CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE9B2169-24BF-4136-A39E-48844E8E486B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE9B2169-24BF-4136-A39E-48844E8E486B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE9B2169-24BF-4136-A39E-48844E8E486B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE9B2169-24BF-4136-A39E-48844E8E486B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{543F5767-911A-4309-B78D-8CBA108F268A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{543F5767-911A-4309-B78D-8CBA108F268A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{543F5767-911A-4309-B78D-8CBA108F268A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{543F5767-911A-4309-B78D-8CBA108F268A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00E10B68-86D2-4C85-8C02-4DFC3F41C12F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00E10B68-86D2-4C85-8C02-4DFC3F41C12F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00E10B68-86D2-4C85-8C02-4DFC3F41C12F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00E10B68-86D2-4C85-8C02-4DFC3F41C12F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7C7A746-2B9A-489E-BAB8-24943A4EEF73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7C7A746-2B9A-489E-BAB8-24943A4EEF73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7C7A746-2B9A-489E-BAB8-24943A4EEF73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7C7A746-2B9A-489E-BAB8-24943A4EEF73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3084904-7182-476A-A4C3-3DC5857A23FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3084904-7182-476A-A4C3-3DC5857A23FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3084904-7182-476A-A4C3-3DC5857A23FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3084904-7182-476A-A4C3-3DC5857A23FB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

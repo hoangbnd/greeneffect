@@ -1,0 +1,2 @@
+﻿DataProvider: sqlserver
+DataConnectionString: Data Source=(local);Initial Catalog=GreenSignalDev;Persist Security Info=True;User ID=greensignal;Password=greensignal123;Max Pool Size=100;
