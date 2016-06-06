@@ -18,36 +18,37 @@ namespace GreenEffect.Api.Controllers
             _userServices = userServices;
         }
 
+        //Tim kiem du lieu
+        //public JsonModel<List<UserApiModel>> Get(string searchUsername, string searchPassword)
+        //{
+        //    var listUsers = new List<UserApiModel>();
+        //  //  get user by username
+        //    var userResult = _userServices.GetAll(searchUsername, searchPassword);
+        //    if (userResult.RuleViolations.IsNullOrEmpty()) {
 
-        public JsonModel<List<UserApiModel>> Get(string searchUsername, string searchPassword)
-        {
-            var listUsers = new List<UserApiModel>();
-
-            var userResult = _userServices.GetAll(searchUsername, searchPassword);
-            if (userResult.RuleViolations.IsNullOrEmpty()) {
-                
-                listUsers = userResult.Result.Select(u => new UserApiModel
-                {
-                    Id = u.Id,
-                    UserName = u.UserName,
-                    Password = u.Password
-                }).OrderByDescending(i => i.Id).ToList();
-                return new JsonModel<List<UserApiModel>>
-                {
-                    IsSuccessful = true,
-                    Data = listUsers
-                };
-            }
-            return new JsonModel<List<UserApiModel>>
-            {
-                IsSuccessful = false,
-                Messenger = userResult.RuleViolations[0].ErrorMessage
-            };
-        }
+        //        listUsers = userResult.Result.Select(u => new UserApiModel
+        //        {
+        //            Id = u.Id,
+        //            UserName = u.UserName,
+        //            Password = u.Password
+        //        }).OrderByDescending(i => i.Id).ToList();
+        //        return new JsonModel<List<UserApiModel>>
+        //        {
+        //            IsSuccessful = true,
+        //            Data = listUsers
+        //        };
+        //    }
+        //    return new JsonModel<List<UserApiModel>>
+        //    {
+        //        IsSuccessful = false,
+        //        Messenger = userResult.RuleViolations[0].ErrorMessage
+        //    };
+        //}
         // GET api/user/5
         public JsonModel<UserApiModel> Get(int id)
         {
             var userResult = _userServices.GetById(id);
+
             if (userResult.RuleViolations.IsNullOrEmpty())
             {
                 return new JsonModel<UserApiModel>()
@@ -70,33 +71,81 @@ namespace GreenEffect.Api.Controllers
                     Messenger = userResult.RuleViolations[0].ErrorMessage
                 }; ;
         }
-        [HttpPost]
-        public JsonModel<UserApiModel> Create(UserApiModel model)
+        //update Password
+
+
+        public JsonModel<UserApiModel> UpdatePassword(UserApiModel model)
         {
-            var user = new User
+            //kiem tra user da ton tai chua
+            var userRs  = _userServices.GetById(model.Id);
+            // kiem tra viec lay user
+            if (userRs.RuleViolations.IsNullOrEmpty())
             {
-                UserName = model.UserName,
-                Password = model.Password
-            };
-            var userResult = _userServices.Create(user);
-            if (userResult.RuleViolations.IsNullOrEmpty())
-            {
+                //neu co thi set password moi
+                var user = userRs.Result;
+                user.Password = model.Password;
+                var updateResult = _userServices.Update(user);
+                //kiem tra ket qua update
+                if (updateResult.RuleViolations.IsNullOrEmpty())
+                {
+                    //neu update thanh cong thi tra ve user da duoc cap nhat password
+                    return new JsonModel<UserApiModel>
+                    {
+                        IsSuccessful = true,
+                        Data = new UserApiModel
+                        {
+                            Id = user.Id,
+                            UserName = user.UserName,
+                            Password = user.Password,
+                            Datetime = user.Datetime
+                        }
+                    };
+                }
+                //update khong thanh cong tra ve loi
                 return new JsonModel<UserApiModel>
                 {
-                    IsSuccessful = true,
-                    Data = new UserApiModel
-                    {
-                        Id = userResult.Result.Id,
-                        UserName = userResult.Result.UserName,
-                        Password = userResult.Result.Password
-                    }
+                    IsSuccessful = false,
+                    Messenger = updateResult.RuleViolations[0].ErrorMessage
                 };
             }
+            //tra ve loi khi khong lay duoc user
             return new JsonModel<UserApiModel>
             {
                 IsSuccessful = false,
-                Messenger = userResult.RuleViolations[0].ErrorMessage
+                Messenger = userRs.RuleViolations[0].ErrorMessage
             };
         }
+
+
+
+        //tao moi 1 ban ghi len sql
+        //[HttpPost]
+        //public JsonModel<UserApiModel> Create(UserApiModel model)
+        //{
+        //    var user = new User
+        //    {
+        //        UserName = model.UserName,
+        //        Password = model.Password
+        //    };
+        //    var userResult = _userServices.Create(user);
+        //    if (userResult.RuleViolations.IsNullOrEmpty())
+        //    {
+        //        return new JsonModel<UserApiModel>
+        //        {
+        //            IsSuccessful = true,
+        //            Data = new UserApiModel
+        //            {
+        //                Id = userResult.Result.Id,
+        //                UserName = userResult.Result.UserName,
+        //                Password = userResult.Result.Password
+        //            }
+        //        };
+        //    }
+        //    return new JsonModel<UserApiModel>
+        //    {
+        //        IsSuccessful = false,
+        //        Messenger = userResult.RuleViolations[0].ErrorMessage
+        //    };
+        //}
     }
 }

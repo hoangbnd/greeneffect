@@ -33,12 +33,11 @@ namespace GreenEffect.Services.Implement
             }
         }
 
-        public ServiceResult<User> GetByUserNameAndPassword(string userName, string password)
+        public ServiceResult<User> GetByUserNameAndPassword(string userName, string password, string datetime)
         {
             throw new NotImplementedException();
         }
-
-        public ServiceResult<ICollection<User>> GetAll(string searchUsername, string searchPassword)
+        public ServiceResult<ICollection<User>> GetAll(string searchUsername, string searchPassword, string datetime)
         {
             try
             {
@@ -80,7 +79,7 @@ namespace GreenEffect.Services.Implement
                                                                   new RuleViolation("Ex",
                                                                                     "Insert data error:" +
                                                                                     ex.Message)
-                                                              });
+               });
             }
         }
 
@@ -95,6 +94,12 @@ namespace GreenEffect.Services.Implement
         }
 
         public bool Validate(string userName, string password)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public object GetUserById(int p)
         {
             throw new NotImplementedException();
         }
