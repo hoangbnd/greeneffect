@@ -71,9 +71,7 @@ namespace GreenEffect.Api.Controllers
                     Messenger = userResult.RuleViolations[0].ErrorMessage
                 }; ;
         }
-        //update Password
-
-
+        //Update Password
         public JsonModel<UserApiModel> UpdatePassword(UserApiModel model)
         {
             //kiem tra user da ton tai chua
