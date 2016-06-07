@@ -16,6 +16,7 @@ namespace GreenEffect.Repository.EF.Configuration
             Property(u => u.UserName);
             Property(u => u.Password);
             Property(u => u.Datetime);
+            Property(u=> u.LocTheo);
         }
     }
 }

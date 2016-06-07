@@ -103,5 +103,11 @@ namespace GreenEffect.Services.Implement
         {
             throw new NotImplementedException();
         }
+
+
+        public ServiceResult<User> GetByUserNameAndPassword(string userName, string password, string datetime, int loctheo)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
