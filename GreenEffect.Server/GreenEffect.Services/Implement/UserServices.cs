@@ -37,7 +37,7 @@ namespace GreenEffect.Services.Implement
         {
             throw new NotImplementedException();
         }
-        public ServiceResult<ICollection<User>> GetAll(string searchUsername, string searchPassword, string datetime)
+        public ServiceResult<ICollection<User>> GetAll(string searchUsername, string searchPassword)
         {
             try
             {
@@ -106,6 +106,12 @@ namespace GreenEffect.Services.Implement
 
 
         public ServiceResult<User> GetByUserNameAndPassword(string userName, string password, string datetime, int loctheo)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public ServiceResult<User> GetByUserNameAndPassword(string userName, string password)
         {
             throw new NotImplementedException();
         }

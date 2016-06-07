@@ -10,9 +10,9 @@ namespace GreenEffect.Services.Interface
 {
     public interface IUserServices
     {
-        ServiceResult<ICollection<User>> GetAll(string searchUsername, string searchPassword, string datetime);
+        ServiceResult<ICollection<User>> GetAll(string searchUsername, string searchPassword);
         ServiceResult<User> GetById(int id);
-        ServiceResult<User> GetByUserNameAndPassword(string userName, string password,string datetime,int loctheo);
+        ServiceResult<User> GetByUserNameAndPassword(string userName, string password);
         ServiceResult<User> Create(User user);
         ServiceResult<User> Update(User user);
         ServiceResult<User> Delete(User user);

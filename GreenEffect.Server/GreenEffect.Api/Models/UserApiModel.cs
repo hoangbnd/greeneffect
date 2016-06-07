@@ -12,5 +12,6 @@ namespace GreenEffect.Api.Models
         public string Password { get; set; }
         public string Datetime { get; set; }
         public int LocTheo { get; set; }
+        public int IdenObj { get; set; }
     }
 }

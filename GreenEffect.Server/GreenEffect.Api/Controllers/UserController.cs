@@ -59,6 +59,7 @@ namespace GreenEffect.Api.Controllers
                         UserName = userResult.Result.UserName,
                         Password = userResult.Result.Password,
                         LocTheo = userResult.Result.LocTheo,
+                        IdenObj = userResult.Result.IdenObj,
                     },
                     IsSuccessful = true,
                     Messenger = ""
