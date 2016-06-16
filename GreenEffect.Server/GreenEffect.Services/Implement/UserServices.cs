@@ -105,7 +105,7 @@ namespace GreenEffect.Services.Implement
         }
 
 
-        public ServiceResult<User> GetByUserNameAndPassword(string userName, string password, string datetime, int loctheo)
+        public ServiceResult<User> GetByUserNameAndPassword(string userName, string password)
         {
             throw new NotImplementedException();
         }

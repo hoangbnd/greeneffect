@@ -80,6 +80,7 @@
     <Compile Include="Events\ISubscriptionService.cs" />
     <Compile Include="Events\SubscriptionService.cs" />
     <Compile Include="Implement\UserServices.cs" />
+    <Compile Include="Interface\ICustomersServices.cs" />
     <Compile Include="Interface\IUserServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

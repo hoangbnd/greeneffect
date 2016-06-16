@@ -58,7 +58,7 @@ namespace GreenEffect.Api.Controllers
                         Id = userResult.Result.Id,
                         UserName = userResult.Result.UserName,
                         Password = userResult.Result.Password,
-                        LocTheo = userResult.Result.LocTheo,
+                        Op = userResult.Result.Op,
                         IdenObj = userResult.Result.IdenObj,
                     },
                     IsSuccessful = true,
