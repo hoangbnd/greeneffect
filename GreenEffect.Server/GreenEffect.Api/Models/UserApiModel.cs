@@ -10,7 +10,7 @@ namespace GreenEffect.Api.Models
         public int Id { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
-        public string Datetime { get; set; }
+        public DateTime Datetime { get; set; }
         public int Op { get; set; }
         public int IdenObj { get; set; }
     }

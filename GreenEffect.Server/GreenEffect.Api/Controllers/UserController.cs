@@ -74,6 +74,7 @@ namespace GreenEffect.Api.Controllers
                 }; ;
         }
         //Update Password
+        [HttpPost]
         public JsonModel<UserApiModel> UpdatePassword(UserApiModel model)
         {
             //kiem tra user da ton tai chua

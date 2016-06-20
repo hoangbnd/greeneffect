@@ -85,7 +85,21 @@ namespace GreenEffect.Services.Implement
 
         public ServiceResult<User> Update(User user)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _userRepository.Update(user);
+                return new ServiceResult<User>(user);
+            }
+            catch (Exception ex)
+            {
+
+                return new ServiceResult<User>(new[]
+                                                              {
+                                                                  new RuleViolation("Ex",
+                                                                                    "Update data error:" +
+                                                                                    ex.Message)
+               });
+            }
         }
 
         public ServiceResult<User> Delete(User user)
@@ -111,9 +125,9 @@ namespace GreenEffect.Services.Implement
         }
 
 
-        public ServiceResult<User> GetByUserNameAndPassword(string userName, string password)
-        {
-            throw new NotImplementedException();
-        }
+        //public ServiceResult<User> GetByUserNameAndPassword(string userName, string password)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }
