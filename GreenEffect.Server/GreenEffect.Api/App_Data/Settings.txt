@@ -1,2 +1,2 @@
 ﻿DataProvider: sqlserver
-DataConnectionString: Data Source=(local);Initial Catalog=mobile;Persist Security Info=True;User ID=sa;Password=1;Max Pool Size=100;
+DataConnectionString: Data Source=(local);Initial Catalog=mobile;Persist Security Info=True;User ID=sa;Password=2;Max Pool Size=100;

@@ -60,6 +60,7 @@ namespace GreenEffect.Api.Controllers
                         Password = userResult.Result.Password,
                         Op = userResult.Result.Op,
                         IdenObj = userResult.Result.IdenObj,
+                        Datetime = userResult.Result.Datetime,
                     },
                     IsSuccessful = true,
                     Messenger = ""
@@ -85,6 +86,7 @@ namespace GreenEffect.Api.Controllers
                 //neu co thi set password moi
                 var user = userRs.Result;
                 user.Password = model.Password;
+                user.Datetime = DateTime.Now;
                 var updateResult = _userServices.Update(user);
                 //kiem tra ket qua update
                 if (updateResult.RuleViolations.IsNullOrEmpty())
