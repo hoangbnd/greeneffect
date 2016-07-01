@@ -117,7 +117,7 @@ namespace GreenEffect.Api
             builder.RegisterType<FileWrapper>().As<IFile>().InstancePerHttpRequest().InstancePerApiRequest();
             //services
             builder.RegisterType<UserServices>().As<IUserServices>().InstancePerHttpRequest().InstancePerApiRequest();
-
+            builder.RegisterType<CustomersSevices>().As<ICustomersServices>().InstancePerHttpRequest().InstancePerApiRequest();
 
 
             //register webhelper

@@ -10,15 +10,15 @@ namespace GreenEffect.Services.Interface
 {
     public interface ICustomersServices
     {
-        ServiceResult<ICollection<Customers>> GetAll(string searchCustomersID, string searchCustomersName, string searchAdress, string searchPhone);
+        ServiceResult<ICollection<Customers>> GetAll(string searchCustomersID);
         ServiceResult<Customers> GetById(int id);
-        ServiceResult<Customers> GetByCustormers(string userName, string password);
+     //   ServiceResult<Customers> GetByCustormers(string searchCustomersID, string searchCustomersName);
         ServiceResult<Customers> Create(Customers customers);
         ServiceResult<Customers> Update(Customers customers);
         ServiceResult<Customers> Delete(Customers customers);
 
-        bool Validate(string userName, string password);
+        bool Validate(string searchCustomersID, string searchCustomersName, string searchCustomersAddress, string searchCustomersPhone);
 
-        object GetUserById(int p);
+        object GetCustomersById(int p);
     }
 }

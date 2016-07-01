@@ -13,10 +13,9 @@ namespace GreenEffect.DomainObject.Customers
         public string CustomersName { get; set; }
         public string Adress { get; set; }
         public string Phone { get; set; }
-        public string Datetime { get; set; }
-        public int FUser { get; set; }
-        public int FRoute { get; set; }
-        public int IdenObj { get; set; }
- 
+        public int IdenCustomers { get; set; }
+        public int IdenUser { get; set; }
+        public int IdenRoute { get; set; }
+        public DateTime Datetime { get; set; }
     }
 }

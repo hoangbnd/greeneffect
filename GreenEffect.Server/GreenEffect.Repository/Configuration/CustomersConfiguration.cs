@@ -17,9 +17,9 @@ namespace GreenEffect.Repository.EF.Configuration
             Property(c => c.CustomersName);
             Property(c => c.Adress);
             Property(c => c.Phone);
-            Property(c => c.FRoute);
-            Property(c => c.FUser);
-            Property(c => c.IdenObj);
+            Property(c => c.IdenRoute);
+            Property(c => c.IdenUser);
+            Property(c => c.IdenCustomers);
             Property(c => c.Datetime);
         }
     }
