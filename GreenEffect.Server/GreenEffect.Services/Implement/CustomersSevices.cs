@@ -4,26 +4,23 @@ using MVCCore;
 using MVCCore.Data;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GreenEffect.Services.Implement
 {
     public  class CustomersSevices:ICustomersServices
     {
-        private readonly IRepository<Customers> _CustomersRepository;
-        public CustomersSevices(IRepository<Customers> CustomersRepository)
+        private readonly IRepository<Customers> _customersRepository;
+        public CustomersSevices(IRepository<Customers> customersRepository)
         {
-            _CustomersRepository = CustomersRepository;
+            _customersRepository = customersRepository;
         }
 
         public ServiceResult<Customers> GetById(int id)
         {
             try
             {
-                Customers customers = _CustomersRepository.FindById(id);
+                Customers customers = _customersRepository.FindById(id);
                 return customers != null
                         ? new ServiceResult<Customers>(customers)
                         : new ServiceResult<Customers>(new[] { new RuleViolation("ErrorMsg", "Have no user with id is {0} ".FormatWith(id)) });
@@ -34,14 +31,14 @@ namespace GreenEffect.Services.Implement
             }
         }
        
-        public ServiceResult<ICollection<Customers>> GetAll(string searchCustomersID, string searchCustomersName, string customersAddress, string customersPhone)
+        public ServiceResult<ICollection<Customers>> GetAll(string searchCustomersId, string searchCustomersName, string customersAddress, string customersPhone)
         {
             try
             {
                 var whCls = new List<Expression<Func<Customers, bool>>>();
-                if (!string.IsNullOrEmpty(searchCustomersID))//check dk co hay ko?
+                if (!string.IsNullOrEmpty(searchCustomersId))//check dk co hay ko?
                 {
-                    whCls.Add(c => c.CustomersId.Contains(searchCustomersID));//neu co thi check username chua (Contains) dk, 
+                    whCls.Add(c => c.CustomersId.Contains(searchCustomersId));//neu co thi check username chua (Contains) dk, 
                     //neu dk yeu cau bang thi co 2 cach c.UserName == "username" hoac c.UserName.Equals("username")
                 }
                 if (!string.IsNullOrEmpty(searchCustomersName))
@@ -59,7 +56,7 @@ namespace GreenEffect.Services.Implement
                 var order = "Id desc";//truong sap xep co quy dinh, "Tentruong kieusapxep" 
                 //VD: sap xep theo username, kieusapxep co 2 loai "asc"(tang dan) va "desc" giam dan 
                 //thi order = "UserName asc"
-                var custormes = _CustomersRepository.FindAll(whCls, order);
+                var custormes = _customersRepository.FindAll(whCls, order);
 
                 return new ServiceResult<ICollection<Customers>>(custormes);
             }
@@ -73,7 +70,7 @@ namespace GreenEffect.Services.Implement
         {
             try
             {
-                _CustomersRepository.Insert(customer);
+                _customersRepository.Insert(customer);
                 return new ServiceResult<Customers>(customer);
             }
             catch (Exception ex)
@@ -92,7 +89,7 @@ namespace GreenEffect.Services.Implement
         {
             try
             {
-                _CustomersRepository.Update(customers);
+                _customersRepository.Update(customers);
                 return new ServiceResult<Customers>(customers);
             }
             catch (Exception ex)
@@ -112,7 +109,7 @@ namespace GreenEffect.Services.Implement
             throw new NotImplementedException();
         }
 
-        public bool Validate(string customersID, string customersName)
+        public bool Validate(string customersId, string customersName)
         {
             throw new NotImplementedException();
         }
@@ -133,9 +130,10 @@ namespace GreenEffect.Services.Implement
         public IRepository<Customers> CustomersRepository { get; set; }
 
 
-        public bool Validate(string searchCustomersID, string searchCustomersName, string searchCustomersAddress, string searchCustomersPhone)
+        public bool Validate(string searchCustomersId, string searchCustomersName, string searchCustomersAddress, string searchCustomersPhone)
         {
             throw new NotImplementedException();
         }
+
     }
 }
