@@ -7,7 +7,6 @@ using System.Web.Http;
 using MVCCore;
 using GreenEffect.Api.Models;
 using GreenEffect.DomainObject.Customers;
-
 namespace GreenEffect.Api.Controllers
 {
     public class CustomersController:ApiController
@@ -82,6 +81,80 @@ namespace GreenEffect.Api.Controllers
             {
                 IsSuccessful = false,
                 Messenger = customerResult.RuleViolations[0].ErrorMessage
+            };
+        }
+
+        public JsonModel<List<CustomersApiModel>> Get(string searchCustomersId, string searchCustomersName, string customersAddress, string customersPhone)
+        {
+            var listUsers = new List<CustomersApiModel>();
+            // get customers by ID,NAME,ADRESS,PHONE
+            var customersResult = _customersSevices.GetAll(searchCustomersId, searchCustomersName, searchCustomersName, customersPhone);
+            if (customersResult.RuleViolations.IsNullOrEmpty())
+            {
+
+                listUsers = customersResult.Result.Select(c => new CustomersApiModel
+                {
+                    Id = c.Id,
+                    CustomersId = c.CustomersId,
+                    CustomersName = c.CustomersName,
+                    Adress = c.Adress,
+                    Phone = c.Phone,
+                    IdenCustomers = c.IdenCustomers,
+                    IdenRoute = c.IdenRoute,
+                    IdenUser = c.IdenUser
+                }).OrderByDescending(i => i.Id).ToList();
+                return new JsonModel<List<CustomersApiModel>>
+                {
+                    IsSuccessful = true,
+                    Data = listUsers
+                };
+            }
+            return new JsonModel<List<CustomersApiModel>>
+            {
+                IsSuccessful = false,
+                Messenger = customersResult.RuleViolations[0].ErrorMessage
+            };
+        }
+
+       // tao moi 1 ban ghi len sql
+        [HttpPost]
+        public JsonModel<CustomersApiModel> Create(CustomersApiModel model)
+        {
+            var customer = new Customers
+            {
+                CustomersId = model.CustomersId,
+                CustomersName = model.CustomersName,
+                Adress = model.Adress,
+                Phone = model.Phone,
+                IdenCustomers = model.IdenCustomers,
+                IdenUser = model.IdenUser,
+                IdenRoute = model.IdenRoute,
+                Datetime = DateTime.Now
+            };
+            var customersResult = _customersSevices.Create(customer);
+            if (customersResult.RuleViolations.IsNullOrEmpty())
+            {
+                return new JsonModel<CustomersApiModel>
+                {
+                    IsSuccessful = true,
+                    Data = new CustomersApiModel
+                    {
+                        Id = customersResult.Result.Id,
+                        CustomersId = customersResult.Result.CustomersId,
+                        CustomersName = customersResult.Result.CustomersName,
+                        Adress = customersResult.Result.Adress,
+                        Phone = customersResult.Result.Phone,
+                        IdenCustomers = customersResult.Result.IdenCustomers,
+                        IdenRoute = customersResult.Result.IdenRoute,
+                        IdenUser = customersResult.Result.IdenUser,
+                     
+                    }
+                };
+            }
+            return new JsonModel<CustomersApiModel>
+            {
+                IsSuccessful = false,
+                Messenger = customersResult.RuleViolations[0].ErrorMessage
             };
         }
     }

@@ -65,6 +65,7 @@ namespace GreenEffect.Services.Implement
             }
         }
 
+    
 
         public ServiceResult<Customers> Create(Customers customer)
         {

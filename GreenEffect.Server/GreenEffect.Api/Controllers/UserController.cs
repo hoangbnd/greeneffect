@@ -22,9 +22,10 @@ namespace GreenEffect.Api.Controllers
         //public JsonModel<List<UserApiModel>> Get(string searchUsername, string searchPassword)
         //{
         //    var listUsers = new List<UserApiModel>();
-        //  //  get user by username
+        //    //  get user by username
         //    var userResult = _userServices.GetAll(searchUsername, searchPassword);
-        //    if (userResult.RuleViolations.IsNullOrEmpty()) {
+        //    if (userResult.RuleViolations.IsNullOrEmpty())
+        //    {
 
         //        listUsers = userResult.Result.Select(u => new UserApiModel
         //        {
