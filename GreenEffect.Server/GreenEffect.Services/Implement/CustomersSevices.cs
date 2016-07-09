@@ -30,7 +30,7 @@ namespace GreenEffect.Services.Implement
                 return new ServiceResult<Customers>(new[] { new RuleViolation("Exception", "Get data error :" + e.Message) });
             }
         }
-       
+       //
         public ServiceResult<ICollection<Customers>> GetAll(string searchCustomersId, string searchCustomersName, string customersAddress, string customersPhone)
         {
             try
@@ -38,20 +38,20 @@ namespace GreenEffect.Services.Implement
                 var whCls = new List<Expression<Func<Customers, bool>>>();
                 if (!string.IsNullOrEmpty(searchCustomersId))//check dk co hay ko?
                 {
-                    whCls.Add(c => c.CustomersId.Contains(searchCustomersId));//neu co thi check username chua (Contains) dk, 
+                    whCls.Add(c => c.CustomersId.Equals(searchCustomersId));//neu co thi check username chua (Contains) dk, 
                     //neu dk yeu cau bang thi co 2 cach c.UserName == "username" hoac c.UserName.Equals("username")
                 }
                 if (!string.IsNullOrEmpty(searchCustomersName))
                 {
-                    whCls.Add(c => c.CustomersName.Contains(searchCustomersName));
+                    whCls.Add(c => c.CustomersName.Equals(searchCustomersName));
                 }
                 if (!string.IsNullOrEmpty(customersAddress))
                 {
-                    whCls.Add(c => c.Adress.Contains(customersAddress));
+                    whCls.Add(c => c.Adress.Equals(customersAddress));
                 }
                 if (!string.IsNullOrEmpty(customersPhone))
                 {
-                    whCls.Add(c => c.Phone.Contains(customersPhone));
+                    whCls.Add(c => c.Phone.Equals(customersPhone));
                 }
                 var order = "Id desc";//truong sap xep co quy dinh, "Tentruong kieusapxep" 
                 //VD: sap xep theo username, kieusapxep co 2 loai "asc"(tang dan) va "desc" giam dan 
@@ -60,13 +60,35 @@ namespace GreenEffect.Services.Implement
 
                 return new ServiceResult<ICollection<Customers>>(custormes);
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 return new ServiceResult<ICollection<Customers>>(new[] { new RuleViolation("Exception", "Get data error :" + ex.Message) });
             }
         }
 
-    
+        public ServiceResult<ICollection<Customers>> GetByIden(int IdenRoute)
+        {
+            try
+            {
+                var whCls = new List<Expression<Func<Customers, bool>>>();
+                if (IdenRoute>0)//check dk co hay ko?
+                {
+                    whCls.Add(c => c.CustomersId.Equals(IdenRoute));//neu co thi check username chua (Contains) dk, 
+                    //neu dk yeu cau bang thi co 2 cach c.UserName == "username" hoac c.UserName.Equals("username")
+                }              
+                var order = "Id desc";//truong sap xep co quy dinh, "Tentruong kieusapxep" 
+                //VD: sap xep theo username, kieusapxep co 2 loai "asc"(tang dan) va "desc" giam dan 
+                //thi order = "UserName asc"
+                var custormes = _customersRepository.FindAll(whCls, order);
 
+                return new ServiceResult<ICollection<Customers>>(custormes);
+            }
+            catch (Exception ex)
+            {
+                return new ServiceResult<ICollection<Customers>>(new[] { new RuleViolation("Exception", "Get data error :" + ex.Message) });
+            }
+        }
+        //Creat Customers
         public ServiceResult<Customers> Create(Customers customer)
         {
             try
@@ -86,29 +108,7 @@ namespace GreenEffect.Services.Implement
             }
         }
 
-        public ServiceResult<Customers> Update(Customers customers)
-        {
-            try
-            {
-                _customersRepository.Update(customers);
-                return new ServiceResult<Customers>(customers);
-            }
-            catch (Exception ex)
-            {
-
-                return new ServiceResult<Customers>(new[]
-                                                              {
-                                                                  new RuleViolation("Ex",
-                                                                                    "Update data error:" +
-                                                                                    ex.Message)
-               });
-            }
-        }
-
-        public ServiceResult<Customers> Delete(Customers customers)
-        {
-            throw new NotImplementedException();
-        }
+       
 
         public bool Validate(string customersId, string customersName)
         {
@@ -121,16 +121,7 @@ namespace GreenEffect.Services.Implement
             throw new NotImplementedException();
         }
 
-
-        //public ServiceResult<Customers> GetByUserNameAndPassword(string userName, string password)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-
         public IRepository<Customers> CustomersRepository { get; set; }
-
-
         public bool Validate(string searchCustomersId, string searchCustomersName, string searchCustomersAddress, string searchCustomersPhone)
         {
             throw new NotImplementedException();

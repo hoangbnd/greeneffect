@@ -16,9 +16,7 @@ namespace GreenEffect.Api.Models
         public int IdenUser { get; set; }
         public int IdenRoute { get; set; }
         public DateTime Datetime { get; set; }
-
         public bool IsSuccessful { get; set; }
-
         public string Messenger { get; set; }
     }
 }
