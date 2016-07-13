@@ -66,6 +66,30 @@ namespace GreenEffect.Services.Implement
             }
         }
 
+        public ServiceResult<ICollection<Customers>> GetByUser(int IdenUser)
+        {
+            try
+            {
+                var whCls = new List<Expression<Func<Customers, bool>>>();
+                if (IdenUser>0)//check dk co hay ko?
+                {
+                    whCls.Add(c => c.CustomersId.Equals(IdenUser));//neu co thi check username chua (Contains) dk, 
+                    //neu dk yeu cau bang thi co 2 cach c.UserName == "username" hoac c.UserName.Equals("username")
+                }
+               
+                var order = "Id desc";//truong sap xep co quy dinh, "Tentruong kieusapxep" 
+                //VD: sap xep theo username, kieusapxep co 2 loai "asc"(tang dan) va "desc" giam dan 
+                //thi order = "UserName asc"
+                var custormes = _customersRepository.FindAll(whCls, order);
+
+                return new ServiceResult<ICollection<Customers>>(custormes);
+            }
+            catch (Exception ex)
+            {
+                return new ServiceResult<ICollection<Customers>>(new[] { new RuleViolation("Exception", "Get data error :" + ex.Message) });
+            }
+        }
+
         public ServiceResult<ICollection<Customers>> GetByIden(int IdenRoute)
         {
             try

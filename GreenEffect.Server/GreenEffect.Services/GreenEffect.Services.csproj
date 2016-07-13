@@ -82,8 +82,10 @@
     <Compile Include="Implement\CustomersSevices.cs" />
     <Compile Include="Implement\HttpGet.cs" />
     <Compile Include="Implement\JsonModel.cs" />
+    <Compile Include="Implement\RouteSevices.cs" />
     <Compile Include="Implement\UserServices.cs" />
     <Compile Include="Interface\ICustomersServices.cs" />
+    <Compile Include="Interface\IRouteSevice.cs" />
     <Compile Include="Interface\IUserServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

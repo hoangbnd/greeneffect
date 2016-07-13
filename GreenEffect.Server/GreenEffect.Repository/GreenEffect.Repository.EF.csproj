@@ -72,6 +72,7 @@
   <ItemGroup>
     <Compile Include="BaseEfDataProvider.cs" />
     <Compile Include="Configuration\CustomersConfiguration.cs" />
+    <Compile Include="Configuration\RouteConfigurations.cs" />
     <Compile Include="Configuration\UserConfiguration.cs" />
     <Compile Include="DataReaderExtensions.cs" />
     <Compile Include="DbContextExtensions.cs" />

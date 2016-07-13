@@ -147,6 +147,39 @@ namespace GreenEffect.Api.Controllers
                 Messenger = customersResult.RuleViolations[0].ErrorMessage
             };
         }
+
+        public JsonModel<List<CustomersApiModel>> GetByUser(int IdenUser)
+        {
+            var listUsers = new List<CustomersApiModel>();
+            //  get user by username
+            var customersResult = _customersSevices.GetByIden(IdenUser);
+            if (customersResult.RuleViolations.IsNullOrEmpty())
+            {
+
+                listUsers = customersResult.Result.Select(c => new CustomersApiModel
+                {
+                    Id = c.Id,
+                    CustomersId = c.CustomersId,
+                    CustomersName = c.CustomersName,
+                    Adress = c.Adress,
+                    Phone = c.Phone,
+                    IdenCustomers = c.IdenCustomers,
+                    IdenRoute = c.IdenRoute,
+                    IdenUser = c.IdenUser
+
+                }).OrderByDescending(i => i.Id).ToList();
+                return new JsonModel<List<CustomersApiModel>>
+                {
+                    IsSuccessful = true,
+                    Data = listUsers
+                };
+            }
+            return new JsonModel<List<CustomersApiModel>>
+            {
+                IsSuccessful = false,
+                Messenger = customersResult.RuleViolations[0].ErrorMessage
+            };
+        }
        // tao moi 1 ban ghi len sql
         [HttpPost]
         public JsonModel<CustomersApiModel> Create(CustomersApiModel model)

@@ -75,6 +75,39 @@ namespace GreenEffect.Api.Controllers
                     Messenger = userResult.RuleViolations[0].ErrorMessage
                 }; ;
         }
+        // Get by UserName Password
+
+        public JsonModel<List<UserApiModel>> GetByUserNameAndPassword(string UserName, string Password)
+        {
+            var listUsers = new List<UserApiModel>();
+            //  get user by username
+            var customersResult = _userServices.GetByUserNameAndPassword(UserName,Password);
+            if (customersResult.RuleViolations.IsNullOrEmpty())
+            {
+
+                listUsers = customersResult.Result.Select(u => new UserApiModel
+                {
+                    Id = u.Id,
+                    UserName = u.UserName,
+                    Password = u.Password,
+                    IdenObj = u.IdenObj,
+                    Op = u.Op,
+                    Datetime = u.Datetime
+                  
+
+                }).OrderByDescending(i => i.Id).ToList();
+                return new JsonModel<List<UserApiModel>>
+                {
+                    IsSuccessful = true,
+                    Data = listUsers
+                };
+            }
+            return new JsonModel<List<UserApiModel>>
+            {
+                IsSuccessful = false,
+                Messenger = customersResult.RuleViolations[0].ErrorMessage
+            };
+        }
         //Update Password
         [HttpPost]
         public JsonModel<UserApiModel> UpdatePassword(UserApiModel model)
