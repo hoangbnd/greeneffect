@@ -122,7 +122,6 @@ namespace GreenEffect.Api.Controllers
             var customersResult = _customersSevices.GetByIden(IdenRoute);
             if (customersResult.RuleViolations.IsNullOrEmpty())
             {
-
                 listUsers = customersResult.Result.Select(c => new CustomersApiModel
                 {
                     Id = c.Id,

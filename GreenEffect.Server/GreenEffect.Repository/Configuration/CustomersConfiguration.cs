@@ -11,7 +11,7 @@ namespace GreenEffect.Repository.EF.Configuration
     {
         public CustomersConfiguration()
         {
-            ToTable("Customers");
+            ToTable("viewall_customer");
             HasKey(c => c.Id);
             Property(c => c.CustomersId);
             Property(c => c.CustomersName);
