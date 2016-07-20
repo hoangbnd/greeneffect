@@ -1,0 +1,40 @@
+﻿  <ion-content class="login_page main_bg" ng-controller="LoginCtrl">
+    <div class="logo">
+        <img src="img/logo.png" />
+        <!--<img ng-if="active_colorthem==1" src="img/logo1.png"/>
+        <img ng-if="active_colorthem==2"  src="img/logo2.png"/>
+        <img ng-if="active_colorthem==3" src="img/logo3.png"/>-->
+    </div>
+
+    <!--<a href="#/app/home" class="button button-icon skip_btn"><i class="ion-arrow-right-c"></i></a>
+    <button class="button button-icon setting_icon" ng-click="opensetting_modal()"><i class="ion-gear-b"></i></button>-->
+
+    <form class="app_form">
+        <h3>Đăng nhập</h3>
+        <div class="list list-inset">
+            <label class="item item-input">
+                <i class="icon ion-android-person placeholder-icon"></i>
+                <input type="text" placeholder="Username" ng-model="loginData.username">
+            </label>
+            <label class="item item-input">
+                <i class="icon ion-ios-locked placeholder-icon"></i>
+                <input type="password" placeholder="Password" ng-model="loginData.password">
+            </label>
+        </div>
+        <div class="row two_btn">
+            <div class="col">
+                <a href="javascript:;" class="button button-block main_btn" ng-click="doLogin()">
+                    Login
+                </a>
+            </div>
+            <div class="col">
+                <a href="#/register" class="button button-block">
+                    Sign up
+                </a>
+            </div>
+        </div>
+
+        <a href="#" class="button button-clear forg_psw" ng-click="forget_password()">Forget password</a>
+        <a href="#/app/home" class="button button-clear face_btn"><i class="ion-social-facebook"></i></a>
+    </form>
+</ion-content>
