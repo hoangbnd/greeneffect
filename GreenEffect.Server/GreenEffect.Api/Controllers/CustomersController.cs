@@ -151,7 +151,7 @@ namespace GreenEffect.Api.Controllers
         {
             var listUsers = new List<CustomersApiModel>();
             //  get user by username
-            var customersResult = _customersSevices.GetByIden(IdenUser);
+            var customersResult = _customersSevices.GetByUser(IdenUser);
             if (customersResult.RuleViolations.IsNullOrEmpty())
             {
 

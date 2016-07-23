@@ -247,6 +247,7 @@
     <Compile Include="Controllers\CustomerRouteController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductsGroupController.cs" />
     <Compile Include="Controllers\RouteController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -256,6 +257,7 @@
     <Compile Include="Models\BaseJsonModel.cs" />
     <Compile Include="Models\CustomerRouteApiModel.cs" />
     <Compile Include="Models\CustomersApiModel.cs" />
+    <Compile Include="Models\ProductsGroupApiModel.cs" />
     <Compile Include="Models\RouteApiModel.cs" />
     <Compile Include="Models\UserApiModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

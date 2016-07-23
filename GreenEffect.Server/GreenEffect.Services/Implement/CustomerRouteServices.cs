@@ -22,15 +22,11 @@ namespace GreenEffect.Services.Implement
                 var whCls = new List<Expression<Func<CustomersRoutes, bool>>>();
                 if (IdenRoute > 0)//check dk co hay ko?
                 {
-                    whCls.Add(c => c.IdenRoute.Equals(IdenRoute));//neu co thi check username chua (Contains) dk, 
-                    //neu dk yeu cau bang thi co 2 cach c.UserName == "username" hoac c.UserName.Equals("username")
+                    whCls.Add(c => c.IdenRoute.Equals(IdenRoute));
                 }
 
-                var order = "Id desc";//truong sap xep co quy dinh, "Tentruong kieusapxep" 
-                //VD: sap xep theo username, kieusapxep co 2 loai "asc"(tang dan) va "desc" giam dan 
-                //thi order = "UserName asc"
+                var order = "Id desc";
                 var custormesroute = _customersRouteRepository.FindAll(whCls, order);
-
                 return new ServiceResult<ICollection<CustomersRoutes>>(custormesroute);
             }
             catch (Exception ex)
