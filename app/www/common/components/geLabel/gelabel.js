@@ -5,6 +5,7 @@
     .module('greeneffect.common.components.geLabel', ['greeneffect.common.service.itemnamemanagement'])
     .directive('geLabel', function() {
         return {
+            restrict: "E",
             controller: Controller,
             templateUrl: 'common/components/geLabel/geLabel.html',
             bindings: {

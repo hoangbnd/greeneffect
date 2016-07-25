@@ -1,0 +1,18 @@
+﻿<!--<ion-modal-view class="setting_app animated slideInDown">
+    <ion-content scroll="false" class="setting_content">
+        <button class="button button-icon close_modal main_bg" ng-click="$ctrl.close()"><i class="ion-close"></i></button>
+        <span></span>
+    </ion-content>
+</ion-modal-view>-->
+
+
+<div class="modal-backdrop active" ng-if="$ctrl.display">
+    <div class="modal-backdrop-bg"></div><div ng-transclude="" class="modal-wrapper">
+        <ion-modal-view class="setting_app animated slideInDown modal slide-in-up ng-enter active ng-enter-active">
+            <ion-content class="setting_content scroll-content ionic-scroll scroll-content-false" scroll="false">
+                <button ng-click="closesetting_modal()" class="button button-icon close_modal main_bg"><i class="ion-close"></i></button>
+                <span>{{$ctrl.message}}</span>
+            </ion-content>
+        </ion-modal-view>
+    </div>
+</div>
