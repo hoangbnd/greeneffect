@@ -44,9 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuthorityObject\AuthorityObject.cs" />
     <Compile Include="CustomersRoute\CustomersRoute.cs" />
     <Compile Include="Customers\Customers.cs" />
+    <Compile Include="Order\Order.cs" />
     <Compile Include="ProductsGroup\ProductsGroup.cs" />
+    <Compile Include="Products\Products.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Route\Route.cs" />
     <Compile Include="User\User.cs" />

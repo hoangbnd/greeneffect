@@ -71,8 +71,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseEfDataProvider.cs" />
+    <Compile Include="Configuration\AuthorityObjectConfigurations.cs" />
     <Compile Include="Configuration\CustomerRouteConfiguration.cs" />
     <Compile Include="Configuration\CustomersConfiguration.cs" />
+    <Compile Include="Configuration\OrderConfiguration.cs" />
+    <Compile Include="Configuration\ProductsConfigurations.cs" />
     <Compile Include="Configuration\ProductsGroupConfiguration.cs" />
     <Compile Include="Configuration\RouteConfigurations.cs" />
     <Compile Include="Configuration\UserConfiguration.cs" />

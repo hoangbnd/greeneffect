@@ -121,6 +121,8 @@ namespace GreenEffect.Api
             builder.RegisterType<RouteSevices>().As<IRouteSevice>().InstancePerHttpRequest().InstancePerApiRequest();
             builder.RegisterType<CustomerRouteServices>().As<ICustomersRoutesServices>().InstancePerHttpRequest().InstancePerApiRequest();
             builder.RegisterType<ProductsGroupServices>().As<IProductsGroupServices>().InstancePerHttpRequest().InstancePerApiRequest();
+            builder.RegisterType<ProductsServices>().As<IProductsServices>().InstancePerHttpRequest().InstancePerApiRequest();
+            builder.RegisterType<AuthorityObjectServices>().As<IAuthorityObjectServices>().InstancePerHttpRequest().InstancePerApiRequest();
 
             //register webhelper
             builder.RegisterType<WebHelper>().As<IWebHelper>().InstancePerHttpRequest().InstancePerApiRequest();

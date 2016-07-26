@@ -17,14 +17,14 @@ namespace GreenEffect.Api.Controllers
         {
             _productsGroupRouteService = ProductsGroupRouteService;
         }
-        public JsonModel<List<ProductsGroupApiModel>> GetALL(int disable)
+        public JsonModel<List<ProductsGroupApiModel>> GetALL(string groupname)
         {
-            var listUsers = new List<ProductsGroupApiModel>();
-            var productsgroup = _productsGroupRouteService.GetALL(disable);
+            var listProductsGroup = new List<ProductsGroupApiModel>();
+            var productsgroup = _productsGroupRouteService.GetALL(groupname);
             if (productsgroup.RuleViolations.IsNullOrEmpty())
             {
 
-                listUsers = productsgroup.Result.Select(g => new ProductsGroupApiModel
+                listProductsGroup = productsgroup.Result.Select(g => new ProductsGroupApiModel
                 {
                     Id = g.Id,
                     GroupID = g.GroupID,
@@ -37,7 +37,7 @@ namespace GreenEffect.Api.Controllers
                 return new JsonModel<List<ProductsGroupApiModel>>
                 {
                     IsSuccessful = true,
-                    Data = listUsers
+                    Data = listProductsGroup
                 };
             }
             return new JsonModel<List<ProductsGroupApiModel>>

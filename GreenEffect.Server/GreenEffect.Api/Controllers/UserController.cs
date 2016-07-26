@@ -12,7 +12,6 @@ namespace GreenEffect.Api.Controllers
     public class UserController : ApiController
     {
         private readonly IUserServices _userServices;
-
         public UserController(IUserServices userServices)
         {
             _userServices = userServices;
@@ -153,8 +152,7 @@ namespace GreenEffect.Api.Controllers
             };
         }
 
-
-
+      
         //tao moi 1 ban ghi len sql
         //[HttpPost]
         //public JsonModel<UserApiModel> Create(UserApiModel model)

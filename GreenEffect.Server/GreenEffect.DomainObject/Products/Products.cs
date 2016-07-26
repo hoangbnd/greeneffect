@@ -4,13 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MVCCore;
-namespace GreenEffect.DomainObject.ProductsGroup
+namespace GreenEffect.DomainObject.Products
 {
-    public class ProductsGroup: BaseEntity
+    public class Products:BaseEntity
     {
-        public string GroupID { get; set; }
-        public string GroupName { get; set; }
+        public string ProductsID { get; set; }
+        public string ProductsName { get; set; }
+        public decimal UnitPrice { get; set; }
         public int IdenProductsGroup { get; set; }
+        public int IdenProducts { get; set; }
         public int Disable { get; set; }
         public DateTime Datetime { get; set; }
     }
