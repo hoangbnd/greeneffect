@@ -1,8 +1,11 @@
 ﻿(function () {
     'use strict';
-    angular.module('greeneffect.controller.user', [])
+    angular.module('greeneffect.controller.user', [
+        'greeneffect.service.user',
+        'greeneffect.constant'
+    ])
 
-    .controller('LoginCtrl', function ($scope, $ionicModal, $timeout) {
+    .controller('LoginCtrl', function ($scope, $ionicModal, $timeout, UserServices, Constant) {
 
         $scope.alertMsg = '';
         $scope.alertType = 'warning';
@@ -25,7 +28,16 @@
                 $scope.displayAlert = true;
                 $scope.alertType = 'warning';
                 $scope.alertMsg = 'Hãy nhập đầy đủ tên đăng nhập và mật khẩu.'
+                return;
             }
+            var userInfo = {
+                username: $scope.loginData.username,
+                password: $scope.loginData.password
+            };            
+            sessionStorage.setItem(Constant.SS_KEY.USER_INFO, angular.toJson(userInfo));
+            UserServices.login().then(function (data) {
+                console.log(data);
+            });
         };
 
         $scope.closeAlertEvent = function () {

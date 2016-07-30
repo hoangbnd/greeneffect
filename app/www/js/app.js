@@ -1,8 +1,9 @@
-angular.module('greeneffect', [
+﻿angular.module('greeneffect', [
     'ngComponentRouter',
     'ngSanitize',
     'ionic',
     'greeneffect.constant',
+    'greeneffect.service.user',
     'greeneffect.controller.main',
     'greeneffect.controller.user',
     'greeneffect.common.components.geAlert'])
@@ -19,7 +20,93 @@ angular.module('greeneffect', [
         }
     });
 })
-.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $locationProvider, $httpProvider, Constant) {
+    /*
+      # Hashbang Mode
+      http://www.example.com/#/aaa/
+      # HTML5 Mode
+      http://www.example.com/aaa/
+    */
+    $locationProvider.html5Mode(Constant.HTML5_MODE);
+
+    $httpProvider.interceptors.push(['$q', '$injector', '$timeout', function ($q, $injector, $timeout) {
+        return {
+            'request': function (request) {
+                request.timeout = Constant.HTTP_PROVIDER_SETTINGS.TIMEOUT;
+                if (angular.isUndefined(request.retryCount)) {
+                    request.retryCount = 0;
+                }
+                request.startDate = 0;
+                request.endDate = 0;
+                request.startDate = new Date().getTime();
+                return request;
+            },
+            'response': function (response) {
+                response.config.endDate = new Date().getTime();
+                writeResponseLog(response);
+                if (angular.isDefined(response.data.systemerror)) {
+                    // systemerrorが存在した場合はステータス200でもエラー扱い
+                    if (Constant.HTTP_PROVIDER_SETTINGS.RETRY_COUNT <= response.config.retryCount) {
+                        // リトライ回数の上限に達している
+                        response.statusText = angular.toJson(response.data.systemerror);
+                        return $q.reject(response);
+                    }
+                    response.config.retryCount++;
+                    return $timeout(function () {
+                        var $http = $injector.get('$http');
+                        return $http(response.config);
+                    }, Constant.HTTP_PROVIDER_SETTINGS.RETRY_INTERVAL);
+                }
+                return response;
+            },
+            'responseError': function (rejection) {
+                rejection.config.endDate = new Date().getTime();
+                writeResponseLog(rejection);
+                if (canRetry(rejection)) {
+                    rejection.config.retryCount++;
+                    return $timeout(function () {
+                        var $http = $injector.get('$http');
+                        return $http(rejection.config);
+                    }, Constant.HTTP_PROVIDER_SETTINGS.RETRY_INTERVAL);
+                }
+                return $q.reject(rejection);
+            }
+        }
+    }]);
+
+    var canRetry = function (rejection) {
+        if (rejection.status === -1) {
+            return canRetryUnknownError(rejection);
+        }
+        return canRetryAnotherError(rejection);
+    };
+
+    var canRetryUnknownError = function (rejection) {
+        if (Constant.HTTP_PROVIDER_SETTINGS.TIMEOUT <= (rejection.config.endDate - rejection.config.startDate)) {
+            rejection.statusText = 'timeout';
+            return false;
+        }
+        rejection.status = Constant.OFFLINE_STATUS;
+        rejection.statusText = 'offLine';
+        if (Constant.HTTP_PROVIDER_SETTINGS.RETRY_COUNT <= rejection.config.retryCount) {
+            return false;
+        }
+        return true;
+    };
+
+    var canRetryAnotherError = function (rejection) {
+        if (rejection.status === 408) {
+            return false;
+        }
+        if (Constant.HTTP_PROVIDER_SETTINGS.RETRY_COUNT <= rejection.config.retryCount) {
+            return false;
+        }
+        return true;
+    };
+
+    var writeResponseLog = function (response) {
+        console.log(response.config.url + ':' + (response.config.endDate - response.config.startDate) + 'ms');
+    };
     $ionicConfigProvider.navBar.alignTitle('left');
     $ionicConfigProvider.backButton.text('').previousTitleText('');
     $stateProvider

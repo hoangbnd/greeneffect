@@ -70,39 +70,36 @@ namespace GreenEffect.Api.Controllers
 
 
             return new JsonModel<UserApiModel>()
-                {
-                    IsSuccessful = false,
-                    Messenger = userResult.RuleViolations[0].ErrorMessage
-                }; ;
+            {
+                IsSuccessful = false,
+                Messenger = userResult.RuleViolations[0].ErrorMessage
+            }; ;
         }
         // Get by UserName Password
 
-        public JsonModel<List<UserApiModel>> GetByUserNameAndPassword(string UserName, string Password)
+        public JsonModel<UserApiModel> Login(string userName, string password)
         {
-            var listUsers = new List<UserApiModel>();
+            var listUsers = new UserApiModel();
             //  get user by username
-            var customersResult = _userServices.GetByUserNameAndPassword(UserName,Password);
+            var customersResult = _userServices.GetByUserNameAndPassword(userName, password);
             if (customersResult.RuleViolations.IsNullOrEmpty())
             {
-
-                listUsers = customersResult.Result.Select(u => new UserApiModel
+                listUsers = new UserApiModel
                 {
-                    Id = u.Id,
-                    UserName = u.UserName,
-                    Password = u.Password,
-                    IdenObj = u.IdenObj,
-                    Op = u.Op,
-                    Datetime = u.Datetime
-                  
-
-                }).OrderByDescending(i => i.Id).ToList();
-                return new JsonModel<List<UserApiModel>>
+                    Id = customersResult.Result.Id,
+                    UserName = customersResult.Result.UserName,
+                    Password = customersResult.Result.Password,
+                    IdenObj = customersResult.Result.IdenObj,
+                    Op = customersResult.Result.Op,
+                    Datetime = customersResult.Result.Datetime
+                };
+                return new JsonModel<UserApiModel>
                 {
                     IsSuccessful = true,
                     Data = listUsers
                 };
             }
-            return new JsonModel<List<UserApiModel>>
+            return new JsonModel<UserApiModel>
             {
                 IsSuccessful = false,
                 Messenger = customersResult.RuleViolations[0].ErrorMessage
@@ -113,7 +110,7 @@ namespace GreenEffect.Api.Controllers
         public JsonModel<UserApiModel> UpdatePassword(UserApiModel model)
         {
             //kiem tra user da ton tai chua
-            var userRs  = _userServices.GetById(model.Id);
+            var userRs = _userServices.GetById(model.Id);
             // kiem tra viec lay user
             if (userRs.RuleViolations.IsNullOrEmpty())
             {
