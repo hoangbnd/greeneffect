@@ -4,7 +4,8 @@ angular.module('greeneffect', [
     'ionic',
     'greeneffect.constant',
     'greeneffect.controller.main',
-    'greeneffect.controller.user'])
+    'greeneffect.controller.user',
+    'greeneffect.common.components.geAlert'])
 .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard

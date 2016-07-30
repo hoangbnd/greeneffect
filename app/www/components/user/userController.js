@@ -3,13 +3,10 @@
     angular.module('greeneffect.controller.user', [])
 
     .controller('LoginCtrl', function ($scope, $ionicModal, $timeout) {
-        // With the new view caching in Ionic, Controllers are only called
-        // when they are recreated or on app start, instead of every page change.
-        // To listen for when this page is active (for example, to refresh data),
-        // listen for the $ionicView.enter event:
-        //$scope.$on('$ionicView.enter', function(e) {
-        //});
-        
+
+        $scope.alertMsg = '';
+        $scope.alertType = 'warning';
+        $scope.displayAlert = false;
         // Form data for the login modal
         //$scope.loginData = {};
 
@@ -20,31 +17,20 @@
             $scope.modal = modal;
         });
 
-        //// Triggered in the login modal to close it
-        //$scope.closeLogin = function () {
-        //    $scope.modal.hide();
-        //};
-
-        //// Open the login modal
-        //$scope.login = function () {
-        //    $scope.modal.show();
-        //};
-
         // Perform the login action when the user submits the login form
         $scope.doLogin = function () {
-            console.log('Doing login', $scope.loginData);
-            console.log($scope.username);
             if (angular.isUndefined($scope.loginData) || angular.isUndefined($scope.loginData.username) ||
                angular.isUndefined($scope.loginData.password) || angular.equals($scope.loginData.username, '') || 
                  angular.equals($scope.loginData.password, '')) {
-                $ctrl.displayAlert = true;
-
+                $scope.displayAlert = true;
+                $scope.alertType = 'warning';
+                $scope.alertMsg = 'Hãy nhập đầy đủ tên đăng nhập và mật khẩu.'
             }
-            // Simulate a login delay. Remove this and replace with your login
-            // code if using a login system
-            //$timeout(function () {
-            //    $scope.closeLogin();
-            //}, 1000);
         };
-    });
+
+        $scope.closeAlertEvent = function () {
+            alert("close");
+        }
+    })
+
 })();

@@ -5,41 +5,31 @@
       .module('greeneffect.common.components.geAlert', [])
       .directive('geAlert', function() {
           return {
-              controller: Controller,
+              restrict: 'E',
+              controller: controller,
               templateUrl: 'common/components/geAlert/geAlert.html',
               scope: {
-                  type: '=',
+                  ngModel: '=',
+                  type: '=', //waring, info, success
                   message: '=',
-                  display: '='
+                  display: '=',
+                  closeEvent: '&'
               },
               required: {
                   type: true,
                   message: true,
                   display: true
               },
-              $canActivate: $canActivate
+              transclude: true,
           };
       });
 
-    Controller.$inject = [];
-
-    var ctrl;
-
-    function Controller() {
-        ctrl = this;
-    }
-
-    function $canActivate() {
-        return true;
-    }
-
-    Controller.prototype.$onInit = function () {
-        if (angular.isUndefined(ctrl.display)) {
-            ctrl.display = false;
+    var controller = ['$scope', function ($scope) {
+        $scope.close = function () {
+            if (angular.isDefined($scope.closeEvent) || angular.isFunction($scope.closeEvent)) {
+                $scope.closeEvent();
+            }
+            $scope.display = false;
         }
-    };
-
-    Controller.prototype.close = function () {
-        ctrl.display = false;
-    }
+    }];
 })();
