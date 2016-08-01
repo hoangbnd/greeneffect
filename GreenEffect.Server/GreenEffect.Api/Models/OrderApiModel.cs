@@ -25,7 +25,7 @@ namespace GreenEffect.Api.Models
         public int IdenProductsGroup { get; set; }
         public string LocationName { get; set; }
         public string Description { get; set; }
-        public string longitude { get; set; }
+        public string Longitude { get; set; }
         public string Latitude { get; set; }
         public DateTime Datetime { get; set; }
         public int Disable { get; set; }

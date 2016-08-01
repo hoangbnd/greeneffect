@@ -45,7 +45,7 @@ namespace GreenEffect.Api.Controllers
                          IdenProductsGroup=orderResult.Result.IdenProductsGroup,
                          LocationName = orderResult.Result.LocationName,
                          Description = orderResult.Result.Description,
-                         longitude = orderResult.Result.longitude,
+                         Longitude = orderResult.Result.Longitude,
                          Latitude = orderResult.Result.Latitude,
                          Datetime = orderResult.Result.Datetime,
                          Disable = orderResult.Result.Disable
@@ -63,11 +63,11 @@ namespace GreenEffect.Api.Controllers
              }; ;
          }
 
-         public JsonModel<List<OrderApiModel>> GetByOrder(string OrderName)
+         public JsonModel<List<OrderApiModel>> GetByOrder(string OrderName, int disable)
          {
              var listOrder = new List<OrderApiModel>();
              //  get user by username
-             var orderResult = _orderServices.GetByOrder(OrderName);
+             var orderResult = _orderServices.GetByOrder(OrderName,disable);
              if (orderResult.RuleViolations.IsNullOrEmpty())
              {
 
@@ -91,7 +91,7 @@ namespace GreenEffect.Api.Controllers
                      IdenProductsGroup = o.IdenProductsGroup,
                      LocationName = o.LocationName,
                      Description = o.Description,
-                     longitude = o.longitude,
+                     Longitude = o.Longitude,
                      Latitude = o.Latitude,
                      Datetime = o.Datetime,
                      Disable = o.Disable
@@ -110,11 +110,11 @@ namespace GreenEffect.Api.Controllers
              };
          }
 
-         public JsonModel<List<OrderApiModel>> GetByUser(int IdenUser)
+         public JsonModel<List<OrderApiModel>> GetByUser(int IdenUser, int disable)
          {
              var listOrder = new List<OrderApiModel>();
              //  get user by username
-             var orderResult = _orderServices.GetByUser(IdenUser);
+             var orderResult = _orderServices.GetByUser(IdenUser,disable);
              if (orderResult.RuleViolations.IsNullOrEmpty())
              {
 
@@ -138,7 +138,7 @@ namespace GreenEffect.Api.Controllers
                      IdenProductsGroup = o.IdenProductsGroup,
                      LocationName = o.LocationName,
                      Description = o.Description,
-                     longitude = o.longitude,
+                     Longitude = o.Longitude,
                      Latitude = o.Latitude,
                      Datetime = o.Datetime,
                      Disable = o.Disable
@@ -156,11 +156,11 @@ namespace GreenEffect.Api.Controllers
                  Messenger = orderResult.RuleViolations[0].ErrorMessage
              };
          }
-         public JsonModel<List<OrderApiModel>> GetByRoute(int IdenRouter)
+         public JsonModel<List<OrderApiModel>> GetByRoute(int IdenRouter, int disable)
          {
              var listOrder = new List<OrderApiModel>();
              //  get user by username
-             var orderResult = _orderServices.GetByRoute(IdenRouter);
+             var orderResult = _orderServices.GetByRoute(IdenRouter,disable);
              if (orderResult.RuleViolations.IsNullOrEmpty())
              {
 
@@ -184,7 +184,7 @@ namespace GreenEffect.Api.Controllers
                      IdenProductsGroup = o.IdenProductsGroup,
                      LocationName = o.LocationName,
                      Description = o.Description,
-                     longitude = o.longitude,
+                     Longitude = o.Longitude,
                      Latitude = o.Latitude,
                      Datetime = o.Datetime,
                      Disable = o.Disable
@@ -197,6 +197,71 @@ namespace GreenEffect.Api.Controllers
                  };
              }
              return new JsonModel<List<OrderApiModel>>
+             {
+                 IsSuccessful = false,
+                 Messenger = orderResult.RuleViolations[0].ErrorMessage
+             };
+         }
+        //[HttpPost]
+         public JsonModel<OrderApiModel> Create(OrderApiModel model)
+         {
+             var order = new Order
+             {
+                 OrderDate = model.OrderDate,
+                 OrderName = model.OrderName,
+                 Note = model.Note,
+                 Description = model.Description,
+                 ProductsNumber=model.ProductsNumber,
+                 UnitPrice=model.UnitPrice,
+                 Amount=model.Amount,
+                 IdenCustomers=model.IdenCustomers,
+                 IdenUser=model.IdenUser,
+                 IdenProducts=model.IdenProducts,
+                 IdenRoute=model.IdenRoute,
+                 IdenCustomersRoutes=model.IdenCustomersRoutes,
+                 IdenCustomersLocation=model.IdenCustomersLocation,
+                 IdenObject=model.IdenObject,
+                 IdenProductsGroup=model.IdenProductsGroup,
+                 LocationName=model.LocationName,
+                 Longitude=model.Longitude,
+                 Latitude=model.Latitude,
+                 Datetime=model.Datetime,
+                 Disable=model.Disable
+             };
+             var orderResult = _orderServices.Create(order);
+             if (orderResult.RuleViolations.IsNullOrEmpty())
+             {
+                 return new JsonModel<OrderApiModel>
+                 {
+                     IsSuccessful = true,
+                     Data = new OrderApiModel
+                     {
+                         Id = orderResult.Result.Id,
+                         OrderDate = orderResult.Result.OrderDate,
+                         OrderName = orderResult.Result.OrderName,
+                         Note = orderResult.Result.Note,
+                         Reciever = orderResult.Result.Reciever,
+                         ProductsNumber = orderResult.Result.ProductsNumber,
+                         UnitPrice = orderResult.Result.UnitPrice,
+                         Amount = orderResult.Result.Amount,
+                         IdenCustomers = orderResult.Result.IdenCustomers,
+                         IdenUser = orderResult.Result.IdenUser,
+                         IdenProducts = orderResult.Result.IdenProducts,
+                         IdenRoute = orderResult.Result.IdenRoute,
+                         IdenCustomersRoutes = orderResult.Result.IdenCustomersRoutes,
+                         IdenCustomersLocation = orderResult.Result.IdenCustomersLocation,
+                         IdenObject = orderResult.Result.IdenObject,
+                         IdenProductsGroup = orderResult.Result.IdenProductsGroup,
+                         LocationName = orderResult.Result.LocationName,
+                         Description = orderResult.Result.Description,
+                         Longitude = orderResult.Result.Longitude,
+                         Latitude = orderResult.Result.Latitude,
+                         Datetime = orderResult.Result.Datetime,
+                         Disable = orderResult.Result.Disable
+                     }
+                 };
+             }
+             return new JsonModel<OrderApiModel>
              {
                  IsSuccessful = false,
                  Messenger = orderResult.RuleViolations[0].ErrorMessage

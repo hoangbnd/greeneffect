@@ -7,9 +7,9 @@ namespace GreenEffect.Services.Interface
     public interface IOrderServices
     {
         ServiceResult<Order> GetById(int id);
-        ServiceResult<ICollection<Order>> GetByUser(int IdenUser);
-        ServiceResult<ICollection<Order>> GetByOrder(string OrderName);
+        ServiceResult<ICollection<Order>> GetByUser(int IdenUser,int disable);
+        ServiceResult<ICollection<Order>> GetByOrder(string OrderName, int disable);
         ServiceResult<Order> Create(Order customers);
-        ServiceResult<ICollection<Order>> GetByRoute(int IdenRouter);
+        ServiceResult<ICollection<Order>> GetByRoute(int IdenRouter, int disable);
     }
 }

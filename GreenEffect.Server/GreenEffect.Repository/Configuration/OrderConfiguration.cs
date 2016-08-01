@@ -30,7 +30,7 @@ namespace GreenEffect.Repository.EF.Configuration
             Property(o => o.IdenProductsGroup);
             Property(o => o.LocationName);
             Property(o => o.Description);
-            Property(o => o.longitude);
+            Property(o => o.Longitude);
             Property(o => o.Latitude);
             Property(o => o.Datetime);
             Property(o => o.Disable);

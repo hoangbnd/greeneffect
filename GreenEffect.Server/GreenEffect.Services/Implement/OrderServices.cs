@@ -29,7 +29,7 @@ namespace GreenEffect.Services.Implement
                 return new ServiceResult<Order>(new[] { new RuleViolation("Exception", "Get data error :" + e.Message) });
             }
         }
-        public ServiceResult<ICollection<Order>> GetByOrder(string OrderName)
+        public ServiceResult<ICollection<Order>> GetByOrder(string OrderName, int disable)
         {
             try
             {
@@ -38,24 +38,9 @@ namespace GreenEffect.Services.Implement
                 {
                     whCls.Add(c => c.OrderName.Contains(OrderName));
                 }
-
-                var order = "Id desc";
-                var _oder = _orderRepository.FindAll(whCls, order);
-                return new ServiceResult<ICollection<Order>>(_oder);
-            }
-            catch (Exception ex)
-            {
-                return new ServiceResult<ICollection<Order>>(new[] { new RuleViolation("Exception", "Get data error :" + ex.Message) });
-            }
-        }
-        public ServiceResult<ICollection<Order>> GetByUser(int IdenUser)
-        {
-            try
-            {
-                var whCls = new List<Expression<Func<Order, bool>>>();
-                if (IdenUser>=1)//check dk co hay ko?
+                if (disable == 0)//check dk co hay ko?
                 {
-                    whCls.Add(c => c.IdenUser.Equals(IdenUser));
+                    whCls.Add(c => c.Disable.Equals(disable));
                 }
                 var order = "Id desc";
                 var _oder = _orderRepository.FindAll(whCls, order);
@@ -66,7 +51,32 @@ namespace GreenEffect.Services.Implement
                 return new ServiceResult<ICollection<Order>>(new[] { new RuleViolation("Exception", "Get data error :" + ex.Message) });
             }
         }
-        public ServiceResult<ICollection<Order>> GetByRoute(int IdenRouter)
+        public ServiceResult<ICollection<Order>> GetByUser(int IdenUser, int disable)
+        {
+            try
+            {
+                var whCls = new List<Expression<Func<Order, bool>>>();
+                if (IdenUser>=1)//check dk co hay ko?
+                {
+                    whCls.Add(c => c.IdenUser.Equals(IdenUser));
+                
+
+                }
+                if (disable == 0)//check dk co hay ko?
+                {
+                    whCls.Add(c => c.Disable.Equals(disable));
+                }
+                var order = "Id desc";
+                var _oder = _orderRepository.FindAll(whCls, order);
+                return new ServiceResult<ICollection<Order>>(_oder);
+              
+            }
+            catch (Exception ex)
+            {
+                return new ServiceResult<ICollection<Order>>(new[] { new RuleViolation("Exception", "Get data error :" + ex.Message) });
+            }
+        }
+        public ServiceResult<ICollection<Order>> GetByRoute(int IdenRouter, int disable)
         {
             try
             {
@@ -74,6 +84,10 @@ namespace GreenEffect.Services.Implement
                 if (IdenRouter >= 1)//check dk co hay ko?
                 {
                     whCls.Add(c => c.IdenRoute.Equals(IdenRouter));
+                }
+                if ( disable == 0)//check dk co hay ko?
+                {
+                    whCls.Add(c => c.Disable.Equals(disable));
                 }
                 var order = "Id desc";
                 var _oder = _orderRepository.FindAll(whCls, order);
