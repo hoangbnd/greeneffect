@@ -30,7 +30,7 @@ namespace GreenEffect.Services.Implement
 
                  return new ServiceResult<ICollection<ProductsGroup>>(productsgroup);
              }
-             catch (Exception ex)
+             catch (Exception ex) 
              {
                  return new ServiceResult<ICollection<ProductsGroup>>(new[] { new RuleViolation("Exception", "Get data error :" + ex.Message) });
              }

@@ -21,7 +21,7 @@ namespace GreenEffect.Repository.EF.Configuration
             Property(r => r.IdenUser);
             Property(r => r.IdenCustomersRoutes);
             Property(r => r.IdenRoute);
-            Property(r => r.DateTime);
+            Property(r => r.DateTime); 
         }
     }
 }

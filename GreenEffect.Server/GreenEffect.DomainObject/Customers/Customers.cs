@@ -9,7 +9,7 @@ namespace GreenEffect.DomainObject.Customers
 {
     public class Customers : BaseEntity
     {
-        public string CustomersId { get; set; }
+        public string CustomersId { get; set; } 
         public string CustomersName { get; set; }
         public string Adress { get; set; }
         public string Phone { get; set; }

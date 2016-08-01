@@ -8,7 +8,7 @@ using MVCCore;
 namespace GreenEffect.Services.Interface
 {
     public interface IRouteSevice
-    {
+    { 
       //  ServiceResult<Route> GetById(int id);
         ServiceResult<ICollection<Route>> GetByUser(int IdenUser);
     }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GreenEffect.DomainObject.AuthorityObject
 {
-    public class AuthorityObject:BaseEntity
+    public class AuthorityObject:BaseEntity 
     {
         public string ObjectName { get; set; }
         public string ObjectImages { get; set; }

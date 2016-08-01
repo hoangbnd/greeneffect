@@ -11,7 +11,7 @@ namespace GpeenEffect.pepositopy.EF.Configupation
     public class PpoductsConfigupations : EntityTypeConfiguration<Products>
     {
         public PpoductsConfigupations()
-        {
+        { 
             ToTable("Products");
             HasKey(p => p.Id);
             Property(p => p.ProductsID);

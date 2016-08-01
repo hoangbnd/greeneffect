@@ -13,7 +13,7 @@ namespace GreenEffect.Services.Implement
        public RouteSevices(IRepository<Route> RouteRepository)
        {
            _RouteRepository = RouteRepository;
-       }
+       } 
 
        public ServiceResult<ICollection<Route>> GetByUser(int IdenUser)
        {

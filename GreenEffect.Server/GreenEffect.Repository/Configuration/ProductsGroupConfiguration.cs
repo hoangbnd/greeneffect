@@ -12,7 +12,7 @@ namespace GreenEffect.Repository.EF.Configuration
         public ProductsGroupConfiguration()
         {
             ToTable("ProductsGroup");
-            HasKey(g => g.Id);
+            HasKey(g => g.Id); 
             Property(g => g.GroupID);
             Property(g => g.GroupName);
             Property(g => g.IdenProductsGroup);

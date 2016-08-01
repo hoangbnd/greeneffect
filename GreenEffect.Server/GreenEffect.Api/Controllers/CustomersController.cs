@@ -123,7 +123,7 @@ namespace GreenEffect.Api.Controllers
             if (customersResult.RuleViolations.IsNullOrEmpty())
             {
                 listUsers = customersResult.Result.Select(c => new CustomersApiModel
-                {
+                { Datetime
                     Id = c.Id,
                     CustomersId = c.CustomersId,
                     CustomersName = c.CustomersName,

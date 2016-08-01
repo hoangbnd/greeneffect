@@ -26,7 +26,7 @@ namespace GreenEffect.Api.Controllers
             {
 
                 listUsers = customerrouteResult.Result.Select(r => new CustomerRouteApiModel
-                {
+                { 
                     Id = r.Id,
                     CustomersId = r.CustomersId,
                     CustomersName = r.CustomersName,

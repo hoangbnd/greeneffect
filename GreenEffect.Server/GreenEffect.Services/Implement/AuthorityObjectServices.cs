@@ -10,7 +10,7 @@ using MVCCore.Data;
 using System.Linq.Expressions;
 
 namespace GreenEffect.Services.Implement
-{
+{ 
     public class AuthorityObjectServices : IAuthorityObjectServices
     {
         private readonly IRepository<AuthorityObject> _repository;

@@ -12,7 +12,7 @@ namespace GreenEffect.Repository.EF.Configuration
         public AuthorityObjectConfigurations()
         {
             ToTable("Object");
-            HasKey(o => o.Id);
+            HasKey(o => o.Id); 
             Property(o => o.ObjectName);
             Property(o => o.ObjectImages);        
             Property(o => o.ObjectUser);

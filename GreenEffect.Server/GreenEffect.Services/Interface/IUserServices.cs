@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GreenEffect.Services.Interface
+namespace GreenEffect.Services.Interface 
 {
     public interface IUserServices
     {

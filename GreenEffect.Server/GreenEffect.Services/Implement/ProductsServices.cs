@@ -17,7 +17,7 @@ namespace GreenEffect.Services.Implement
         public ServiceResult<ICollection<Products>> GetByIden(int IdenGroup)
         {
             try
-            {
+            { 
                 var whCls = new List<Expression<Func<Products, bool>>>();
                 if (IdenGroup > 0)//check dk co hay ko?
                 {

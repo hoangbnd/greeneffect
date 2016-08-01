@@ -7,7 +7,7 @@ namespace GreenEffect.Api.Models
 {
     public class AuthorityObjectApiModel
     {
-        public int Id { get; set; }
+        public int Id { get; set; } 
         public string ObjectName { get; set; }
         public string ObjectImages { get; set; }
         public string ObjectUser { get; set; }
