@@ -32,31 +32,28 @@ namespace GreenEffect.Services.Implement
             }
         }
 
-        public ServiceResult<ICollection<User>> GetByUserNameAndPassword(string UserName, string Password)
+        public ServiceResult<User> GetByUserNameAndPassword(string userName, string password)
         {
             try
             {
                 var whCls = new List<Expression<Func<User, bool>>>();
-                if (!string.IsNullOrEmpty(UserName))//check dk co hay ko?
+                if (!string.IsNullOrEmpty(userName))//check dk co hay ko?
                 {
-                    whCls.Add(c => c.UserName.Equals(UserName));//neu co thi check username chua (Contains) dk, 
+                    whCls.Add(c => c.UserName.Equals(userName));//neu co thi check username chua (Contains) dk, 
                     //neu dk yeu cau bang thi co 2 cach c.UserName == "username" hoac c.UserName.Equals("username")
                 }
-                if (!string.IsNullOrEmpty(Password))
+                if (!string.IsNullOrEmpty(password))
                 {
-                    whCls.Add(c => c.Password.Equals(Password));
+                    whCls.Add(c => c.Password.Equals(password));
                 }
 
-                var order = "Id desc";//truong sap xep co quy dinh, "Tentruong kieusapxep" 
-                //VD: sap xep theo username, kieusapxep co 2 loai "asc"(tang dan) va "desc" giam dan 
-                //thi order = "UserName asc"
-                var users = _userRepository.FindAll(whCls, order);
+                var users = _userRepository.Find(whCls);
 
-                return new ServiceResult<ICollection<User>>(users);
+                return new ServiceResult<User>(users);
             }
             catch (Exception ex)
             {
-                return new ServiceResult<ICollection<User>>(new[] { new RuleViolation("Exception", "Get data error :" + ex.Message) });
+                return new ServiceResult<User>(new[] { new RuleViolation("Exception", "Get data error :" + ex.Message) });
             }
         }
         public ServiceResult<ICollection<User>> GetAll(string searchUsername, string searchPassword)

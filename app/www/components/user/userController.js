@@ -1,45 +1,48 @@
 ﻿(function () {
     'use strict';
-    angular.module('greeneffect.controller.user', [])
+    angular.module('greeneffect.controller.user', [
+        'greeneffect.service.user',
+        'greeneffect.constant'
+    ])
 
-    .controller('LoginCtrl', function ($scope, $ionicModal, $timeout) {
-        // With the new view caching in Ionic, Controllers are only called
-        // when they are recreated or on app start, instead of every page change.
-        // To listen for when this page is active (for example, to refresh data),
-        // listen for the $ionicView.enter event:
-        //$scope.$on('$ionicView.enter', function(e) {
-        //});
-        
+    .controller('LoginCtrl', function ($scope, $ionicModal, $timeout, UserServices, Constant) {
+
+        $scope.alertMsg = '';
+        $scope.alertType = 'warning';
+        $scope.displayAlert = false;
         // Form data for the login modal
         //$scope.loginData = {};
 
         //// Create the login modal that we will use later
-        //$ionicModal.fromTemplateUrl('templates/login.html', {
-        //    scope: $scope
-        //}).then(function (modal) {
-        //    $scope.modal = modal;
-        //});
-
-        //// Triggered in the login modal to close it
-        //$scope.closeLogin = function () {
-        //    $scope.modal.hide();
-        //};
-
-        //// Open the login modal
-        //$scope.login = function () {
-        //    $scope.modal.show();
-        //};
+        $ionicModal.fromTemplateUrl('templates/menumodal.html', {
+            scope: $scope
+        }).then(function (modal) {
+            $scope.modal = modal;
+        });
 
         // Perform the login action when the user submits the login form
         $scope.doLogin = function () {
-            console.log('Doing login', $scope.loginData);
-            console.log($scope.username);
-
-            // Simulate a login delay. Remove this and replace with your login
-            // code if using a login system
-            //$timeout(function () {
-            //    $scope.closeLogin();
-            //}, 1000);
+            if (angular.isUndefined($scope.loginData) || angular.isUndefined($scope.loginData.username) ||
+               angular.isUndefined($scope.loginData.password) || angular.equals($scope.loginData.username, '') || 
+                 angular.equals($scope.loginData.password, '')) {
+                $scope.displayAlert = true;
+                $scope.alertType = 'warning';
+                $scope.alertMsg = 'Hãy nhập đầy đủ tên đăng nhập và mật khẩu.'
+                return;
+            }
+            var userInfo = {
+                username: $scope.loginData.username,
+                password: $scope.loginData.password
+            };            
+            sessionStorage.setItem(Constant.SS_KEY.USER_INFO, angular.toJson(userInfo));
+            UserServices.login().then(function (data) {
+                console.log(data);
+            });
         };
-    });
+
+        $scope.closeAlertEvent = function () {
+            alert("close");
+        }
+    })
+
 })();

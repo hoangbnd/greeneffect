@@ -1,4 +1,4 @@
-﻿  <ion-content class="login_page main_bg" ng-controller="LoginCtrl">
+﻿<ion-content class="login_page main_bg" ng-controller="LoginCtrl">
     <div class="logo">
         <img src="img/logo.png" />
         <!--<img ng-if="active_colorthem==1" src="img/logo1.png"/>
@@ -24,17 +24,18 @@
         <div class="row two_btn">
             <div class="col">
                 <a href="javascript:;" class="button button-block main_btn" ng-click="doLogin()">
-                    Login
+                    Đăng nhập
                 </a>
             </div>
-            <div class="col">
+            <!--<div class="col">
                 <a href="#/register" class="button button-block">
-                    Sign up
+                    Đăng ký
                 </a>
-            </div>
+            </div>-->
         </div>
 
         <a href="#" class="button button-clear forg_psw" ng-click="forget_password()">Forget password</a>
         <a href="#/app/home" class="button button-clear face_btn"><i class="ion-social-facebook"></i></a>
     </form>
+    <ge-alert type="alertType" message="alertMsg" display="displayAlert" close-event="closeAlertEvent()"></ge-alert>
 </ion-content>
