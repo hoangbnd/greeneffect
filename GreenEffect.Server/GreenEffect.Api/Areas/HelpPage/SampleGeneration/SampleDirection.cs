@@ -1,4 +1,4 @@
-namespace GreenSign.Api.Areas.HelpPage
+namespace GreenEffect.Api.Areas.HelpPage
 {
     /// <summary>
     /// Indicates whether the sample is used for request or response
