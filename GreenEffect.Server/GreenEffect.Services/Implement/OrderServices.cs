@@ -115,5 +115,23 @@ namespace GreenEffect.Services.Implement
                });
             }
         }
+        public ServiceResult<Order> Update(Order order)
+        {
+            try
+            {
+                _orderRepository.Update(order);
+                return new ServiceResult<Order>(order);
+            }
+            catch (Exception ex)
+            {
+
+                return new ServiceResult<Order>(new[]
+                                                              {
+                                                                  new RuleViolation("Ex",
+                                                                                    "Update data error:" +
+                                                                                    ex.Message)
+               });
+            }
+        }
     }
 }

@@ -112,7 +112,7 @@ namespace GreenEffect.Api
 
             //work context
             //builder.RegisterType<WorkContext>().As<IWorkContext>().InstancePerHttpRequest().InstancePerApiRequest();
-
+                
             //register file and email
             builder.RegisterType<FileWrapper>().As<IFile>().InstancePerHttpRequest().InstancePerApiRequest();
             //services

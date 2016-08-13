@@ -11,7 +11,7 @@ namespace GreenEffect.Repository.EF.Configuration
     {
         public OrderConfiguration()
         {
-            ToTable("Order");
+            ToTable("CreateOrder");
             HasKey(o => o.Id);
             Property(o => o.OrderDate);
             Property(o => o.OrderName);

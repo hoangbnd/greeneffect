@@ -22,7 +22,7 @@ namespace GreenEffect.Api.Controllers
             var listObjs = new List<AuthorityObjectApiModel>();
             var authoObjs = _authorityObjServices.GetAll(idenUser);
             if (authoObjs.RuleViolations.IsNullOrEmpty())
-            {
+            { 
 
                 listObjs = authoObjs.Result.Select(o => new AuthorityObjectApiModel
                 {

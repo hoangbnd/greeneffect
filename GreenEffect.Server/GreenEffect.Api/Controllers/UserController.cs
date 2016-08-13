@@ -77,7 +77,7 @@ namespace GreenEffect.Api.Controllers
         // Get by UserName Password
 
         public JsonModel<UserApiModel> Login(string userName, string password)
-        {
+        {   
             var listUsers = new UserApiModel();
             //  get user by username
             var customersResult = _userServices.GetByUserNameAndPassword(userName, password);

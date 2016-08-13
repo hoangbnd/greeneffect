@@ -46,7 +46,7 @@ namespace GreenEffect.Services.Implement
                 {
                     whCls.Add(c => c.Password.Equals(password));
                 }
-
+                    
                 var users = _userRepository.Find(whCls);
 
                 return new ServiceResult<User>(users);
