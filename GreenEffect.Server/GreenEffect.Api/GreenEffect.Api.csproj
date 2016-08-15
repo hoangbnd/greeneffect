@@ -249,6 +249,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\AuthorityObjectController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\OrderDataController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ProductsGroupController.cs" />
     <Compile Include="Controllers\RouteController.cs" />
@@ -262,6 +263,7 @@
     <Compile Include="Models\CustomerRouteApiModel.cs" />
     <Compile Include="Models\CustomersApiModel.cs" />
     <Compile Include="Models\OrderApiModel.cs" />
+    <Compile Include="Models\OrderDataApiModel.cs" />
     <Compile Include="Models\ProductsApiModel.cs" />
     <Compile Include="Models\ProductsGroupApiModel.cs" />
     <Compile Include="Models\RouteApiModel.cs" />

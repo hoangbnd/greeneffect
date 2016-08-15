@@ -84,6 +84,7 @@
     <Compile Include="Implement\CustomersSevices.cs" />
     <Compile Include="Implement\HttpGet.cs" />
     <Compile Include="Implement\JsonModel.cs" />
+    <Compile Include="Implement\OrderDataServices.cs" />
     <Compile Include="Implement\OrderServices.cs" />
     <Compile Include="Implement\ProductsGroupServices.cs" />
     <Compile Include="Implement\ProductsServices.cs" />

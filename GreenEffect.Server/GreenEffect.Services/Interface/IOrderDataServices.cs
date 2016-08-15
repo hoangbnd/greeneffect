@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GreenEffect.DomainObject.Order;
+using GreenEffect.DomainObject.OrderData;
 using MVCCore;
-using System.Collections.Generic;
 namespace GreenEffect.Services.Interface
 {
-    public class IOrderDataServices
+    public interface IOrderDataServices
     {
-        ServiceResult<Order> GetById(int id);
-        ServiceResult<ICollection<Order>> GetByUser(int IdenUser, int disable);
-        ServiceResult<ICollection<Order>> GetByOrder(string OrderName, int disable);
-        ServiceResult<ICollection<Order>> GetByRoute(int IdenRouter, int disable);
+        ServiceResult<OrderData> GetById(int id);
+        ServiceResult<ICollection<OrderData>> GetByUser(int IdenUser, int disable);
+        ServiceResult<ICollection<OrderData>> GetByOrder(string OrderName, int disable);
+        ServiceResult<ICollection<OrderData>> GetByRoute(int IdenRouter, int disable);
     }
 }

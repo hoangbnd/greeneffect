@@ -47,6 +47,7 @@
     <Compile Include="AuthorityObject\AuthorityObject.cs" />
     <Compile Include="CustomersRoute\CustomersRoute.cs" />
     <Compile Include="Customers\Customers.cs" />
+    <Compile Include="OrderData\OrderData.cs" />
     <Compile Include="Order\Order.cs" />
     <Compile Include="ProductsGroup\ProductsGroup.cs" />
     <Compile Include="Products\Products.cs" />
