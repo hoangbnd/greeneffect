@@ -17,25 +17,25 @@ namespace GreenEffect.Api.Controllers
         {
             _customerRouteService = customerRouteService;
         }
-        public JsonModel<List<CustomerRouteApiModel>> GetByRoute(int IdenRoute)
+        public JsonModel<List<CustomerRouteApiModel>> GetByRoute(int RouteID)
         {
             var listUsers = new List<CustomerRouteApiModel>();
             //  get user by username
-            var customerrouteResult = _customerRouteService.GetByRoute(IdenRoute);
+            var customerrouteResult = _customerRouteService.GetByRoute(RouteID);
             if (customerrouteResult.RuleViolations.IsNullOrEmpty())
             {
 
                 listUsers = customerrouteResult.Result.Select(r => new CustomerRouteApiModel
                 { 
                     Id = r.Id,
-                    CustomersId = r.CustomersId,
+                    CustomersCode = r.CustomersCode,
                     CustomersName = r.CustomersName,
                     Adress = r.Adress,
                     Phone = r.Phone,
-                    IdenUser = r.IdenUser,
-                    IdenCustomers = r.IdenCustomers,
-                    IdenCustomersRoutes = r.IdenCustomersRoutes,
-                    IdenRoute = r.IdenRoute,
+                    UserID = r.UserID,
+                    CustomersID = r.CustomersID,
+                    CustomersRoutesID = r.CustomersRoutesID,
+                    RouteID = r.RouteID,
                     DateTime = r.DateTime,
                
                 }).OrderByDescending(i => i.Id).ToList();

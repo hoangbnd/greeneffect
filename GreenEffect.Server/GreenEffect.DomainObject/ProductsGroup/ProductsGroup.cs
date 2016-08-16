@@ -8,9 +8,9 @@ namespace GreenEffect.DomainObject.ProductsGroup
 {
     public class ProductsGroup: BaseEntity
     {
-        public string GroupID { get; set; }
+        public string GroupCode { get; set; }
         public string GroupName { get; set; }
-        public int IdenProductsGroup { get; set; }
+        public int ProductsGroupID { get; set; }
         public int Disable { get; set; }
         public DateTime Datetime { get; set; }
     }

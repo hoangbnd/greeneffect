@@ -58,7 +58,7 @@ namespace GreenEffect.Services.Implement
                 var whCls = new List<Expression<Func<OrderData, bool>>>();
                 if (IdenUser >= 1)//check dk co hay ko?
                 {
-                    whCls.Add(c => c.IdenUser.Equals(IdenUser));
+                    whCls.Add(c => c.UserID.Equals(IdenUser));
 
 
                 }
@@ -83,7 +83,7 @@ namespace GreenEffect.Services.Implement
                 var whCls = new List<Expression<Func<OrderData, bool>>>();
                 if (IdenRouter >= 1)//check dk co hay ko?
                 {
-                    whCls.Add(c => c.IdenRoute.Equals(IdenRouter));
+                    whCls.Add(c => c.RouteID.Equals(IdenRouter));
                 }
                 if (disable == 0)//check dk co hay ko?
                 {

@@ -13,9 +13,9 @@ namespace GreenEffect.Repository.EF.Configuration
         {
             ToTable("ProductsGroup");
             HasKey(g => g.Id);
-            Property(g => g.GroupID);
+            Property(g => g.GroupCode);
             Property(g => g.GroupName);
-            Property(g => g.IdenProductsGroup);
+            Property(g => g.ProductsGroupID);
             Property(g => g.Disable);
             Property(g => g.Datetime);
         }

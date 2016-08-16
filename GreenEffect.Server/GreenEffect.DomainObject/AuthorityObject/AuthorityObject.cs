@@ -12,7 +12,7 @@ namespace GreenEffect.DomainObject.AuthorityObject
         public string ObjectName { get; set; }
         public string ObjectImages { get; set; }
         public string ObjectUser { get; set; }
-        public int IdenObject { get; set; }
+        public int ObjectID { get; set; }
         public int ObjectSystem { get; set; }
         public DateTime Datetime { get; set; }
     }

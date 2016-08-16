@@ -15,28 +15,28 @@ namespace GreenEffect.Api.Models
         public decimal ProductsNumber { get; set; }
         public decimal UnitPrice { get; set; }
         public decimal Amount { get; set; }
-        public int IdenCustomers { get; set; }
-        public int IdenUser { get; set; }
-        public int IdenProducts { get; set; }
-        public int IdenRoute { get; set; }
-        public int IdenCustomersRoutes { get; set; }
-        public int IdenCustomersLocation { get; set; }
-        public int IdenObject { get; set; }
-        public int IdenProductsGroup { get; set; }
+        public int CustomersID { get; set; }
+        public int UserID { get; set; }
+        public int ProductsID { get; set; }
+        public int RouteID { get; set; }
+        public int CustomersRoutesID { get; set; }
+        public int CustomersLocationID { get; set; }
+        public int ObjectID { get; set; }
+        public int ProductsGroupID { get; set; }
         public string LocationName { get; set; }
         public string Description { get; set; }
         public string Longitude { get; set; }
         public string Latitude { get; set; }
-        public string RouteId { get; set; }
+        public string RouteCode { get; set; }
         public string RouteName { get; set; }
-        public string GroupID { get; set; }
+        public string GroupCode { get; set; }
         public string GroupName { get; set; }
         public string Phone { get; set; }
         public string Adress { get; set; }
-        public string CustomersId { get; set; }
+        public string CustomersCode { get; set; }
         public string CustomersName { get; set; }
         public string ObjectName { get; set; }
-        public string ProductsID { get; set; }
+        public string ProductsCode { get; set; }
         public string ProductsName { get; set; }
         public string UserName { get; set; }
         public DateTime Datetime { get; set; }

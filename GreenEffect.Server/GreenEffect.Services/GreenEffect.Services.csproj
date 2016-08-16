@@ -81,6 +81,8 @@
     <Compile Include="Events\SubscriptionService.cs" />
     <Compile Include="Implement\AuthorityObjectServices.cs" />
     <Compile Include="Implement\CustomerRouteServices.cs" />
+    <Compile Include="Implement\CustomersImagesServices.cs" />
+    <Compile Include="Implement\CustomersLocationServices.cs" />
     <Compile Include="Implement\CustomersSevices.cs" />
     <Compile Include="Implement\HttpGet.cs" />
     <Compile Include="Implement\JsonModel.cs" />
@@ -91,6 +93,8 @@
     <Compile Include="Implement\RouteSevices.cs" />
     <Compile Include="Implement\UserServices.cs" />
     <Compile Include="Interface\IAuthorityObjectServices.cs" />
+    <Compile Include="Interface\ICustomersImagesServices.cs" />
+    <Compile Include="Interface\ICustomersLocationServices.cs" />
     <Compile Include="Interface\ICustomersRoutesServices.cs" />
     <Compile Include="Interface\ICustomersServices.cs" />
     <Compile Include="Interface\IOrderDataServices.cs" />

@@ -59,7 +59,7 @@ namespace GreenEffect.Api.Controllers
                         UserName = userResult.Result.UserName,
                         Password = userResult.Result.Password,
                         Op = userResult.Result.Op,
-                        IdenObj = userResult.Result.IdenObj,
+                        UserID = userResult.Result.UserID,
                         Datetime = userResult.Result.Datetime,
                     },
                     IsSuccessful = true,
@@ -88,7 +88,7 @@ namespace GreenEffect.Api.Controllers
                     Id = customersResult.Result.Id,
                     UserName = customersResult.Result.UserName,
                     Password = customersResult.Result.Password,
-                    IdenObj = customersResult.Result.IdenObj,
+                    UserID = customersResult.Result.UserID,
                     Op = customersResult.Result.Op,
                     Datetime = customersResult.Result.Datetime
                 };
@@ -130,6 +130,7 @@ namespace GreenEffect.Api.Controllers
                             Id = user.Id,
                             UserName = user.UserName,
                             Password = user.Password,
+                            UserID = user.UserID,
                             Datetime = user.Datetime
                         }
                     };

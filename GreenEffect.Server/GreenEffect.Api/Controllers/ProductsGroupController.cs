@@ -27,9 +27,9 @@ namespace GreenEffect.Api.Controllers
                 listProductsGroup = productsgroup.Result.Select(g => new ProductsGroupApiModel
                 {
                     Id = g.Id,
-                    GroupID = g.GroupID,
+                    GroupCode = g.GroupCode,
                     GroupName = g.GroupName,
-                    IdenProductsGroup = g.IdenProductsGroup,
+                    ProductsGroupID = g.ProductsGroupID,
                     Disable = g.Disable,
                     Datetime=g.Datetime,
 

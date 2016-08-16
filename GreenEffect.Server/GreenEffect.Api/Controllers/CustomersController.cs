@@ -29,13 +29,13 @@ namespace GreenEffect.Api.Controllers
                     Data = new CustomersApiModel()
                     {
                         Id = customersResult.Result.Id,
-                        CustomersId = customersResult.Result.CustomersId,
+                        CustomersCode = customersResult.Result.CustomersCode,
                         CustomersName = customersResult.Result.CustomersName,
                         Adress = customersResult.Result.Adress,
                         Phone = customersResult.Result.Phone,
-                        IdenRoute = customersResult.Result.IdenRoute,
-                        IdenUser=customersResult.Result.IdenUser,
-                        IdenCustomers=customersResult.Result.IdenCustomers,
+                        RouteID = customersResult.Result.RouteID,
+                        UserID=customersResult.Result.UserID,
+                        CustomersID=customersResult.Result.CustomersID,
                         Datetime = customersResult.Result.Datetime,
                     },
                     IsSuccessful = true,
@@ -59,13 +59,13 @@ namespace GreenEffect.Api.Controllers
                 var lstCustomerApi = customerResult.Result.Select(c => new CustomersApiModel
                 {
                     Id = c.Id,
-                    CustomersId = c.CustomersId,
+                    CustomersCode = c.CustomersCode,
                     CustomersName = c.CustomersName,
                     Adress = c.Adress,
                     Phone = c.Phone,
-                    IdenRoute = c.IdenRoute,
-                    IdenUser = c.IdenUser,
-                    IdenCustomers = c.IdenCustomers,
+                    RouteID = c.RouteID,
+                    UserID = c.UserID,
+                    CustomersID = c.CustomersID,
                     Datetime = c.Datetime
                 }).ToList();
                 return new JsonModel<List<CustomersApiModel>>()
@@ -84,23 +84,23 @@ namespace GreenEffect.Api.Controllers
             };
         }
 
-        public JsonModel<List<CustomersApiModel>> Get(string searchCustomersId, string searchCustomersName, string customersAddress, string customersPhone)
+        public JsonModel<List<CustomersApiModel>> Get(string searchCustomersCode, string searchCustomersName, string customersAddress, string customersPhone)
         {
             var listUsers = new List<CustomersApiModel>();
             // get customers by ID,NAME,ADRESS,PHONE
-            var customersResult = _customersSevices.GetAll(searchCustomersId, searchCustomersName, customersAddress, customersPhone);
+            var customersResult = _customersSevices.GetAll(searchCustomersCode, searchCustomersName, customersAddress, customersPhone);
             if (customersResult.RuleViolations.IsNullOrEmpty())
             {
                 listUsers = customersResult.Result.Select(c => new CustomersApiModel
                 {
                     Id = c.Id,
-                    CustomersId = c.CustomersId,
+                    CustomersCode = c.CustomersCode,
                     CustomersName = c.CustomersName,
                     Adress = c.Adress,
                     Phone = c.Phone,
-                    IdenCustomers = c.IdenCustomers,
-                    IdenRoute = c.IdenRoute,
-                    IdenUser = c.IdenUser
+                    CustomersID = c.CustomersID,
+                    RouteID = c.RouteID,
+                    UserID = c.UserID
                 }).OrderByDescending(i => i.Id).ToList();
                 return new JsonModel<List<CustomersApiModel>>
                 {
@@ -115,23 +115,23 @@ namespace GreenEffect.Api.Controllers
             };
         }
 
-        public JsonModel<List<CustomersApiModel>> GetByIden(int IdenRoute)
+        public JsonModel<List<CustomersApiModel>> GetByIden(int RouteID)
         {
             var listUsers = new List<CustomersApiModel>();
             //  get user by username
-            var customersResult = _customersSevices.GetByIden(IdenRoute);
+            var customersResult = _customersSevices.GetByIden(RouteID);
             if (customersResult.RuleViolations.IsNullOrEmpty())
             {
                 listUsers = customersResult.Result.Select(c => new CustomersApiModel
                 { 
                     Id = c.Id,
-                    CustomersId = c.CustomersId,
+                    CustomersCode = c.CustomersCode,
                     CustomersName = c.CustomersName,
                     Adress = c.Adress,
                     Phone = c.Phone,
-                    IdenCustomers = c.IdenCustomers,
-                    IdenRoute = c.IdenRoute,
-                    IdenUser = c.IdenUser
+                    CustomersID = c.CustomersID,
+                    RouteID = c.RouteID,
+                    UserID = c.UserID
                    
                 }).OrderByDescending(i => i.Id).ToList();
                 return new JsonModel<List<CustomersApiModel>>
@@ -147,24 +147,24 @@ namespace GreenEffect.Api.Controllers
             };
         }
 
-        public JsonModel<List<CustomersApiModel>> GetByUser(int IdenUser)
+        public JsonModel<List<CustomersApiModel>> GetByUser(int UserID)
         {
             var listUsers = new List<CustomersApiModel>();
             //  get user by username
-            var customersResult = _customersSevices.GetByUser(IdenUser);
+            var customersResult = _customersSevices.GetByUser(UserID);
             if (customersResult.RuleViolations.IsNullOrEmpty())
             {
 
                 listUsers = customersResult.Result.Select(c => new CustomersApiModel
                 {
                     Id = c.Id,
-                    CustomersId = c.CustomersId,
+                    CustomersCode = c.CustomersCode,
                     CustomersName = c.CustomersName,
                     Adress = c.Adress,
                     Phone = c.Phone,
-                    IdenCustomers = c.IdenCustomers,
-                    IdenRoute = c.IdenRoute,
-                    IdenUser = c.IdenUser
+                    CustomersID = c.CustomersID,
+                    RouteID = c.RouteID,
+                    UserID = c.UserID
 
                 }).OrderByDescending(i => i.Id).ToList();
                 return new JsonModel<List<CustomersApiModel>>
@@ -184,18 +184,18 @@ namespace GreenEffect.Api.Controllers
         public JsonModel<CustomersApiModel> Create(CustomersApiModel model)
         {
 
-            if (!string.IsNullOrEmpty(model.CustomersId) || !string.IsNullOrEmpty(model.CustomersName))//check null
+            if (!string.IsNullOrEmpty(model.CustomersCode) || !string.IsNullOrEmpty(model.CustomersName))//check null
             {
 
                 var customer = new Customers
                 {
-                    CustomersId = model.CustomersId,
+                    CustomersCode = model.CustomersCode,
                     CustomersName = model.CustomersName,
                     Adress = model.Adress,
                     Phone = model.Phone,
-                    IdenCustomers = model.IdenCustomers,
-                    IdenUser = model.IdenUser,
-                    IdenRoute = model.IdenRoute,
+                    CustomersID = model.CustomersID,
+                    UserID = model.UserID,
+                    RouteID = model.RouteID,
                     Datetime = DateTime.Now
                 };
 
@@ -208,13 +208,13 @@ namespace GreenEffect.Api.Controllers
                         Data = new CustomersApiModel
                         {
                             Id = customersResult.Result.Id,
-                            CustomersId = customersResult.Result.CustomersId,
+                            CustomersCode = customersResult.Result.CustomersCode,
                             CustomersName = customersResult.Result.CustomersName,
                             Adress = customersResult.Result.Adress,
                             Phone = customersResult.Result.Phone,
-                            IdenCustomers = customersResult.Result.IdenCustomers,
-                            IdenRoute = customersResult.Result.IdenRoute,
-                            IdenUser = customersResult.Result.IdenUser,
+                            CustomersID = customersResult.Result.CustomersID,
+                            RouteID = customersResult.Result.RouteID,
+                            UserID = customersResult.Result.UserID,
 
                         }
                     };
@@ -232,7 +232,7 @@ namespace GreenEffect.Api.Controllers
                 return new JsonModel<CustomersApiModel>
                 {
                     IsSuccessful = false,
-                    Messenger = "Not empty CustomersID or CustomerName"
+                    Messenger = "Not empty CustomersCode or CustomerName"
                 };
             }
         }

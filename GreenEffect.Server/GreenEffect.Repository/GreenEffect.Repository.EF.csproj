@@ -74,6 +74,8 @@
     <Compile Include="Configuration\AuthorityObjectConfigurations.cs" />
     <Compile Include="Configuration\CustomerRouteConfiguration.cs" />
     <Compile Include="Configuration\CustomersConfiguration.cs" />
+    <Compile Include="Configuration\CustomersImagesConfigurations.cs" />
+    <Compile Include="Configuration\CustomersLocationConfigurations.cs" />
     <Compile Include="Configuration\OrderConfiguration.cs" />
     <Compile Include="Configuration\OrderDataConfigurations.cs" />
     <Compile Include="Configuration\ProductsConfigurations.cs" />

@@ -28,10 +28,10 @@ namespace GreenEffect.Api.Controllers
                 listUsers = routeResult.Result.Select(r => new RouteApiModel
                 {
                     Id = r.Id,
-                    RouteId = r.RouteId,
+                    RouteCode = r.RouteCode,
                     RouteName = r.RouteName,
-                    IdenRoute = r.IdenRoute,
-                    IdenUser = r.IdenUser,
+                    RouteID = r.RouteID,
+                    UserID = r.UserID,
                     DateTime = r.DateTime
                 }).OrderByDescending(i => i.Id).ToList();
                 return new JsonModel<List<RouteApiModel>>

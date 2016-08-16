@@ -35,14 +35,14 @@ namespace GreenEffect.Api.Controllers
                         ProductsNumber = orderResult.Result.ProductsNumber,
                         UnitPrice = orderResult.Result.UnitPrice,
                         Amount = orderResult.Result.Amount,
-                        IdenCustomers = orderResult.Result.IdenCustomers,
-                        IdenUser = orderResult.Result.IdenUser,
-                        IdenProducts = orderResult.Result.IdenProducts,
-                        IdenRoute = orderResult.Result.IdenRoute,
-                        IdenCustomersRoutes = orderResult.Result.IdenCustomersRoutes,
-                        IdenCustomersLocation = orderResult.Result.IdenCustomersLocation,
-                        IdenObject = orderResult.Result.IdenObject,
-                        IdenProductsGroup = orderResult.Result.IdenProductsGroup,
+                        CustomersID = orderResult.Result.CustomersID,
+                        UserID = orderResult.Result.UserID,
+                        ProductsID = orderResult.Result.ProductsID,
+                        RouteID = orderResult.Result.RouteID,
+                        CustomersRoutesID = orderResult.Result.CustomersRoutesID,
+                        CustomersLocationID = orderResult.Result.CustomersLocationID,
+                        ObjectID = orderResult.Result.ObjectID,
+                        ProductsGroupID = orderResult.Result.ProductsGroupID,
                         LocationName = orderResult.Result.LocationName,
                         Description = orderResult.Result.Description,
                         Longitude = orderResult.Result.Longitude,
@@ -81,14 +81,14 @@ namespace GreenEffect.Api.Controllers
                     ProductsNumber = o.ProductsNumber,
                     UnitPrice = o.UnitPrice,
                     Amount = o.Amount,
-                    IdenCustomers = o.IdenCustomers,
-                    IdenUser = o.IdenUser,
-                    IdenProducts = o.IdenProducts,
-                    IdenRoute = o.IdenRoute,
-                    IdenCustomersRoutes = o.IdenCustomersRoutes,
-                    IdenCustomersLocation = o.IdenCustomersLocation,
-                    IdenObject = o.IdenObject,
-                    IdenProductsGroup = o.IdenProductsGroup,
+                    CustomersID = o.CustomersID,
+                    UserID = o.UserID,
+                    ProductsID = o.ProductsID,
+                    RouteID = o.RouteID,
+                    CustomersRoutesID = o.CustomersRoutesID,
+                    CustomersLocationID = o.CustomersLocationID,
+                    ObjectID = o.ObjectID,
+                    ProductsGroupID = o.ProductsGroupID,
                     LocationName = o.LocationName,
                     Description = o.Description,
                     Longitude = o.Longitude,
@@ -110,11 +110,11 @@ namespace GreenEffect.Api.Controllers
             };
         }
 
-        public JsonModel<List<OrderDataApiModel>> GetByUser(int IdenUser, int disable)
+        public JsonModel<List<OrderDataApiModel>> GetByUser(int UserID, int disable)
         {
             var listOrder = new List<OrderDataApiModel>();
             //  get user by username
-            var orderResult = _orderdataServices.GetByUser(IdenUser, disable);
+            var orderResult = _orderdataServices.GetByUser(UserID, disable);
             if (orderResult.RuleViolations.IsNullOrEmpty())
             {
 
@@ -128,14 +128,14 @@ namespace GreenEffect.Api.Controllers
                     ProductsNumber = o.ProductsNumber,
                     UnitPrice = o.UnitPrice,
                     Amount = o.Amount,
-                    IdenCustomers = o.IdenCustomers,
-                    IdenUser = o.IdenUser,
-                    IdenProducts = o.IdenProducts,
-                    IdenRoute = o.IdenRoute,
-                    IdenCustomersRoutes = o.IdenCustomersRoutes,
-                    IdenCustomersLocation = o.IdenCustomersLocation,
-                    IdenObject = o.IdenObject,
-                    IdenProductsGroup = o.IdenProductsGroup,
+                    CustomersID = o.CustomersID,
+                    UserID = o.UserID,
+                    ProductsID = o.ProductsID,
+                    RouteID = o.RouteID,
+                    CustomersRoutesID = o.CustomersRoutesID,
+                    CustomersLocationID = o.CustomersLocationID,
+                    ObjectID = o.ObjectID,
+                    ProductsGroupID = o.ProductsGroupID,
                     LocationName = o.LocationName,
                     Description = o.Description,
                     Longitude = o.Longitude,
@@ -156,11 +156,11 @@ namespace GreenEffect.Api.Controllers
                 Messenger = orderResult.RuleViolations[0].ErrorMessage
             };
         }
-        public JsonModel<List<OrderDataApiModel>> GetByRoute(int IdenRouter, int disable)
+        public JsonModel<List<OrderDataApiModel>> GetByRoute(int RouteIDr, int disable)
         {
             var listOrder = new List<OrderDataApiModel>();
             //  get user by username
-            var orderResult = _orderdataServices.GetByRoute(IdenRouter, disable);
+            var orderResult = _orderdataServices.GetByRoute(RouteIDr, disable);
             if (orderResult.RuleViolations.IsNullOrEmpty())
             {
 
@@ -174,14 +174,14 @@ namespace GreenEffect.Api.Controllers
                     ProductsNumber = o.ProductsNumber,
                     UnitPrice = o.UnitPrice,
                     Amount = o.Amount,
-                    IdenCustomers = o.IdenCustomers,
-                    IdenUser = o.IdenUser,
-                    IdenProducts = o.IdenProducts,
-                    IdenRoute = o.IdenRoute,
-                    IdenCustomersRoutes = o.IdenCustomersRoutes,
-                    IdenCustomersLocation = o.IdenCustomersLocation,
-                    IdenObject = o.IdenObject,
-                    IdenProductsGroup = o.IdenProductsGroup,
+                    CustomersID = o.CustomersID,
+                    UserID = o.UserID,
+                    ProductsID = o.ProductsID,
+                    RouteID = o.RouteID,
+                    CustomersRoutesID = o.CustomersRoutesID,
+                    CustomersLocationID = o.CustomersLocationID,
+                    ObjectID = o.ObjectID,
+                    ProductsGroupID = o.ProductsGroupID,
                     LocationName = o.LocationName,
                     Description = o.Description,
                     Longitude = o.Longitude,
