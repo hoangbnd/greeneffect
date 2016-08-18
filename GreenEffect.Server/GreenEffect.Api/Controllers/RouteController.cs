@@ -1,6 +1,7 @@
 ﻿using GreenEffect.Services.Interface;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
@@ -17,8 +18,23 @@ namespace GreenEffect.Api.Controllers
         {
             _routeService = routeServices;
         }
-        public JsonModel<List<RouteApiModel>> GetByUser(int idenUser)
+        [HttpPost]
+        public JsonModel<List<RouteApiModel>> GetByUser()
         {
+            var idenUserStr = HttpContext.Current.Request["idenUser"];
+            int idenUser;
+            if (!int.TryParse(idenUserStr, NumberStyles.Integer, CultureInfo.InvariantCulture, out idenUser))
+            {
+                idenUser = 0;
+            }
+            if (idenUser.Equals(0))
+            {
+                return new JsonModel<List<RouteApiModel>>
+                {
+                    IsSuccessful = false,
+                    Messenger = "Mã nhân viên không đúng. Xin mời đăng nhập lại."
+                };
+            }
             var listUsers = new List<RouteApiModel>();
             //  get user by username
             var routeResult = _routeService.GetByUser(idenUser);

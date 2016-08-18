@@ -60,7 +60,7 @@ namespace GreenEffect.Api.Controllers
                         Password = userResult.Result.Password,
                         Op = userResult.Result.Op,
                         IdenObj = userResult.Result.IdenObj,
-                        Datetime = userResult.Result.Datetime,
+                        Datetime = userResult.Result.LastLoginDt,
                     },
                     IsSuccessful = true,
                     Messenger = ""
@@ -87,17 +87,28 @@ namespace GreenEffect.Api.Controllers
                 };
             }
             //  get user by username
-            var customersResult = _userServices.GetByUserNameAndPassword(model.UserName, model.Password);
-            if (customersResult.RuleViolations.IsNullOrEmpty())
+            var userResult = _userServices.GetByUserNameAndPassword(model.UserName, model.Password);
+            if (userResult.RuleViolations.IsNullOrEmpty())
             {
+                if (userResult.Result == null)
+                {
+                    return new JsonModel<UserApiModel>
+                    {
+                        IsSuccessful = false,
+                        Messenger = "Tên đăng nhập hoặc mật khẩu chưa đúng. Vui lòng nhập lại "
+                    };
+                }
+                var user = userResult.Result;
+                user.LastLoginDt = DateTime.Now;
+                _userServices.Update(user);
                 var listUsers = new UserApiModel
                 {
-                    Id = customersResult.Result.Id,
-                    UserName = customersResult.Result.UserName,
-                    Password = customersResult.Result.Password,
-                    IdenObj = customersResult.Result.IdenObj,
-                    Op = customersResult.Result.Op,
-                    Datetime = customersResult.Result.Datetime
+                    Id = userResult.Result.Id,
+                    UserName = userResult.Result.UserName,
+                    Password = userResult.Result.Password,
+                    IdenObj = userResult.Result.IdenObj,
+                    Op = userResult.Result.Op,
+                    Datetime = userResult.Result.LastLoginDt
                 };
                 return new JsonModel<UserApiModel>
                 {
@@ -108,7 +119,7 @@ namespace GreenEffect.Api.Controllers
             return new JsonModel<UserApiModel>
             {
                 IsSuccessful = false,
-                Messenger = customersResult.RuleViolations[0].ErrorMessage
+                Messenger = userResult.RuleViolations[0].ErrorMessage
             };
         }
         //Update Password
@@ -123,7 +134,7 @@ namespace GreenEffect.Api.Controllers
                 //neu co thi set password moi
                 var user = userRs.Result;
                 user.Password = model.Password;
-                user.Datetime = DateTime.Now;
+                user.LastLoginDt = DateTime.Now;
                 var updateResult = _userServices.Update(user);
                 //kiem tra ket qua update
                 if (updateResult.RuleViolations.IsNullOrEmpty())
@@ -137,7 +148,7 @@ namespace GreenEffect.Api.Controllers
                             Id = user.Id,
                             UserName = user.UserName,
                             Password = user.Password,
-                            Datetime = user.Datetime
+                            Datetime = user.LastLoginDt
                         }
                     };
                 }
