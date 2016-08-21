@@ -202,14 +202,14 @@
                 }
             }
         })
-        .state('app.order', {
-            url: "/order",
-            views: {
-                'menuContent': {
-                    templateUrl: "components/order/createOrder.html"
-                }
-            }
-        })
+        //.state('app.order', {
+        //    url: "/order",
+        //    views: {
+        //        'menuContent': {
+        //            templateUrl: "components/order/createOrder.html"
+        //        }
+        //    }
+        //})
 
 
     //.state('app.home', {
