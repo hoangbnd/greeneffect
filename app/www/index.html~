@@ -3,8 +3,6 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-	
-
     <title></title>
 
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
@@ -59,7 +57,6 @@
     <script src="services/user/userServices.js"></script>
     <!-- app js -->
     <script src="js/app.js"></script>
-    <script src="js/helpfn.js"></script>
 
 </head>
 
