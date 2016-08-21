@@ -205,6 +205,7 @@
                 }
             }
         })
+<<<<<<< HEAD
         .state('app.order', {
             url: "/order",
             views: {
@@ -221,6 +222,16 @@
         url:"/gallery",
         templateUrl: "components/order/gallery.html"
      })
+=======
+        //.state('app.order', {
+        //    url: "/order",
+        //    views: {
+        //        'menuContent': {
+        //            templateUrl: "components/order/createOrder.html"
+        //        }
+        //    }
+        //})
+>>>>>>> 095e10f77ad7baf9e06ceecd93c295f4e9ad6f40
 
     //.state('register', {
     //    url: "/register",

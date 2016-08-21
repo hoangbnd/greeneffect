@@ -23,8 +23,8 @@
 
         // Perform the login action when the user submits the login form
         $scope.doLogin = function () {
-            $location.path("#/customer/list");
-            return;
+            //$location.path("#/customer/list");
+            //return;
             if (angular.isUndefined($scope.loginData) ||
                 angular.isUndefined($scope.loginData.username) ||
                 angular.equals($scope.loginData.username, '')) {
@@ -57,7 +57,7 @@
                 userInfo.Op = data.Data.Op;
                 userInfo.IdenObj = data.Data.IdenObj;
                 console.log(data);
-                $location.path("#/customer/list");
+                $location.path("/customer/list");
             }).catch(function (error) {
                 $scope.displayAlert = true;
                 $scope.alertType = 'warning';
