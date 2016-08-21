@@ -1,4 +1,4 @@
-(function () {
+﻿(function () {
     'use strict';
 
     angular
@@ -21,7 +21,9 @@
           SS_KEY: {
               USER_INFO: 'geUserInfo',
               SYSTEM_EXCEPTION: 'geSystemException',
-              HT0401F04_PARAM: 'ht0401f04_param'
+              HT0401F04_PARAM: 'ht0401f04_param',
+              ROUTE_INFO: 'geRouteInfo',
+              ORDER_INFO: 'geOrderInfo'
           },
           GE_COOKIE_KEY: 'GEUSERINFO',
           GE_USER_INFO_KEY: {
@@ -43,6 +45,11 @@
               ON_VOICE_AFTER: 'OnVoiceAfter',
               ON_GET_ACCESS_JSON: 'OnGetAccessJson',
               ON_GET_SHOHIN: 'OnGetShohin'
+          },
+          MSG: {
+              E001: 'Có lỗi xảy ra trong hệ thống. Xin vui lòng thử lại sau.',
+              E101: 'Thông tin {0} không được để trống.',
           }
+
       });
 })();

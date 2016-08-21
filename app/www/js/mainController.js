@@ -1,7 +1,15 @@
 angular.module('greeneffect.controller.main', [])
 
 .controller('AppCtrl', function ($scope, $ionicModal, $timeout) {
-
+    $scope.viewOnMap = function () {
+        var routeInfo = {
+            currentRoute: $scope.routeSelected,
+            allRoutes: $scope.routes,
+            allCustomer: $scope.allCustomer
+        }
+        sessionStorage.setItem(Constant.SS_KEY.ROUTE_INFO, angular.toJson(routeInfo));
+        $location.path("#/app/map")
+    };
     
 })
 

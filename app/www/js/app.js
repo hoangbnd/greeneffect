@@ -1,15 +1,20 @@
 ﻿angular.module('greeneffect', [
     'ngComponentRouter',
     'ngSanitize',
+    'ngCordova',
     'ionic',
     'greeneffect.constant',
     'greeneffect.service.user',
+    'greeneffect.service.customer',
     'greeneffect.controller.main',
     'greeneffect.controller.user',
     'greeneffect.controller.order',
-    'greeneffect.common.components.geAlert'])
-.run(function ($ionicPlatform) {
-    $ionicPlatform.ready(function () {
+    'greeneffect.controller.customer',
+    'greeneffect.common.components.geAlert',
+    /*'greeneffect.common.components.geMap',*/
+    'greeneffect.common.service.messagemanagement'])
+.run(function ($ionicPlatform, $ionicPopup, $cordovaNetwork) {
+   $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
         if (window.cordova && window.cordova.plugins.Keyboard) {
@@ -21,6 +26,19 @@
             // org.apache.cordova.statusbar required
             StatusBar.styleDefault();
         }
+
+        //if ($cordovaNetwork.getNetwork() == Connection.NONE) {
+        //    $ionicpopup.confirm({
+        //        title: "internet disconnected",
+        //        content: "the internet is disconnected on your device."
+        //    })
+        //    .then(function (result) {
+        //        if (!result) {
+        //            ionic.platform.exitapp();
+        //        }
+        //    });
+        //}
+
     });
 })
 .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $locationProvider, $httpProvider,$resourceProvider, Constant, $compileProvider) {
@@ -156,11 +174,45 @@
     $ionicConfigProvider.navBar.alignTitle('left');
     $ionicConfigProvider.backButton.text('').previousTitleText('');
     $stateProvider
-
-     .state('login', {
-         url: "/login",
-         templateUrl: "components/user/login.html"
-     })
+        //.state('app', {
+        //    url: "/app",
+        //    abstract: true,
+        //    templateUrl: "templates/menu.html",
+        //})
+        .state('login', {
+            url: "/login",
+            templateUrl: "components/user/login.html",
+            controller: 'LoginCtrl'
+        })
+        .state('customer', {
+            url: "/customer",
+            abstract: true,
+            templateUrl: "templates/menu.html",
+        })
+        .state('customer.list', {
+            url: "/list",
+            views: {
+                'menuContent': {
+                    templateUrl: "components/customer/customerList.html"
+                }
+            }
+        })
+        .state('customer.map', {
+            url: "/map",
+            views: {
+                'menuContent': {
+                    templateUrl: "components/customer/viewOnMap.html"
+                }
+            }
+        })
+        .state('app.order', {
+            url: "/order",
+            views: {
+                'menuContent': {
+                    templateUrl: "components/order/createOrder.html"
+                }
+            }
+        })
      .state('takephoto',{
         url:"/takephoto",
         templateUrl: "components/order/takephoto.html"

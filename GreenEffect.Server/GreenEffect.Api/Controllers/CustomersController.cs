@@ -1,6 +1,7 @@
 ﻿using GreenEffect.Services.Interface;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
@@ -146,12 +147,26 @@ namespace GreenEffect.Api.Controllers
                 Messenger = customersResult.RuleViolations[0].ErrorMessage
             };
         }
-
-        public JsonModel<List<CustomersApiModel>> GetByUser(int IdenUser)
+        [HttpPost]
+        public JsonModel<List<CustomersApiModel>> GetByUser()
         {
+            var idenUserStr = HttpContext.Current.Request["idenUser"];
+            int idenUser;
+            if (!int.TryParse(idenUserStr, NumberStyles.Integer, CultureInfo.InvariantCulture, out idenUser))
+            {
+                idenUser = 0;
+            }
+            if (idenUser.Equals(0))
+            {
+                return new JsonModel<List<CustomersApiModel>>
+                {
+                    IsSuccessful = false,
+                    Messenger = "Mã nhân viên không đúng. Xin mời đăng nhập lại."
+                };
+            }
             var listUsers = new List<CustomersApiModel>();
             //  get user by username
-            var customersResult = _customersSevices.GetByUser(IdenUser);
+            var customersResult = _customersSevices.GetByUser(idenUser);
             if (customersResult.RuleViolations.IsNullOrEmpty())
             {
 
