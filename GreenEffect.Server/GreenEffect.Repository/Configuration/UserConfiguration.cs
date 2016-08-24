@@ -15,7 +15,7 @@ namespace GreenEffect.Repository.EF.Configuration
             HasKey(u => u.Id);
             Property(u => u.UserName);
             Property(u => u.Password);
-            Property(u => u.Datetime);
+            Property(u => u.LastLoginDt);
             Property(u=> u.Op);
         }
     }

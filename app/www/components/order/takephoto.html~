@@ -1,0 +1,6 @@
+<ion-content class="main_bg" ng-controller="takePhotoCtrl">
+	<button class="button button-block button-positive" ng-click = "takePhoto()"> Máy Ảnh</button>
+   <button class="button button-block button-positive" ng-click='openGallery()'> Thư Viện</button>
+
+<img ng-src = "http://placehold.it/300x300" > </img>
+</ion-content>

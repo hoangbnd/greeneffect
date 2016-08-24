@@ -25,13 +25,8 @@
                     $q.all([
                         validateUser()
                     ]).then(function (data) {
-
-                        var result = {
-
-                        }
-
-                        deferred.resolve(result);
-                        return result;
+                        deferred.resolve(data[0]);
+                        return data[0];
                     }).catch(function (error) {
                         deferred.reject(error);
                         return error;

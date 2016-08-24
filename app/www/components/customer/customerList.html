@@ -1,0 +1,55 @@
+﻿<ion-view view-title="Green Effect">
+    <ion-content class="home_page" ng-controller="LstCustomerCtrl">
+        <div class="list list-route">
+            <label class="item item-input item-select sel_item main_color">
+                <select ng-model="routeSelected" ng-change="selectRoute(routeSelected)" 
+                        ng-options="route as route.RouteName for route in routes track by route.IdenRoute">
+                    <option value="" ng-if="false"></option>
+                </select>
+            </label>
+        </div>
+        <div class="home_list"
+             collection-repeat="item in customers"
+             collection-item-width="'100%'">
+            <div class="list_content">
+                <div class="row">
+                    <div class="col col-25">
+                        <div class="thumb">
+                            <img src="/img/user-icon-white.png" />
+                        </div>
+                    </div>
+                    <div class="col col-75">
+                        <h3 class="main_color">{{item.CustomersName}}</h3>
+                        <p class="address">Địa chỉ: {{item.Adress}}</p>
+                        <p>Điện thoại: {{item.Phone}}</p>
+                    </div>
+                </div>
+                <!--<p class="num_see"><i class="ion-eye"></i>1245</p>-->
+                <span class="see_more main_bg" ng-click="goToCreateOrder(item)">
+                    <i class="ion-plus"></i>
+                </span>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
+
+<style>
+    .home_page .list.list-route {
+        padding: 15px;
+    }
+
+    .home_page .sel_item.item-select {
+        width: 100%;
+    }
+
+    .thumb {
+        width: 62px;
+        height: 62px;
+        margin: 15px auto;
+    }
+
+    .address {
+        max-height: 40px;
+        overflow: hidden;
+    }
+</style>
