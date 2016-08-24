@@ -7,5 +7,5 @@ namespace GreenEffect.Services.Interface
     public interface IAuthorityObjectServices
     {
         ServiceResult<ICollection<AuthorityObject>> GetAll(int IdenUser);
-    }
+    } 
 }

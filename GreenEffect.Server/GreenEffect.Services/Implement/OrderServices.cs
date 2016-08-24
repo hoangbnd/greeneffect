@@ -18,7 +18,7 @@ namespace GreenEffect.Services.Implement
         public ServiceResult<Order> GetById(int id)
         {
             try
-            {
+            { 
                 Order order = _orderRepository.FindById(id);
                 return order != null
                         ? new ServiceResult<Order>(order)

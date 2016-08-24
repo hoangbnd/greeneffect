@@ -10,7 +10,7 @@ namespace GreenEffect.DomainObject.CustomersRoutes
     {
         public string CustomersCode { get; set; }
         public string CustomersName { get; set; }
-        public string Adress { get; set; }
+        public string Adress { get; set; } 
         public string Phone { get; set; }
         public int UserID { get; set; }
         public int CustomersID { get; set; }

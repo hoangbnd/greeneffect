@@ -7,7 +7,7 @@ using MVCCore;
 namespace GreenEffect.DomainObject.Products
 {
     public class Products:BaseEntity
-    {
+    { 
         public string ProductsCode { get; set; }
         public string ProductsName { get; set; }
         public decimal UnitPrice { get; set; }

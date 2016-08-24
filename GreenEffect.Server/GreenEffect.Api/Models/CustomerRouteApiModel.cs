@@ -7,7 +7,7 @@ namespace GreenEffect.Api.Models
 {
     public class CustomerRouteApiModel
     {
-        public int Id { get; set; }
+        public int Id { get; set; } 
         public string CustomersCode { get; set; }
         public string CustomersName { get; set; }
         public string Adress { get; set; }

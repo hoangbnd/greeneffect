@@ -86,6 +86,7 @@ namespace GreenEffect.Api.Controllers
                     Messenger = orderResult.RuleViolations[0].ErrorMessage
                 };
 
+
             }
             else
             {

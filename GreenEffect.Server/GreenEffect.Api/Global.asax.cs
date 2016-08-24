@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Web;
-using System.Web.Compilation;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -20,7 +16,6 @@ using MVCCore;
 using MVCCore.Caching;
 using MVCCore.Data;
 using MVCCore.Fakes;
-using MVCCore.Infrastructure;
 using MVCCore.Plugins;
 using GreenEffect.Services.Implement;
 using GreenEffect.Services.Interface;
@@ -45,7 +40,7 @@ namespace GreenEffect.Api
             
             // Create the container builder.
             var builder = new ContainerBuilder();
-
+            
             // Register the Web API controllers.
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 

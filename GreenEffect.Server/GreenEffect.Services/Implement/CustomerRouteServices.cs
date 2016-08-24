@@ -12,7 +12,7 @@ namespace GreenEffect.Services.Implement
     {
         private readonly IRepository<CustomersRoutes> _customersRouteRepository;
         public CustomerRouteServices(IRepository<CustomersRoutes> customersRouteRepository)
-        {
+        { 
             _customersRouteRepository = customersRouteRepository;
         }
         public ServiceResult<ICollection<CustomersRoutes>> GetByRoute(int RouteID)

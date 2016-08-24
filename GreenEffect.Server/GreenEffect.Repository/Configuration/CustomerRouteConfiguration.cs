@@ -21,7 +21,7 @@ namespace GreenEffect.Repository.EF.Configuration
             Property(r => r.UserID);
             Property(r => r.CustomersRoutesID);
             Property(r => r.RouteID);
-            Property(r => r.DateTime);
+            Property(r => r.DateTime); 
         }
     }
 }

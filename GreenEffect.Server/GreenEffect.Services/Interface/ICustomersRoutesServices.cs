@@ -8,4 +8,4 @@ namespace GreenEffect.Services.Interface
     {
         ServiceResult<ICollection<CustomersRoutes>> GetByRoute(int RouteID);
     }
-}
+} 

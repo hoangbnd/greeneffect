@@ -75,15 +75,22 @@ namespace GreenEffect.Api.Controllers
             }; ;
         }
         // Get by UserName Password
-
-        public JsonModel<UserApiModel> Login(string userName, string password)
+        [HttpPost]
+        public JsonModel<UserApiModel> Login(UserApiModel model)
         {   
-            var listUsers = new UserApiModel();
+            if (string.IsNullOrEmpty(model.UserName) || string.IsNullOrEmpty(model.Password))
+            {
+                return new JsonModel<UserApiModel>
+                {
+                    IsSuccessful = false,
+                    Messenger = "Hãy nhập đầy đủ tên đăng nhập và mật khẩu"
+                };
+            }
             //  get user by username
-            var customersResult = _userServices.GetByUserNameAndPassword(userName, password);
+            var customersResult = _userServices.GetByUserNameAndPassword(model.UserName, model.Password);
             if (customersResult.RuleViolations.IsNullOrEmpty())
             {
-                listUsers = new UserApiModel
+                var listUsers = new UserApiModel
                 {
                     Id = customersResult.Result.Id,
                     UserName = customersResult.Result.UserName,

@@ -6,7 +6,7 @@ using System.Web;
 namespace GreenEffect.Api.Models
 {
     public class RouteApiModel
-    {
+    { 
         public int Id { get; set; }
         public string RouteCode { get; set; }
         public string RouteName { get; set; }

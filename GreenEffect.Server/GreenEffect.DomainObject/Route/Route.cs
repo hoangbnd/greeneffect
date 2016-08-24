@@ -8,7 +8,6 @@ namespace GreenEffect.DomainObject.Route
 {  
         public class Route : BaseEntity
         {
-           
             public string RouteCode { get; set; }
             public string RouteName { get; set; }
             public int RouteID { get; set; }

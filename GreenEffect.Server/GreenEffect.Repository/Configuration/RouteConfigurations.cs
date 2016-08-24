@@ -12,7 +12,7 @@ namespace GreenEffect.Repository.EF.Configuration
         {
             public RouteConfigurations()
             {
-                ToTable("Routes");
+                ToTable("Routes"); 
                 HasKey(r => r.Id);
                 Property(r => r.RouteCode);
                 Property(r => r.RouteName);

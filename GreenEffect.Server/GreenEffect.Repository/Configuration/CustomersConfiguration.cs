@@ -12,7 +12,7 @@ namespace GreenEffect.Repository.EF.Configuration
         public CustomersConfiguration()
         {
             ToTable("Customers");
-            HasKey(c => c.Id);
+            HasKey(c => c.Id); 
             Property(c => c.CustomersCode);
             Property(c => c.CustomersName);
             Property(c => c.Adress);

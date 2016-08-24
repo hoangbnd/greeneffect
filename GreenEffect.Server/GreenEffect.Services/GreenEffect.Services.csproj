@@ -45,9 +45,6 @@
     <Reference Include="BarcodeGenerator.Common">
       <HintPath>..\packages\Barcode\BarcodeGenerator.Common.dll</HintPath>
     </Reference>
-    <Reference Include="DotNetOpenAuth.OpenId">
-      <HintPath>..\GreenSign.Site\bin\DotNetOpenAuth.OpenId.dll</HintPath>
-    </Reference>
     <Reference Include="GifLib">
       <HintPath>..\packages\GifLib.dll</HintPath>
     </Reference>
@@ -116,6 +113,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

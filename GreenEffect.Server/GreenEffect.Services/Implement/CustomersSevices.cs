@@ -14,7 +14,7 @@ namespace GreenEffect.Services.Implement
         public CustomersSevices(IRepository<Customers> customersRepository)
         {
             _customersRepository = customersRepository;
-        }
+        } 
 
         public ServiceResult<Customers> GetById(int id)
         {

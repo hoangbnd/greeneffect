@@ -6,7 +6,7 @@ using System.Web;
 namespace GreenEffect.Api.Models
 {
     public class ProductsGroupApiModel
-    {
+    { 
         public int Id { get; set; }
         public string GroupCode { get; set; }
         public string GroupName { get; set; }

@@ -58,7 +58,7 @@ namespace GreenEffect.Services.Implement
         }
         public ServiceResult<ICollection<User>> GetAll(string searchUsername, string searchPassword)
         {
-            try
+            try 
             {
                 var whCls = new List<Expression<Func<User, bool>>>();
                 if (!string.IsNullOrEmpty(searchUsername))//check dk co hay ko?

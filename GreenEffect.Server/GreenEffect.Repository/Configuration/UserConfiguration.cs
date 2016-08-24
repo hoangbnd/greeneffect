@@ -11,7 +11,7 @@ namespace GreenEffect.Repository.EF.Configuration
     public class UserConfiguration : EntityTypeConfiguration<User>
     {
         public UserConfiguration() {
-            ToTable("User");
+            ToTable("User"); 
             HasKey(u => u.Id);
             Property(u => u.UserName);
             Property(u => u.Password);
