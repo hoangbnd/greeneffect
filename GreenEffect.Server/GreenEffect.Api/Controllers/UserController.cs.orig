@@ -59,8 +59,13 @@ namespace GreenEffect.Api.Controllers
                         UserName = userResult.Result.UserName,
                         Password = userResult.Result.Password,
                         Op = userResult.Result.Op,
+<<<<<<< HEAD
                         UserID = userResult.Result.UserID,
+                        Datetime = userResult.Result.Datetime,
+=======
+                        IdenObj = userResult.Result.IdenObj,
                         Datetime = userResult.Result.LastLoginDt,
+>>>>>>> b579fa1dddfce4f961502078cf543a073badbbf8
                     },
                     IsSuccessful = true,
                     Messenger = ""
@@ -103,12 +108,21 @@ namespace GreenEffect.Api.Controllers
                 _userServices.Update(user);
                 var listUsers = new UserApiModel
                 {
+<<<<<<< HEAD
+                    Id = customersResult.Result.Id,
+                    UserName = customersResult.Result.UserName,
+                    Password = customersResult.Result.Password,
+                    UserID = customersResult.Result.UserID,
+                    Op = customersResult.Result.Op,
+                    Datetime = customersResult.Result.Datetime
+=======
                     Id = userResult.Result.Id,
                     UserName = userResult.Result.UserName,
                     Password = userResult.Result.Password,
-                    UserID = userResult.Result.UserID,
+                    IdenObj = userResult.Result.IdenObj,
                     Op = userResult.Result.Op,
                     Datetime = userResult.Result.LastLoginDt
+>>>>>>> b579fa1dddfce4f961502078cf543a073badbbf8
                 };
                 return new JsonModel<UserApiModel>
                 {
@@ -148,8 +162,12 @@ namespace GreenEffect.Api.Controllers
                             Id = user.Id,
                             UserName = user.UserName,
                             Password = user.Password,
+<<<<<<< HEAD
                             UserID = user.UserID,
+                            Datetime = user.Datetime
+=======
                             Datetime = user.LastLoginDt
+>>>>>>> b579fa1dddfce4f961502078cf543a073badbbf8
                         }
                     };
                 }

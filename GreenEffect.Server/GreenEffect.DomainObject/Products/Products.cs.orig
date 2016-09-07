@@ -1,0 +1,24 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using MVCCore;
+namespace GreenEffect.DomainObject.Products
+{
+    public class Products:BaseEntity
+<<<<<<< HEAD
+    {
+        public string ProductsCode { get; set; }
+=======
+    { 
+        public string ProductsID { get; set; }
+>>>>>>> 53d8a8dc5cf83e60665548f60b0a14383c8feb98
+        public string ProductsName { get; set; }
+        public decimal UnitPrice { get; set; }
+        public int ProductsGroupID { get; set; }
+        public int ProductsID { get; set; }
+        public int Disable { get; set; }
+        public DateTime Datetime { get; set; }
+    }
+}

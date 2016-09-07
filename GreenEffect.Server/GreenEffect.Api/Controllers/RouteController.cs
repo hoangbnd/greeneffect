@@ -18,26 +18,11 @@ namespace GreenEffect.Api.Controllers
         {
             _routeService = routeServices;
         }
-        [HttpPost]
-        public JsonModel<List<RouteApiModel>> GetByUser()
+        public JsonModel<List<RouteApiModel>> GetByUser(int IdenUser)
         {
-            var idenUserStr = HttpContext.Current.Request["idenUser"];
-            int idenUser;
-            if (!int.TryParse(idenUserStr, NumberStyles.Integer, CultureInfo.InvariantCulture, out idenUser))
-            {
-                idenUser = 0;
-            }
-            if (idenUser.Equals(0))
-            {
-                return new JsonModel<List<RouteApiModel>>
-                {
-                    IsSuccessful = false,
-                    Messenger = "Mã nhân viên không đúng. Xin mời đăng nhập lại."
-                };
-            }
             var listUsers = new List<RouteApiModel>();
             //  get user by username
-            var routeResult = _routeService.GetByUser(idenUser);
+            var routeResult = _routeService.GetByUser(IdenUser);
             if (routeResult.RuleViolations.IsNullOrEmpty())
             {
 
