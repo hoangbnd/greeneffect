@@ -277,6 +277,7 @@
     <Compile Include="Controllers\CustomersLocaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\AuthorityObjectController.cs" />
+    <Compile Include="Controllers\MessagerController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\OrderDataController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
@@ -293,6 +294,7 @@
     <Compile Include="Models\CustomersApiModel.cs" />
     <Compile Include="Models\CustomersImagesApiModel.cs" />
     <Compile Include="Models\CustomersLocationApiModel.cs" />
+    <Compile Include="Models\MessagerApiModel.cs" />
     <Compile Include="Models\OrderApiModel.cs" />
     <Compile Include="Models\OrderDataApiModel.cs" />
     <Compile Include="Models\ProductsApiModel.cs" />
@@ -337,6 +339,9 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Views\Home\Index.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -348,7 +353,6 @@
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />

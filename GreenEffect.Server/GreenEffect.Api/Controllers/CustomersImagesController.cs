@@ -19,7 +19,7 @@ namespace GreenEffect.Api.Controllers
 {
     public class CustomersImagesController:ApiController
     {
-        private const string ImagesFolder = "~/Images";
+        private const string ImagesFolder = "";
         private readonly ICustomersImagesServices _customerImagesService;
 
         public CustomersImagesController(ICustomersImagesServices customerImagesService)
@@ -27,7 +27,7 @@ namespace GreenEffect.Api.Controllers
             _customerImagesService = customerImagesService;
         }
         [HttpPost]
-        public async Task<HttpResponseMessage> PostImages(CustomersImagesApiModel model)
+        public async Task<HttpResponseMessage> PostImages()
         {
             var diskFolder = ConfigurationManager.AppSettings["AssetsMapPath"];
             var avatarUrl = "";
@@ -36,13 +36,27 @@ namespace GreenEffect.Api.Controllers
             {
                 throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
             }
-
+            var customerId = 0;
             string root = HttpContext.Current.Server.MapPath("~/App_Data");
             var provider = new MultipartFormDataStreamProvider(root);
 
             try
             {
-                var customersImagesResult = new ServiceResult<CustomersImages>();
+                
+                await Request.Content.ReadAsMultipartAsync(provider);
+                foreach (var key in provider.FormData.AllKeys)
+                {
+                    var strings = provider.FormData.GetValues(key);
+                    if (strings != null)
+                        foreach (var val in strings)
+                        {
+                            if (key.ToLower() == "customerid")
+                            {
+                                customerId = Int32.Parse(val);
+                            }
+                            
+                        }
+                }
 
                 // This illustrates how to get the file names for uploaded files.
                 foreach (var file in provider.FileData)
@@ -69,23 +83,28 @@ namespace GreenEffect.Api.Controllers
                         avatarUrl = imageThumbUrl;
                     }
                 }
+                var images = new CustomersImages();
+                images.Images = avatarUrl;
+                images.CustomersID = customerId;
+                //images.CustomersImagesID = model.CustomersImagesID;
+                //images.UserID = model.UserID;
+                images.DateTime = DateTime.Now;
+                var customersImagesResult = _customerImagesService.Create(images);
                 if (customersImagesResult != null && customersImagesResult.RuleViolations.IsNullOrEmpty())
                 {
-                    var images = customersImagesResult.Result;
-                        images.Images = avatarUrl;             
-                        images.CustomersID = model.CustomersID;
-                        images.CustomersImagesID = model.CustomersImagesID;
-                        images.UserID = model.UserID;
-                        images.DateTime = DateTime.Now;
-                    //update User
-                    _customerImagesService.Create(images);
-                }
 
+                    return new HttpResponseMessage
+                    {
+                        Content = new StringContent("Upload successful")
+                    };
+                   
+                }
 
                 return new HttpResponseMessage
                 {
-                    Content = new StringContent("Upload successful")
+                    Content = new StringContent("Upload error")
                 };
+                
             }
             catch (Exception e)
             {

@@ -49,6 +49,7 @@
     <Compile Include="CustomersLocation\CustomersLocation.cs" />
     <Compile Include="CustomersRoute\CustomersRoute.cs" />
     <Compile Include="Customers\Customers.cs" />
+    <Compile Include="Messager\Messager.cs" />
     <Compile Include="OrderData\OrderData.cs" />
     <Compile Include="Order\Order.cs" />
     <Compile Include="ProductsGroup\ProductsGroup.cs" />

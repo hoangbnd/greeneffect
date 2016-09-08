@@ -12,7 +12,7 @@ namespace GreenEffect.Repository.EF.Configuration
         public CustomersImagesConfigurations()
         {
             ToTable("CustomersImages");
-            HasKey(o => o.ID);
+            HasKey(o => o.Id);
             Property(o => o.CustomersID);
             Property(o => o.CustomersImagesID);
             Property(o => o.Images);
