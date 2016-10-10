@@ -22,7 +22,7 @@ namespace GreenEffect.Services.Implement
                var whCls = new List<Expression<Func<Route, bool>>>();
                if (IdenUser>0)//check dk co hay ko?
                {
-                   whCls.Add(r => r.IdenUser.Equals(IdenUser));//neu co thi check username chua (Contains) dk, 
+                   whCls.Add(r => r.UserID.Equals(IdenUser));//neu co thi check username chua (Contains) dk, 
                    //neu dk yeu cau bang thi co 2 cach c.UserName == "username" hoac c.UserName.Equals("username")
                }
                var order = "Id desc";//truong sap xep co quy dinh, "Tentruong kieusapxep" 

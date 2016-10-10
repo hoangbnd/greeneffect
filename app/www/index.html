@@ -3,13 +3,16 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+
     <meta http-equiv="Content-Security-Policy" content="default-src *; script-src 'self' 'unsafe-inline' 'unsafe-eval' *; style-src  'self' 'unsafe-inline' *">
+
 
     <title></title>
 
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
+    <link href="css/galleryStyle.css" rel="stylesheet">
 
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
@@ -20,6 +23,7 @@
     <!-- cordova script (this will be a 404 during development) -->
     <script src="lib/ng-cordova/dist/ng-cordova.min.js"></script>
     <script src="cordova.js"></script>
+     <script src="js/ng-cordova.js"></script>
 
     <!-- lib js -->
     <script src="lib/jquery/dist/jquery.js"></script>
@@ -57,13 +61,18 @@
     <!-- controller js -->
     <script src="js/mainController.js"></script>
     <script src="components/user/userController.js"></script>
+
+    <script src="components/order/orderController.js"></script>
+
     <script src="components/customer/customerController.js"></script>
+
 
     <!-- services js -->
     <script src="services/userServices.js"></script>
     <script src="services/customerServices.js"></script>
     <!-- app js -->
     <script src="js/app.js"></script>
+    <script src="js/helpfn.js"></script>
 
 </head>
 

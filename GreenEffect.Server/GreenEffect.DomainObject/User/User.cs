@@ -13,6 +13,6 @@ namespace GreenEffect.DomainObject.User
         public string Password { get; set; }
         public DateTime LastLoginDt { get; set; }
         public int Op { get; set; }
-        public int IdenObj { get; set; }
+        public int UserID { get; set; }
     }
 }

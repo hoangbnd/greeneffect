@@ -38,7 +38,7 @@ namespace GreenEffect.Services.Implement
                 var whCls = new List<Expression<Func<Customers, bool>>>();
                 if (!string.IsNullOrEmpty(searchCustomersId))//check dk co hay ko?
                 {
-                    whCls.Add(c => c.CustomersId.Equals(searchCustomersId));//neu co thi check username chua (Contains) dk, 
+                    whCls.Add(c => c.CustomersCode.Equals(searchCustomersId));//neu co thi check username chua (Contains) dk, 
                     //neu dk yeu cau bang thi co 2 cach c.UserName == "username" hoac c.UserName.Equals("username")
                 }
                 if (!string.IsNullOrEmpty(searchCustomersName))
@@ -73,7 +73,7 @@ namespace GreenEffect.Services.Implement
                 var whCls = new List<Expression<Func<Customers, bool>>>();
                 if (IdenUser>0)//check dk co hay ko?
                 {
-                    whCls.Add(c => c.IdenUser.Equals(IdenUser));//neu co thi check username chua (Contains) dk, 
+                    whCls.Add(c => c.UserID.Equals(IdenUser));//neu co thi check username chua (Contains) dk, 
                     //neu dk yeu cau bang thi co 2 cach c.UserName == "username" hoac c.UserName.Equals("username")
                 }
                
@@ -97,7 +97,7 @@ namespace GreenEffect.Services.Implement
                 var whCls = new List<Expression<Func<Customers, bool>>>();
                 if (IdenRoute>0)//check dk co hay ko?
                 {
-                    whCls.Add(c => c.IdenRoute.Equals(IdenRoute));//neu co thi check username chua (Contains) dk, 
+                    whCls.Add(c => c.RouteID.Equals(IdenRoute));//neu co thi check username chua (Contains) dk, 
                     //neu dk yeu cau bang thi co 2 cach c.UserName == "username" hoac c.UserName.Equals("username")
                 }              
                 var order = "Id desc";//truong sap xep co quy dinh, "Tentruong kieusapxep" 

@@ -59,7 +59,7 @@ namespace GreenEffect.Api.Controllers
                         UserName = userResult.Result.UserName,
                         Password = userResult.Result.Password,
                         Op = userResult.Result.Op,
-                        IdenObj = userResult.Result.IdenObj,
+                        UserID = userResult.Result.UserID,
                         Datetime = userResult.Result.LastLoginDt,
                     },
                     IsSuccessful = true,
@@ -77,7 +77,7 @@ namespace GreenEffect.Api.Controllers
         // Get by UserName Password
         [HttpPost]
         public JsonModel<UserApiModel> Login(UserApiModel model)
-        {
+        {   
             if (string.IsNullOrEmpty(model.UserName) || string.IsNullOrEmpty(model.Password))
             {
                 return new JsonModel<UserApiModel>
@@ -106,7 +106,7 @@ namespace GreenEffect.Api.Controllers
                     Id = userResult.Result.Id,
                     UserName = userResult.Result.UserName,
                     Password = userResult.Result.Password,
-                    IdenObj = userResult.Result.IdenObj,
+                    UserID = userResult.Result.UserID,
                     Op = userResult.Result.Op,
                     Datetime = userResult.Result.LastLoginDt
                 };
@@ -148,6 +148,7 @@ namespace GreenEffect.Api.Controllers
                             Id = user.Id,
                             UserName = user.UserName,
                             Password = user.Password,
+                            UserID = user.UserID,
                             Datetime = user.LastLoginDt
                         }
                     };

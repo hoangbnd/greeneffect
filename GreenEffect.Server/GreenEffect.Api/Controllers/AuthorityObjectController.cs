@@ -31,7 +31,7 @@ namespace GreenEffect.Api.Controllers
                     ObjectImages = o.ObjectImages,
                     ObjectUser = o.ObjectUser,
                     ObjectSystem = o.ObjectSystem,
-                    IdenObject = o.IdenObject,
+                    ObjectID = o.ObjectID,
                     Datetime = o.Datetime
 
 

@@ -15,14 +15,14 @@ namespace GreenEffect.Services.Implement
         { 
             _customersRouteRepository = customersRouteRepository;
         }
-        public ServiceResult<ICollection<CustomersRoutes>> GetByRoute(int IdenRoute)
+        public ServiceResult<ICollection<CustomersRoutes>> GetByRoute(int RouteID)
         {
             try
             {
                 var whCls = new List<Expression<Func<CustomersRoutes, bool>>>();
-                if (IdenRoute > 0)//check dk co hay ko?
+                if (RouteID > 0)//check dk co hay ko?
                 {
-                    whCls.Add(c => c.IdenRoute.Equals(IdenRoute));
+                    whCls.Add(c => c.RouteID.Equals(RouteID));
                 }
 
                 var order = "Id desc";

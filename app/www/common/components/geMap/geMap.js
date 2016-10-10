@@ -1,8 +1,7 @@
 ﻿(function () {
     'use strict';
-
     angular
-      .module('greeneffect.common.components.geMap', [])
+      .module('greeneffect.common.components.geMap', ['ngCordova'])
       .directive('geMap', function () {
           return {
               restrict: 'E',

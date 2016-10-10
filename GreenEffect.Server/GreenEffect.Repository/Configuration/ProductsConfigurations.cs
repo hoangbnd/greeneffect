@@ -14,11 +14,11 @@ namespace GpeenEffect.pepositopy.EF.Configupation
         { 
             ToTable("Products");
             HasKey(p => p.Id);
-            Property(p => p.ProductsID);
+            Property(p => p.ProductsCode);
             Property(p => p.ProductsName);
             Property(p => p.UnitPrice);
-            Property(p => p.IdenProducts);
-            Property(p => p.IdenProductsGroup);
+            Property(p => p.ProductsID);
+            Property(p => p.ProductsGroupID);
             Property(p => p.Datetime);
             Property(p => p.Disable);
         }

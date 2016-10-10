@@ -6,20 +6,21 @@
     'greeneffect.constant',
     'greeneffect.service.user',
     'greeneffect.service.customer',
-
     'greeneffect.controller.main',
     'greeneffect.controller.user',
+    'greeneffect.controller.order',
     'greeneffect.controller.customer',
-
     'greeneffect.common.components.geAlert',
-    'greeneffect.common.components.geMap',
+    /*'greeneffect.common.components.geMap',*/
     'greeneffect.common.service.messagemanagement'])
 .run(function ($ionicPlatform, $ionicPopup, $cordovaNetwork) {
-    $ionicPlatform.ready(function () {
+   $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
         if (window.cordova && window.cordova.plugins.Keyboard) {
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+	    cordova.plugins.keyboard.disableScroll(true);
+	    window.open = cordova.InAppBrowser.open;
         }
         if (window.StatusBar) {
             // org.apache.cordova.statusbar required
@@ -40,7 +41,7 @@
 
     });
 })
-.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $locationProvider, $httpProvider, $resourceProvider, Constant) {
+.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $locationProvider, $httpProvider,$resourceProvider, Constant, $compileProvider) {
     /*
       # Hashbang Mode
       http://www.example.com/#/aaa/
@@ -48,7 +49,9 @@
       http://www.example.com/aaa/
     */
     $locationProvider.html5Mode(Constant.HTML5_MODE);
+   //$locationProvider.html5Mode(true);
     $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+    $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|file|cdvfile):|data:image\//);
     $httpProvider.defaults.transformRequest = [function (data) {
         /**
          * The workhorse; converts an object to x-www-form-urlencoded serialization.
@@ -202,15 +205,36 @@
                 }
             }
         })
-        //.state('app.order', {
-        //    url: "/order",
-        //    views: {
-        //        'menuContent': {
-        //            templateUrl: "components/order/createOrder.html"
-        //        }
-        //    }
-        //})
 
+        .state('app.order', {
+            url: "/order",
+            views: {
+                'menuContent': {
+                    templateUrl: "components/order/createOrder.html"
+                }
+            }
+        })
+     .state('takephoto',{
+        url:"/takephoto",
+        templateUrl: "components/order/takephoto.html"
+     })
+     .state('gallery',{
+        url:"/gallery",
+        templateUrl: "components/order/gallery.html"
+     })
+
+
+    //.state('register', {
+    //    url: "/register",
+    //    templateUrl: "templates/register.html"
+    //})
+
+    //.state('app', {
+    //    url: "/app",
+    //    abstract: true,
+    //    templateUrl: "templates/menu.html",
+    //    controller: 'AppCtrl'
+    //})
 
     //.state('app.home', {
     //    url: "/home",
@@ -255,6 +279,7 @@
     //  })
     ;
     $urlRouterProvider.otherwise('login');
+    //$urlRouterProvider.otherwise('takephoto');
 });
 
 

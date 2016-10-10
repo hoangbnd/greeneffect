@@ -13,14 +13,14 @@ namespace GreenEffect.Repository.EF.Configuration
         {
             ToTable("viewall_customer");
             HasKey(r => r.Id);
-            Property(r => r.CustomersId);
+            Property(r => r.CustomersCode);
             Property(r => r.CustomersName);
             Property(r => r.Adress);
             Property(r => r.Phone);
-            Property(r => r.IdenCustomers);
-            Property(r => r.IdenUser);
-            Property(r => r.IdenCustomersRoutes);
-            Property(r => r.IdenRoute);
+            Property(r => r.CustomersID);
+            Property(r => r.UserID);
+            Property(r => r.CustomersRoutesID);
+            Property(r => r.RouteID);
             Property(r => r.DateTime); 
         }
     }

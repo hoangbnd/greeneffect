@@ -6,6 +6,6 @@ namespace GreenEffect.Services.Interface
 {
     public interface ICustomersRoutesServices
     {
-        ServiceResult<ICollection<CustomersRoutes>> GetByRoute(int IdenRoute);
+        ServiceResult<ICollection<CustomersRoutes>> GetByRoute(int RouteID);
     }
 } 

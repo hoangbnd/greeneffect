@@ -27,11 +27,11 @@ namespace GreenEffect.Api.Controllers
                  listUsers = productsResult.Result.Select(c => new ProductsApiModel
                  {
                      Id = c.Id,
-                     ProductsID = c.ProductsID,
+                     ProductsCode = c.ProductsCode,
                      ProductsName = c.ProductsName,
                      UnitPrice = c.UnitPrice,
-                     IdenProducts = c.IdenProducts,
-                     IdenProductsGroup = c.IdenProductsGroup,
+                     ProductsID = c.ProductsID,
+                     ProductsGroupID = c.ProductsGroupID,
                      Datetime = c.Datetime,
                      Disable = c.Disable
 

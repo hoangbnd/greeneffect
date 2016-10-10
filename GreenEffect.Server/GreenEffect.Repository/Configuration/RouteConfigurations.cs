@@ -14,11 +14,10 @@ namespace GreenEffect.Repository.EF.Configuration
             {
                 ToTable("Routes"); 
                 HasKey(r => r.Id);
-                Property(r => r.IdenRoute);
+                Property(r => r.RouteCode);
                 Property(r => r.RouteName);
-                Property(r => r.RouteId);
-                Property(r => r.IdenRoute);
-                Property(r => r.IdenUser);
+                Property(r => r.RouteID);
+                Property(r => r.UserID);
                 Property(r => r.DateTime);
             }
         }

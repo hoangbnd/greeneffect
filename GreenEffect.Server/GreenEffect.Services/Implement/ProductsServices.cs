@@ -21,7 +21,7 @@ namespace GreenEffect.Services.Implement
                 var whCls = new List<Expression<Func<Products, bool>>>();
                 if (IdenGroup > 0)//check dk co hay ko?
                 {
-                    whCls.Add(c => c.IdenProductsGroup.Equals(IdenGroup));
+                    whCls.Add(c => c.ProductsGroupID.Equals(IdenGroup));
                 }
 
                 var order = "Id desc";
