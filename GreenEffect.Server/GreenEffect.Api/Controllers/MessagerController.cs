@@ -47,5 +47,47 @@ namespace GreenEffect.Api.Controllers
                 Messenger = messager.RuleViolations[0].ErrorMessage
             };
         }
+        //Update Password
+        [HttpPost]
+        public JsonModel<MessagerApiModel> Delete(MessagerApiModel model)
+        {
+           
+            var MessagerRs = _messagerServices.GetById(model.Id);
+            if (MessagerRs.RuleViolations.IsNullOrEmpty())
+            {
+                var mess = MessagerRs.Result;
+                var deleteResult = _messagerServices.Delete(mess);
+                //kiemtra xoa
+                if (deleteResult.RuleViolations.IsNullOrEmpty())
+                {
+                    //neu xoa thanh cong thi tra ve du lieu con lai
+                    return new JsonModel<MessagerApiModel>
+                    {
+                        IsSuccessful = true,
+                        Data = new MessagerApiModel
+                        {
+                            Id = mess.Id,
+                            UserName = mess.UserName,
+                            FromUser = mess.FromUser,
+                            UserID = mess.UserID,
+                            Messager = mess.Message,            
+                        }
+                    };
+                }
+                //delete khong thanh cong tra ve loi
+                return new JsonModel<MessagerApiModel>
+                {
+                    IsSuccessful = false,
+                    Messenger = deleteResult.RuleViolations[0].ErrorMessage
+                };
+            }
+            //tra ve loi khi khong lay duoc
+            return new JsonModel<MessagerApiModel>
+            {
+                IsSuccessful = false,
+                Messenger = MessagerRs.RuleViolations[0].ErrorMessage
+            };
+        }
+
     }
 }

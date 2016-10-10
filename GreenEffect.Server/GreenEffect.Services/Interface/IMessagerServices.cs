@@ -10,5 +10,7 @@ namespace GreenEffect.Services.Interface
     public interface IMessagerServices
     {
         ServiceResult<ICollection<Messager>> GetAll(int IdenUser);
+        ServiceResult<Messager> Delete(Messager messager);
+        ServiceResult<Messager> GetById(int id);
     }
 }
