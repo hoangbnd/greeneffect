@@ -6,7 +6,6 @@ using System.Web;
 using System.Web.Http;
 using MVCCore;
 using GreenEffect.Api.Models;
-using GreenEffect.DomainObject.OrderData;
 
 namespace GreenEffect.Api.Controllers
 {
@@ -35,14 +34,14 @@ namespace GreenEffect.Api.Controllers
                         ProductsNumber = orderResult.Result.ProductsNumber,
                         UnitPrice = orderResult.Result.UnitPrice,
                         Amount = orderResult.Result.Amount,
-                        CustomersID = orderResult.Result.CustomersID,
-                        UserID = orderResult.Result.UserID,
-                        ProductsID = orderResult.Result.ProductsID,
-                        RouteID = orderResult.Result.RouteID,
-                        CustomersRoutesID = orderResult.Result.CustomersRoutesID,
-                        CustomersLocationID = orderResult.Result.CustomersLocationID,
-                        ObjectID = orderResult.Result.ObjectID,
-                        ProductsGroupID = orderResult.Result.ProductsGroupID,
+                        CustomersID = orderResult.Result.CustomersId,
+                        UserID = orderResult.Result.UserId,
+                        ProductsID = orderResult.Result.ProductsId,
+                        RouteID = orderResult.Result.RouteId,
+                        CustomersRoutesID = orderResult.Result.CustomersRoutesId,
+                        CustomersLocationID = orderResult.Result.CustomersLocationId,
+                        ObjectID = orderResult.Result.ObjectId,
+                        ProductsGroupID = orderResult.Result.ProductsGroupId,
                         LocationName = orderResult.Result.LocationName,
                         Description = orderResult.Result.Description,
                         Longitude = orderResult.Result.Longitude,
@@ -51,7 +50,7 @@ namespace GreenEffect.Api.Controllers
                         Disable = orderResult.Result.Disable
                     },
                     IsSuccessful = true,
-                    Messenger = ""
+                    Message = ""
                 };
             }
 
@@ -59,7 +58,7 @@ namespace GreenEffect.Api.Controllers
             return new JsonModel<OrderDataApiModel>()
             {
                 IsSuccessful = false,
-                Messenger = orderResult.RuleViolations[0].ErrorMessage
+                Message = orderResult.RuleViolations[0].ErrorMessage
             }; ;
         }
 
@@ -81,14 +80,14 @@ namespace GreenEffect.Api.Controllers
                     ProductsNumber = o.ProductsNumber,
                     UnitPrice = o.UnitPrice,
                     Amount = o.Amount,
-                    CustomersID = o.CustomersID,
-                    UserID = o.UserID,
-                    ProductsID = o.ProductsID,
-                    RouteID = o.RouteID,
-                    CustomersRoutesID = o.CustomersRoutesID,
-                    CustomersLocationID = o.CustomersLocationID,
-                    ObjectID = o.ObjectID,
-                    ProductsGroupID = o.ProductsGroupID,
+                    CustomersID = o.CustomersId,
+                    UserID = o.UserId,
+                    ProductsID = o.ProductsId,
+                    RouteID = o.RouteId,
+                    CustomersRoutesID = o.CustomersRoutesId,
+                    CustomersLocationID = o.CustomersLocationId,
+                    ObjectID = o.ObjectId,
+                    ProductsGroupID = o.ProductsGroupId,
                     LocationName = o.LocationName,
                     Description = o.Description,
                     Longitude = o.Longitude,
@@ -106,7 +105,7 @@ namespace GreenEffect.Api.Controllers
             return new JsonModel<List<OrderDataApiModel>>
             {
                 IsSuccessful = false,
-                Messenger = orderResult.RuleViolations[0].ErrorMessage
+                Message = orderResult.RuleViolations[0].ErrorMessage
             };
         }
 
@@ -128,14 +127,14 @@ namespace GreenEffect.Api.Controllers
                     ProductsNumber = o.ProductsNumber,
                     UnitPrice = o.UnitPrice,
                     Amount = o.Amount,
-                    CustomersID = o.CustomersID,
-                    UserID = o.UserID,
-                    ProductsID = o.ProductsID,
-                    RouteID = o.RouteID,
-                    CustomersRoutesID = o.CustomersRoutesID,
-                    CustomersLocationID = o.CustomersLocationID,
-                    ObjectID = o.ObjectID,
-                    ProductsGroupID = o.ProductsGroupID,
+                    CustomersID = o.CustomersId,
+                    UserID = o.UserId,
+                    ProductsID = o.ProductsId,
+                    RouteID = o.RouteId,
+                    CustomersRoutesID = o.CustomersRoutesId,
+                    CustomersLocationID = o.CustomersLocationId,
+                    ObjectID = o.ObjectId,
+                    ProductsGroupID = o.ProductsGroupId,
                     LocationName = o.LocationName,
                     Description = o.Description,
                     Longitude = o.Longitude,
@@ -153,7 +152,7 @@ namespace GreenEffect.Api.Controllers
             return new JsonModel<List<OrderDataApiModel>>
             {
                 IsSuccessful = false,
-                Messenger = orderResult.RuleViolations[0].ErrorMessage
+                Message = orderResult.RuleViolations[0].ErrorMessage
             };
         }
         public JsonModel<List<OrderDataApiModel>> GetByRoute(int RouteIDr, int disable)
@@ -174,14 +173,14 @@ namespace GreenEffect.Api.Controllers
                     ProductsNumber = o.ProductsNumber,
                     UnitPrice = o.UnitPrice,
                     Amount = o.Amount,
-                    CustomersID = o.CustomersID,
-                    UserID = o.UserID,
-                    ProductsID = o.ProductsID,
-                    RouteID = o.RouteID,
-                    CustomersRoutesID = o.CustomersRoutesID,
-                    CustomersLocationID = o.CustomersLocationID,
-                    ObjectID = o.ObjectID,
-                    ProductsGroupID = o.ProductsGroupID,
+                    CustomersID = o.CustomersId,
+                    UserID = o.UserId,
+                    ProductsID = o.ProductsId,
+                    RouteID = o.RouteId,
+                    CustomersRoutesID = o.CustomersRoutesId,
+                    CustomersLocationID = o.CustomersLocationId,
+                    ObjectID = o.ObjectId,
+                    ProductsGroupID = o.ProductsGroupId,
                     LocationName = o.LocationName,
                     Description = o.Description,
                     Longitude = o.Longitude,
@@ -199,7 +198,7 @@ namespace GreenEffect.Api.Controllers
             return new JsonModel<List<OrderDataApiModel>>
             {
                 IsSuccessful = false,
-                Messenger = orderResult.RuleViolations[0].ErrorMessage
+                Message = orderResult.RuleViolations[0].ErrorMessage
             };
         }
     }

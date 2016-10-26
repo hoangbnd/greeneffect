@@ -1,10 +1,10 @@
-﻿using GreenEffect.DomainObject.OrderData;
-using GreenEffect.Services.Interface;
+﻿using GreenEffect.Services.Interface;
 using MVCCore;
 using MVCCore.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using GreenEffect.DomainObject.Order;
 
 namespace GreenEffect.Services.Implement
 {
@@ -58,7 +58,7 @@ namespace GreenEffect.Services.Implement
                 var whCls = new List<Expression<Func<OrderData, bool>>>();
                 if (IdenUser >= 1)//check dk co hay ko?
                 {
-                    whCls.Add(c => c.UserID.Equals(IdenUser));
+                    whCls.Add(c => c.UserId.Equals(IdenUser));
 
 
                 }
@@ -83,7 +83,7 @@ namespace GreenEffect.Services.Implement
                 var whCls = new List<Expression<Func<OrderData, bool>>>();
                 if (IdenRouter >= 1)//check dk co hay ko?
                 {
-                    whCls.Add(c => c.RouteID.Equals(IdenRouter));
+                    whCls.Add(c => c.RouteId.Equals(IdenRouter));
                 }
                 if (disable == 0)//check dk co hay ko?
                 {

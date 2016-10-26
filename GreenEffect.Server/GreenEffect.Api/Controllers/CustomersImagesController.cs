@@ -1,19 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
-using GreenEffect.Api.Models;
-using GreenEffect.DomainObject;
-using GreenEffect.Services;
+using GreenEffect.DomainObject.Customer;
 using MVCCore;
-using GreenEffect.DomainObject.CustomersImages;
 using GreenEffect.Services.Interface;
 namespace GreenEffect.Api.Controllers
 {
@@ -85,9 +79,9 @@ namespace GreenEffect.Api.Controllers
                 }
                 var images = new CustomersImages();
                 images.Images = avatarUrl;
-                images.CustomersID = customerId;
+                images.CustomersId = customerId;
                 //images.CustomersImagesID = model.CustomersImagesID;
-                //images.UserID = model.UserID;
+                //images.UserCode = model.UserCode;
                 images.DateTime = DateTime.Now;
                 var customersImagesResult = _customerImagesService.Create(images);
                 if (customersImagesResult != null && customersImagesResult.RuleViolations.IsNullOrEmpty())

@@ -1,24 +1,24 @@
 (function() {
-  'use strict';
+  "use strict";
 
   angular
-    .module('greeneffect.common.service.languagemanagement', ['greeneffect.constant', 'greeneffect.common.service.cookiemanagement'])
-    .factory('LanguageManagementService', LanguageManagementService);
+    .module("greeneffect.common.service.languagemanagement", ["greeneffect.constant", "greeneffect.common.service.cookiemanagement"])
+    .factory("languageManagementService", languageManagementService);
 
-  LanguageManagementService.$inject = ['Constant', 'CookieManagementService'];
+  languageManagementService.$inject = ["constant", "cookieManagementService"];
 
-  function LanguageManagementService(Constant, CookieManagementService) {
+  function languageManagementService(constant, cookieManagementService) {
 
     var LanguageManagementService = {
       getLanguage: function () {
-        var lang = CookieManagementService.getCookieValue(Constant.GE_USER_INFO_KEY.LANG);
+        var lang = cookieManagementService.getCookieValue(constant.GE_USER_INFO_KEY.LANG);
         if (angular.isUndefined(lang)) {
-          lang = Constant.DEFAULT_LANG;
+          lang = constant.DEFAULT_LANG;
         }
         return lang;
       },
       setLanguage: function (lang) {
-        CookieManagementService.setCookieValue(Constant.GE_USER_INFO_KEY.LANG, lang);
+        cookieManagementService.setCookieValue(constant.GE_USER_INFO_KEY.LANG, lang);
         return;
       }
     };

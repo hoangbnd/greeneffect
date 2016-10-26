@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using MVCCore;
 using GreenEffect.Api.Models;
 using GreenEffect.DomainObject.User;
@@ -17,33 +18,6 @@ namespace GreenEffect.Api.Controllers
             _userServices = userServices;
         }
 
-        //Tim kiem du lieu
-        //public JsonModel<List<UserApiModel>> Get(string searchUsername, string searchPassword)
-        //{
-        //    var listUsers = new List<UserApiModel>();
-        //    //  get user by username
-        //    var userResult = _userServices.GetAll(searchUsername, searchPassword);
-        //    if (userResult.RuleViolations.IsNullOrEmpty())
-        //    {
-
-        //        listUsers = userResult.Result.Select(u => new UserApiModel
-        //        {
-        //            Id = u.Id,
-        //            UserName = u.UserName,
-        //            Password = u.Password
-        //        }).OrderByDescending(i => i.Id).ToList();
-        //        return new JsonModel<List<UserApiModel>>
-        //        {
-        //            IsSuccessful = true,
-        //            Data = listUsers
-        //        };
-        //    }
-        //    return new JsonModel<List<UserApiModel>>
-        //    {
-        //        IsSuccessful = false,
-        //        Messenger = userResult.RuleViolations[0].ErrorMessage
-        //    };
-        //}
         // GET api/user/5
         public JsonModel<UserApiModel> Get(int id)
         {
@@ -51,19 +25,18 @@ namespace GreenEffect.Api.Controllers
 
             if (userResult.RuleViolations.IsNullOrEmpty())
             {
-                return new JsonModel<UserApiModel>()
+                return new JsonModel<UserApiModel>
                 {
-                    Data = new UserApiModel()
+                    Data = new UserApiModel
                     {
                         Id = userResult.Result.Id,
                         UserName = userResult.Result.UserName,
                         Password = userResult.Result.Password,
                         Op = userResult.Result.Op,
-                        UserID = userResult.Result.UserID,
-                        Datetime = userResult.Result.LastLoginDt,
+                        Datetime = userResult.Result.LastLoginDt
                     },
                     IsSuccessful = true,
-                    Messenger = ""
+                    Message = ""
                 };
             }
 
@@ -71,19 +44,19 @@ namespace GreenEffect.Api.Controllers
             return new JsonModel<UserApiModel>()
             {
                 IsSuccessful = false,
-                Messenger = userResult.RuleViolations[0].ErrorMessage
+                Message = userResult.RuleViolations[0].ErrorMessage
             }; ;
         }
         // Get by UserName Password
         [HttpPost]
         public JsonModel<UserApiModel> Login(UserApiModel model)
-        {   
-            if (string.IsNullOrEmpty(model.UserName) || string.IsNullOrEmpty(model.Password))
+        {
+            if (model == null || string.IsNullOrEmpty(model.UserName) || string.IsNullOrEmpty(model.Password))
             {
                 return new JsonModel<UserApiModel>
                 {
                     IsSuccessful = false,
-                    Messenger = "Hãy nhập đầy đủ tên đăng nhập và mật khẩu"
+                    Message = "Hãy nhập đầy đủ tên đăng nhập và mật khẩu"
                 };
             }
             //  get user by username
@@ -95,7 +68,7 @@ namespace GreenEffect.Api.Controllers
                     return new JsonModel<UserApiModel>
                     {
                         IsSuccessful = false,
-                        Messenger = "Tên đăng nhập hoặc mật khẩu chưa đúng. Vui lòng nhập lại "
+                        Message = "Tên đăng nhập hoặc mật khẩu chưa đúng. Vui lòng nhập lại "
                     };
                 }
                 var user = userResult.Result;
@@ -106,7 +79,6 @@ namespace GreenEffect.Api.Controllers
                     Id = userResult.Result.Id,
                     UserName = userResult.Result.UserName,
                     Password = userResult.Result.Password,
-                    UserID = userResult.Result.UserID,
                     Op = userResult.Result.Op,
                     Datetime = userResult.Result.LastLoginDt
                 };
@@ -119,7 +91,7 @@ namespace GreenEffect.Api.Controllers
             return new JsonModel<UserApiModel>
             {
                 IsSuccessful = false,
-                Messenger = userResult.RuleViolations[0].ErrorMessage
+                Message = userResult.RuleViolations[0].ErrorMessage
             };
         }
         //Update Password
@@ -148,7 +120,6 @@ namespace GreenEffect.Api.Controllers
                             Id = user.Id,
                             UserName = user.UserName,
                             Password = user.Password,
-                            UserID = user.UserID,
                             Datetime = user.LastLoginDt
                         }
                     };
@@ -157,14 +128,14 @@ namespace GreenEffect.Api.Controllers
                 return new JsonModel<UserApiModel>
                 {
                     IsSuccessful = false,
-                    Messenger = updateResult.RuleViolations[0].ErrorMessage
+                    Message = updateResult.RuleViolations[0].ErrorMessage
                 };
             }
             //tra ve loi khi khong lay duoc user
             return new JsonModel<UserApiModel>
             {
                 IsSuccessful = false,
-                Messenger = userRs.RuleViolations[0].ErrorMessage
+                Message = userRs.RuleViolations[0].ErrorMessage
             };
         }
 
@@ -195,7 +166,7 @@ namespace GreenEffect.Api.Controllers
         //    return new JsonModel<UserApiModel>
         //    {
         //        IsSuccessful = false,
-        //        Messenger = userResult.RuleViolations[0].ErrorMessage
+        //        Message = userResult.RuleViolations[0].ErrorMessage
         //    };
         //}
     }

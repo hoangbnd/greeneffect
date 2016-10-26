@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
@@ -112,7 +113,7 @@ namespace GreenEffect.Api
             builder.RegisterType<FileWrapper>().As<IFile>().InstancePerHttpRequest().InstancePerApiRequest();
             //services
             builder.RegisterType<UserServices>().As<IUserServices>().InstancePerHttpRequest().InstancePerApiRequest();
-            builder.RegisterType<CustomersSevices>().As<ICustomersServices>().InstancePerHttpRequest().InstancePerApiRequest();
+            builder.RegisterType<CustomerSevices>().As<ICustomerServices>().InstancePerHttpRequest().InstancePerApiRequest();
             builder.RegisterType<RouteSevices>().As<IRouteSevice>().InstancePerHttpRequest().InstancePerApiRequest();
             builder.RegisterType<CustomerRouteServices>().As<ICustomersRoutesServices>().InstancePerHttpRequest().InstancePerApiRequest();
             builder.RegisterType<ProductsGroupServices>().As<IProductsGroupServices>().InstancePerHttpRequest().InstancePerApiRequest();
@@ -120,9 +121,9 @@ namespace GreenEffect.Api
             builder.RegisterType<AuthorityObjectServices>().As<IAuthorityObjectServices>().InstancePerHttpRequest().InstancePerApiRequest();
             builder.RegisterType<OrderServices>().As<IOrderServices>().InstancePerHttpRequest().InstancePerApiRequest();
             builder.RegisterType<OrderDataServices>().As<IOrderDataServices>().InstancePerHttpRequest().InstancePerApiRequest();
-            builder.RegisterType<CustomersLocationServices>().As<ICustomersLocationServices>().InstancePerHttpRequest().InstancePerApiRequest();
+            builder.RegisterType<LocationServices>().As<ILocationServices>().InstancePerHttpRequest().InstancePerApiRequest();
             builder.RegisterType<CustomersImagesServices>().As<ICustomersImagesServices>().InstancePerHttpRequest().InstancePerApiRequest();
-            builder.RegisterType<MessagerServices>().As<IMessagerServices>().InstancePerHttpRequest().InstancePerApiRequest();
+            builder.RegisterType<MessageServices>().As<IMessageServices>().InstancePerHttpRequest().InstancePerApiRequest();
             
             //register webhelper
             builder.RegisterType<WebHelper>().As<IWebHelper>().InstancePerHttpRequest().InstancePerApiRequest();
@@ -147,5 +148,15 @@ namespace GreenEffect.Api
             var mvcResolver = new AutofacDependencyResolver(container);
             DependencyResolver.SetResolver(mvcResolver);
         }
+
+        protected void Application_BeginRequest()
+        {
+            if (HttpContext.Current.Request.HttpMethod == "OPTIONS")
+            {
+                HttpContext.Current.Response.AddHeader("ContentType", "application/json");
+                HttpContext.Current.Response.End();
+            }
+        }
     }
+
 }

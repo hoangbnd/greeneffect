@@ -1,10 +1,10 @@
-﻿using GreenEffect.DomainObject.CustomersImages;
-using GreenEffect.Services.Interface;
+﻿using GreenEffect.Services.Interface;
 using MVCCore;
 using MVCCore.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using GreenEffect.DomainObject.Customer;
 
 namespace GreenEffect.Services.Implement
 {

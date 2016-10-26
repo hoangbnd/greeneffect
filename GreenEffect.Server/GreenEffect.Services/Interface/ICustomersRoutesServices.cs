@@ -1,11 +1,11 @@
-﻿using GreenEffect.DomainObject.CustomersRoutes;
-using MVCCore;
+﻿using MVCCore;
 using System.Collections.Generic;
+using GreenEffect.DomainObject.Customer;
 
 namespace GreenEffect.Services.Interface
 {
     public interface ICustomersRoutesServices
     {
-        ServiceResult<ICollection<CustomersRoutes>> GetByRoute(int RouteID);
+        ServiceResult<ICollection<CustomerRoute>> GetByRoute(int RouteID);
     }
 } 

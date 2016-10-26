@@ -1,10 +1,11 @@
-﻿using GreenEffect.DomainObject.OrderData;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GreenEffect.DomainObject.Order;
+
 namespace GreenEffect.Repository.EF.Configuration
 {
     public class OrderDataConfigurations : EntityTypeConfiguration<OrderData>
@@ -20,14 +21,14 @@ namespace GreenEffect.Repository.EF.Configuration
             Property(o => o.ProductsNumber);
             Property(o => o.UnitPrice);
             Property(o => o.Amount);
-            Property(o => o.CustomersID);
-            Property(o => o.UserID);
-            Property(o => o.ProductsID);
-            Property(o => o.RouteID);
-            Property(o => o.CustomersRoutesID);
-            Property(o => o.CustomersLocationID);
-            Property(o => o.ObjectID);
-            Property(o => o.ProductsGroupID);
+            Property(o => o.CustomersId);
+            Property(o => o.UserId);
+            Property(o => o.ProductsId);
+            Property(o => o.RouteId);
+            Property(o => o.CustomersRoutesId);
+            Property(o => o.CustomersLocationId);
+            Property(o => o.ObjectId);
+            Property(o => o.ProductsGroupId);
             Property(o => o.LocationName);
             Property(o => o.Description);
             Property(o => o.Longitude);
@@ -41,7 +42,7 @@ namespace GreenEffect.Repository.EF.Configuration
             Property(o => o.CustomersCode);
             Property(o => o.CustomersName);
             Property(o => o.ObjectName);
-            Property(o => o.ProductsID);
+            Property(o => o.ProductsId);
             Property(o => o.ProductsName);
             Property(o => o.UserName);
             Property(o => o.Datetime);

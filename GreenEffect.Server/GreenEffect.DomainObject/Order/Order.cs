@@ -15,14 +15,14 @@ namespace GreenEffect.DomainObject.Order
         public decimal ProductsNumber { get; set; }
         public decimal UnitPrice { get; set; }
         public decimal Amount { get; set; }
-        public int CustomersID { get; set; }
-        public int UserID { get; set; }
-        public int ProductsID { get; set; }
-        public int RouteID { get; set; }
-        public int CustomersRoutesID { get; set; }
-        public int CustomersLocationID { get; set; }
-        public int ObjectID { get; set; }       
-        public int ProductsGroupID { get; set; }
+        public int CustomersId { get; set; }
+        public int UserId { get; set; }
+        public int ProductsId { get; set; }
+        public int RouteId { get; set; }
+        public int CustomersRoutesId { get; set; }
+        public int CustomersLocationId { get; set; }
+        public int ObjectId { get; set; }       
+        public int ProductsGroupId { get; set; }
         public string LocationName { get; set; }
         public string Description { get; set; }
         public string Longitude { get; set; }

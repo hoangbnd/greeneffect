@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using MVCCore;
 using GreenEffect.Api.Models;
-using GreenEffect.DomainObject.CustomersRoutes;
+
 namespace GreenEffect.Api.Controllers
 {
+    
     public class CustomerRouteController : ApiController
     {
         private readonly ICustomersRoutesServices _customerRouteService;
@@ -17,25 +19,24 @@ namespace GreenEffect.Api.Controllers
         {
             _customerRouteService = customerRouteService;
         }
-        public JsonModel<List<CustomerRouteApiModel>> GetByRoute(int RouteID)
+        public JsonModel<List<CustomerRouteApiModel>> GetByRoute(int routeId)
         {
             var listUsers = new List<CustomerRouteApiModel>();
             //  get user by username
-            var customerrouteResult = _customerRouteService.GetByRoute(RouteID);
+            var customerrouteResult = _customerRouteService.GetByRoute(routeId);
             if (customerrouteResult.RuleViolations.IsNullOrEmpty())
             {
 
                 listUsers = customerrouteResult.Result.Select(r => new CustomerRouteApiModel
                 { 
                     Id = r.Id,
-                    CustomersCode = r.CustomersCode,
-                    CustomersName = r.CustomersName,
+                    CustomerCode = r.CustomersCode,
+                    CustomerName = r.CustomersName,
                     Adress = r.Adress,
                     Phone = r.Phone,
-                    UserID = r.UserID,
-                    CustomersID = r.CustomersID,
-                    CustomersRoutesID = r.CustomersRoutesID,
-                    RouteID = r.RouteID,
+                    UserId = r.UserId,
+                    CustomerId = r.CustomersId,
+                    RouteId = r.RouteId,
                     DateTime = r.DateTime,
                
                 }).OrderByDescending(i => i.Id).ToList();
@@ -48,7 +49,7 @@ namespace GreenEffect.Api.Controllers
             return new JsonModel<List<CustomerRouteApiModel>>
             {
                 IsSuccessful = false,
-                Messenger = customerrouteResult.RuleViolations[0].ErrorMessage
+                Message = customerrouteResult.RuleViolations[0].ErrorMessage
             };
         }
     

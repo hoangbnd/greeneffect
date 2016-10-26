@@ -1,11 +1,11 @@
-﻿using GreenEffect.DomainObject.ProductsGroup;
-using MVCCore;
+﻿using MVCCore;
 using System.Collections.Generic;
+using GreenEffect.DomainObject.Products;
 
 namespace GreenEffect.Services.Interface
 {
     public interface IProductsGroupServices
     {
-        ServiceResult<ICollection<ProductsGroup>> GetALL(string groupname); 
+        ServiceResult<ICollection<ProductGroup>> GetALL(string groupname); 
     }
 }

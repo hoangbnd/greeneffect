@@ -9,28 +9,28 @@ namespace GreenEffect.Services.Implement
 {
    public class ProductsServices:IProductsServices
     {
-        private readonly IRepository<Products> _productsRepository;
-        public ProductsServices(IRepository<Products> productsRepository)
+        private readonly IRepository<Product> _productsRepository;
+        public ProductsServices(IRepository<Product> productsRepository)
         {
             _productsRepository = productsRepository;
         }
-        public ServiceResult<ICollection<Products>> GetByIden(int IdenGroup)
+        public ServiceResult<ICollection<Product>> GetByIden(int IdenGroup)
         {
             try
             { 
-                var whCls = new List<Expression<Func<Products, bool>>>();
+                var whCls = new List<Expression<Func<Product, bool>>>();
                 if (IdenGroup > 0)//check dk co hay ko?
                 {
-                    whCls.Add(c => c.ProductsGroupID.Equals(IdenGroup));
+                    whCls.Add(c => c.ProductGroupId.Equals(IdenGroup));
                 }
 
                 var order = "Id desc";
                 var products = _productsRepository.FindAll(whCls, order);
-                return new ServiceResult<ICollection<Products>>(products);
+                return new ServiceResult<ICollection<Product>>(products);
             }
             catch (Exception ex)
             {
-                return new ServiceResult<ICollection<Products>>(new[] { new RuleViolation("Exception", "Get data error :" + ex.Message) });
+                return new ServiceResult<ICollection<Product>>(new[] { new RuleViolation("Exception", "Get data error :" + ex.Message) });
             }
         }
     }

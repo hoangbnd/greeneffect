@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.Http;
 using MVCCore;
 using GreenEffect.Api.Models;
-using GreenEffect.DomainObject.ProductsGroup;
+
 namespace GreenEffect.Api.Controllers
 {
     public class ProductsGroupController:ApiController
@@ -29,7 +29,6 @@ namespace GreenEffect.Api.Controllers
                     Id = g.Id,
                     GroupCode = g.GroupCode,
                     GroupName = g.GroupName,
-                    ProductsGroupID = g.ProductsGroupID,
                     Disable = g.Disable,
                     Datetime=g.Datetime,
 
@@ -43,7 +42,7 @@ namespace GreenEffect.Api.Controllers
             return new JsonModel<List<ProductsGroupApiModel>>
             {
                 IsSuccessful = false,
-                Messenger = productsgroup.RuleViolations[0].ErrorMessage
+                Message = productsgroup.RuleViolations[0].ErrorMessage
             };
         }
     

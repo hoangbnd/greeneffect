@@ -27,11 +27,11 @@ namespace GreenEffect.Api.Controllers
                  listUsers = productsResult.Result.Select(c => new ProductsApiModel
                  {
                      Id = c.Id,
-                     ProductsCode = c.ProductsCode,
-                     ProductsName = c.ProductsName,
+                     ProductsCode = c.ProductCode,
+                     ProductsName = c.ProductName,
                      UnitPrice = c.UnitPrice,
-                     ProductsID = c.ProductsID,
-                     ProductsGroupID = c.ProductsGroupID,
+                     
+                     ProductsGroupId = c.ProductGroupId,
                      Datetime = c.Datetime,
                      Disable = c.Disable
 
@@ -45,7 +45,7 @@ namespace GreenEffect.Api.Controllers
              return new JsonModel<List<ProductsApiModel>>
              {
                  IsSuccessful = false,
-                 Messenger = productsResult.RuleViolations[0].ErrorMessage
+                 Message = productsResult.RuleViolations[0].ErrorMessage
              };
          }
     }

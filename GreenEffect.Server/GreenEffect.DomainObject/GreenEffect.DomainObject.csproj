@@ -45,15 +45,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthorityObject\AuthorityObject.cs" />
-    <Compile Include="CustomersImages\CustomersImages.cs" />
-    <Compile Include="CustomersLocation\CustomersLocation.cs" />
-    <Compile Include="CustomersRoute\CustomersRoute.cs" />
-    <Compile Include="Customers\Customers.cs" />
-    <Compile Include="Messager\Messager.cs" />
-    <Compile Include="OrderData\OrderData.cs" />
+    <Compile Include="Customer\CustomersImages.cs" />
+    <Compile Include="Customer\Location.cs" />
+    <Compile Include="Customer\CustomersRoute.cs" />
+    <Compile Include="Customer\Customer.cs" />
+    <Compile Include="Message\Message.cs" />
+    <Compile Include="Order\OrderData.cs" />
     <Compile Include="Order\Order.cs" />
-    <Compile Include="ProductsGroup\ProductsGroup.cs" />
-    <Compile Include="Products\Products.cs" />
+    <Compile Include="Products\ProductGroup.cs" />
+    <Compile Include="Products\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Route\Route.cs" />
     <Compile Include="User\User.cs" />

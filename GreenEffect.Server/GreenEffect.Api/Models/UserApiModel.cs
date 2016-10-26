@@ -12,6 +12,5 @@ namespace GreenEffect.Api.Models
         public string Password { get; set; }
         public DateTime Datetime { get; set; }
         public int Op { get; set; }
-        public int UserID { get; set; }
     }
 }

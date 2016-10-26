@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using MVCCore;
@@ -18,21 +19,28 @@ namespace GreenEffect.Api.Controllers
         {
             _routeService = routeServices;
         }
-        public JsonModel<List<RouteApiModel>> GetByUser(int IdenUser)
+
+        [HttpPost]
+        public JsonModel<List<RouteApiModel>> GetByUser(RouteApiModel model)
         {
-            var listUsers = new List<RouteApiModel>();
+            if (model == null || model.UserId == 0)
+            {
+                return new JsonModel<List<RouteApiModel>>
+                {
+                    IsSuccessful = false,
+                    Message = "Mã nhân viên không đúng. Xin mời đăng nhập lại."
+                };
+            }
             //  get user by username
-            var routeResult = _routeService.GetByUser(IdenUser);
+            var routeResult = _routeService.GetByUser(model.UserId);
             if (routeResult.RuleViolations.IsNullOrEmpty())
             {
-
-                listUsers = routeResult.Result.Select(r => new RouteApiModel
+                var listUsers = routeResult.Result.Select(r => new RouteApiModel
                 {
                     Id = r.Id,
                     RouteCode = r.RouteCode,
                     RouteName = r.RouteName,
-                    RouteID = r.RouteID,
-                    UserID = r.UserID,
+                    UserId = r.UserId,
                     DateTime = r.DateTime
                 }).OrderByDescending(i => i.Id).ToList();
                 return new JsonModel<List<RouteApiModel>>
@@ -44,7 +52,7 @@ namespace GreenEffect.Api.Controllers
             return new JsonModel<List<RouteApiModel>>
             {
                 IsSuccessful = false,
-                Messenger = routeResult.RuleViolations[0].ErrorMessage
+                Message = routeResult.RuleViolations[0].ErrorMessage
             };
         }
     }

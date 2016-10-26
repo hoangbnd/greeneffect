@@ -6,6 +6,6 @@ namespace GreenEffect.Services.Interface
 {
     public interface IProductsServices
     {
-        ServiceResult<ICollection<Products>> GetByIden(int IdenGroup); 
+        ServiceResult<ICollection<Product>> GetByIden(int IdenGroup); 
     }
 }

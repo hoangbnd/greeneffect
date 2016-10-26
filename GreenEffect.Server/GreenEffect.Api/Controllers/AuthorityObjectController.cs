@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using MVCCore;
 using GreenEffect.Api.Models;
 using GreenEffect.DomainObject.AuthorityObject;
 namespace GreenEffect.Api.Controllers
 {
+    
     public class AuthorityObjectController : ApiController
     {
         private readonly IAuthorityObjectServices _authorityObjServices;
@@ -31,7 +33,7 @@ namespace GreenEffect.Api.Controllers
                     ObjectImages = o.ObjectImages,
                     ObjectUser = o.ObjectUser,
                     ObjectSystem = o.ObjectSystem,
-                    ObjectID = o.ObjectID,
+                    ObjectId = o.ObjectId,
                     Datetime = o.Datetime
 
 
@@ -45,7 +47,7 @@ namespace GreenEffect.Api.Controllers
             return new JsonModel<List<AuthorityObjectApiModel>>
             {
                 IsSuccessful = false,
-                Messenger = authoObjs.RuleViolations[0].ErrorMessage
+                Message = authoObjs.RuleViolations[0].ErrorMessage
             };
         }
 

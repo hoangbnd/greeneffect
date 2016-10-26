@@ -16,8 +16,7 @@ namespace GreenEffect.Repository.EF.Configuration
                 HasKey(r => r.Id);
                 Property(r => r.RouteCode);
                 Property(r => r.RouteName);
-                Property(r => r.RouteID);
-                Property(r => r.UserID);
+                Property(r => r.UserId);
                 Property(r => r.DateTime);
             }
         }

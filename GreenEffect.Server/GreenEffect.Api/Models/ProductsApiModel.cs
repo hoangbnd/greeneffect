@@ -11,8 +11,7 @@ namespace GreenEffect.Api.Models
         public string ProductsCode { get; set; }
         public string ProductsName { get; set; }
         public decimal UnitPrice { get; set; }
-        public int ProductsGroupID { get; set; }
-        public int ProductsID { get; set; }
+        public int ProductsGroupId { get; set; }
         public int Disable { get; set; }
         public DateTime Datetime { get; set; }
         public bool IsSuccessful { get; set; }

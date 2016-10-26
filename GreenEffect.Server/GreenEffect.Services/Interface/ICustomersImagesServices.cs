@@ -1,6 +1,6 @@
-﻿using GreenEffect.DomainObject.CustomersImages;
-using MVCCore;
+﻿using MVCCore;
 using System.Collections.Generic;
+using GreenEffect.DomainObject.Customer;
 
 namespace GreenEffect.Services.Interface
 {

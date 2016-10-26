@@ -16,7 +16,7 @@ namespace GreenEffect.Repository.EF.Configuration
             Property(o => o.ObjectName);
             Property(o => o.ObjectImages);        
             Property(o => o.ObjectUser);
-            Property(o => o.ObjectID);
+            Property(o => o.ObjectId);
             Property(o => o.ObjectSystem);
             Property(o => o.Datetime);
         }
