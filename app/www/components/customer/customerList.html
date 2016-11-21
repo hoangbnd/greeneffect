@@ -1,7 +1,7 @@
 ﻿<ion-view view-title="Green Effect">
     <ion-content class="home_page" ng-controller="LstCustomerCtrl">
         <div class="list list-route">
-            <label class="item item-input item-select sel_item main_color">
+            <label class="item item-select sel_item main_color">
                 <select ng-model="routeSelected" ng-change="selectRoute(routeSelected)"
                         ng-options="route as route.RouteName for route in routes track by route.Id">
                     <option value="" ng-if="false"></option>
@@ -10,7 +10,7 @@
         </div>
         <div class="home_list"
              collection-repeat="item in customers"
-             collection-item-width="'100%'">
+             collection-item-width="'100%'" ng-click="">
             <div class="list_content">
                 <div class="row">
                     <div class="col col-25">
@@ -19,9 +19,9 @@
                         </div>
                     </div>
                     <div class="col col-75">
-                        <h3 class="main_color">{{item.CustomersName}}</h3>
-                        <p class="address">Địa chỉ: {{item.Adress}}</p>
+                        <h3 class="main_color">{{item.CustomerName}}</h3>
                         <p>Điện thoại: {{item.Phone}}</p>
+                        <p class="address">Địa chỉ: {{item.Adress}}</p>
                     </div>
                 </div>
                 <!--<p class="num_see"><i class="ion-eye"></i>1245</p>-->

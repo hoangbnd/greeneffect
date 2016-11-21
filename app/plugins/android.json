@@ -30,6 +30,12 @@
         },
         "cordova-plugin-geolocation": {
             "PACKAGE_NAME": "com.ionicframework.app173342"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "com.ionicframework.app173342"
+        },
+        "cordova-plugin-media-capture": {
+            "PACKAGE_NAME": "com.ionicframework.app173342"
         }
     },
     "dependent_plugins": {

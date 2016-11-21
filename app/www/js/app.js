@@ -197,7 +197,7 @@
         .state("customer", {
             url: "/customer",
             abstract: true,
-            templateUrl: "templates/menu.html"
+            templateUrl: "components/customer/menu.html"
         })
         .state("customer.list", {
             url: "/list",
@@ -215,15 +215,19 @@
                 }
             }
         })
-
-        //.state("app.order", {
-        //    url: "/order",
-        //    views: {
-        //        "menuContent": {
-        //            templateUrl: "components/order/createOrder.html"
-        //        }
-        //    }
-        //})
+        .state("order", {
+            url: "/order",
+            abstract: true,
+            templateUrl: "components/order/menu.html"
+        })
+        .state("order.create", {
+            url: "/order/create",
+            views: {
+                "menuContent": {
+                    templateUrl: "components/order/createOrder.html"
+                }
+            }
+        })
         .state("takephoto", {
             url: "/takephoto",
             templateUrl: "components/order/takephoto.html"
