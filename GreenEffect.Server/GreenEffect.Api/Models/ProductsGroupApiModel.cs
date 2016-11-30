@@ -12,7 +12,5 @@ namespace GreenEffect.Api.Models
         public string GroupName { get; set; }
         public int Disable { get; set; }
         public DateTime Datetime { get; set; }
-        public bool IsSuccessful { get; set; }
-        public string Messenger { get; set; }
     }
 }

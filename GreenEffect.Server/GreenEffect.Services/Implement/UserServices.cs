@@ -56,7 +56,7 @@ namespace GreenEffect.Services.Implement
                 return new ServiceResult<User>(new[] { new RuleViolation("Exception", "Get data error :" + ex.Message) });
             }
         }
-        public ServiceResult<ICollection<User>> GetAll(string searchUsername, string searchPassword)
+        public ServiceResult<ICollection<User>> GetAll(string searchUsername)
         {
             try 
             {
@@ -66,11 +66,7 @@ namespace GreenEffect.Services.Implement
                     whCls.Add(c => c.UserName.Contains(searchUsername));//neu co thi check username chua (Contains) dk, 
                     //neu dk yeu cau bang thi co 2 cach c.UserName == "username" hoac c.UserName.Equals("username")
                 }
-                if (!string.IsNullOrEmpty(searchPassword))
-                {
-                    whCls.Add(c => c.Password.Contains(searchPassword));
-                }
-
+                
                 var order = "Id desc";//truong sap xep co quy dinh, "Tentruong kieusapxep" 
                 //VD: sap xep theo username, kieusapxep co 2 loai "asc"(tang dan) va "desc" giam dan 
                 //thi order = "UserName asc"

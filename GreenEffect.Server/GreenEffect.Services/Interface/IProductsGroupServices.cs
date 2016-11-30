@@ -6,6 +6,6 @@ namespace GreenEffect.Services.Interface
 {
     public interface IProductsGroupServices
     {
-        ServiceResult<ICollection<ProductGroup>> GetALL(string groupname); 
+        ServiceResult<ICollection<ProductGroup>> GetAll(string groupname); 
     }
 }
