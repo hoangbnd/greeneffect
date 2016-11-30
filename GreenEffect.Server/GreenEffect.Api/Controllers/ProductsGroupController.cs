@@ -11,20 +11,18 @@ namespace GreenEffect.Api.Controllers
 {
     public class ProductsGroupController:ApiController
     {
-        private readonly IProductsGroupServices _productsGroupRouteService;
+        private readonly IProductsGroupServices _productsGroupService;
 
-        public ProductsGroupController(IProductsGroupServices ProductsGroupRouteService)
+        public ProductsGroupController(IProductsGroupServices productsGroupService)
         {
-            _productsGroupRouteService = ProductsGroupRouteService;
+            _productsGroupService = productsGroupService;
         }
-        public JsonModel<List<ProductsGroupApiModel>> GetALL(string groupname)
+        public JsonModel<List<ProductsGroupApiModel>> GetAll(string groupname)
         {
-            var listProductsGroup = new List<ProductsGroupApiModel>();
-            var productsgroup = _productsGroupRouteService.GetALL(groupname);
+            var productsgroup = _productsGroupService.GetAll(groupname);
             if (productsgroup.RuleViolations.IsNullOrEmpty())
             {
-
-                listProductsGroup = productsgroup.Result.Select(g => new ProductsGroupApiModel
+                var listProductsGroup = productsgroup.Result.Select(g => new ProductsGroupApiModel
                 {
                     Id = g.Id,
                     GroupCode = g.GroupCode,

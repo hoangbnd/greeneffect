@@ -15,7 +15,7 @@ namespace GreenEffect.Services.Implement
         {
             _productsGroupRepository = productsRepository;
         }
-         public ServiceResult<ICollection<ProductGroup>> GetALL(string groupname)
+         public ServiceResult<ICollection<ProductGroup>> GetAll(string groupname)
          {
              try
              {
@@ -24,10 +24,7 @@ namespace GreenEffect.Services.Implement
                  {
                      whCls.Add(c => c.GroupName.Contains(groupname));
                  }
-                 var order = "Id desc";//truong sap xep co quy dinh, "Tentruong kieusapxep" 
-                 //VD: sap xep theo username, kieusapxep co 2 loai "asc"(tang dan) va "desc" giam dan 
-                 //thi order = "UserName asc"
-                 var productsgroup = _productsGroupRepository.FindAll(whCls, order);
+                 var productsgroup = _productsGroupRepository.FindAll(whCls, "Id desc");
 
                  return new ServiceResult<ICollection<ProductGroup>>(productsgroup);
              }

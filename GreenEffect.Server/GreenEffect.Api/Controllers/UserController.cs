@@ -94,6 +94,37 @@ namespace GreenEffect.Api.Controllers
                 Message = userResult.RuleViolations[0].ErrorMessage
             };
         }
+
+        [HttpPost]
+        public JsonModel<List<UserApiModel>> GetUsers(string q)
+        {
+            var userResult = _userServices.GetAll(q);
+
+            if (userResult.RuleViolations.IsNullOrEmpty())
+            {
+                var users = userResult.Result.Select(u => new UserApiModel
+                {
+                    Id = u.Id,
+                    UserName = u.UserName,
+                    Password = u.Password,
+                    Op = u.Op,
+                    Datetime = u.LastLoginDt
+                }).ToList();
+                return new JsonModel<List<UserApiModel>>
+                {
+                    Data = users,
+                    IsSuccessful = true,
+                    Message = ""
+                };
+            }
+
+            return new JsonModel<List<UserApiModel>>
+            {
+                IsSuccessful = false,
+                Message = userResult.RuleViolations[0].ErrorMessage
+            };
+        }
+
         //Update Password
         [HttpPost]
         public JsonModel<UserApiModel> UpdatePassword(UserApiModel model)
@@ -139,7 +170,7 @@ namespace GreenEffect.Api.Controllers
             };
         }
 
-      
+
         //tao moi 1 ban ghi len sql
         //[HttpPost]
         //public JsonModel<UserApiModel> Create(UserApiModel model)
