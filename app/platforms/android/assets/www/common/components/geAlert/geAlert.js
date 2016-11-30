@@ -1,19 +1,19 @@
 ﻿(function () {
-    'use strict';
-
+    "use strict";
+    var controller;
     angular
-      .module('greeneffect.common.components.geAlert', [])
-      .directive('geAlert', function() {
+      .module("greeneffect.common.components.geAlert", [])
+      .directive("geAlert", function() {
           return {
-              restrict: 'E',
+              restrict: "E",
               controller: controller,
-              templateUrl: 'common/components/geAlert/geAlert.html',
+              templateUrl: "common/components/geAlert/geAlert.html",
               scope: {
-                  ngModel: '=',
-                  type: '=', //waring, info, success
-                  message: '=',
-                  display: '=',
-                  closeEvent: '&'
+                  ngModel: "=",
+                  type: "=", //waring, info, success
+                  message: "=",
+                  display: "=",
+                  closeEvent: "&"
               },
               required: {
                   type: true,
@@ -23,8 +23,7 @@
               transclude: true,
           };
       });
-
-    var controller = ['$scope', function ($scope) {
+    controller = ["$scope", function ($scope) {
         $scope.close = function () {
             if (angular.isDefined($scope.closeEvent) || angular.isFunction($scope.closeEvent)) {
                 $scope.closeEvent();

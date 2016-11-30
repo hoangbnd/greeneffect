@@ -1,22 +1,22 @@
 ﻿(function () {
-    'use strict';
+    "use strict";
 
-    angular.module('greeneffect.service.user', [
-            'ngResource',
-            'greeneffect.constant',
-            'greeneffect.common.service.urlcreator'
+    angular.module("greeneffect.service.user", [
+            "ngResource",
+            "greeneffect.constant",
+            "greeneffect.common.service.urlcreator"
     ])
-        .factory('UserServices', [
-            '$resource',
-            '$q',
-            '$exceptionHandler',
-            'Constant', 
-            'UrlCreatorService',
-            function UserServices($resource, $q, $exceptionHandler, Constant, UrlCreatorService) {
-                var UserServicesFactory = {
+        .factory("userServices", [
+            "$resource",
+            "$q",
+            "$exceptionHandler",
+            "constant", 
+            "urlCreatorService",
+            function($resource, $q, $exceptionHandler, constant, urlCreatorService) {
+                var userServicesFactory = {
                     login: login
                 };
-                return UserServicesFactory;
+                return userServicesFactory;
 
                 ///////////////////////////////////////////////
 
@@ -36,12 +36,12 @@
                 }
 
                 function validateUser() {
-                    var sessionData = angular.fromJson(sessionStorage.getItem(Constant.SS_KEY.USER_INFO));
+                    var sessionData = angular.fromJson(sessionStorage.getItem(constant.SS_KEY.USER_INFO));
                     var body = {};
-                    body['username'] = sessionData['username'];
-                    body['password'] = sessionData['password'];
-
-                    return $resource(UrlCreatorService.createUrl('user', 'login'), {
+                    body["username"] = sessionData["username"];
+                    body["password"] = sessionData["password"];
+                    
+                    return $resource(urlCreatorService.createUrl("user", "login"), {
                         save: {
                             transformResponse: function (data) {
                                 return angular.fromJson(data);

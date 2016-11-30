@@ -11,8 +11,9 @@
     "greeneffect.controller.order",
     "greeneffect.controller.customer",
     "greeneffect.common.components.geAlert",
-    /*"greeneffect.common.components.geMap",*/
-    "greeneffect.common.service.messagemanagement"])
+    "greeneffect.common.components.geMap",
+    "greeneffect.common.service.messagemanagement",
+    "greeneffect.controller.message"])
 .run(function ($ionicPlatform, $ionicPopup, $cordovaNetwork) {
     $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -41,68 +42,76 @@
 
     });
 })
-.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $locationProvider, $httpProvider, $resourceProvider, Constant, $compileProvider) {
+.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $locationProvider, $httpProvider, $resourceProvider, constant, $compileProvider) {
     /*
       # Hashbang Mode
       http://www.example.com/#/aaa/
       # HTML5 Mode
       http://www.example.com/aaa/
     */
-    $locationProvider.html5Mode(Constant.HTML5_MODE);
-    delete $httpProvider.defaults.headers.common["X-Requested-With"];
-    $httpProvider.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded;charset=utf-8";
-    $httpProvider.defaults.headers.common["Access-Control-Max-Age"] = "1728000";
-    $httpProvider.defaults.headers.common["Accept"] = "application/json, text/javascript";
-    $httpProvider.defaults.headers.common["Access-Control-Allow-Methods"] = "GET, PUT, POST, DELETE, OPTION";
-    $httpProvider.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
-    $httpProvider.defaults.headers.common["Access-Control-Allow-Headers"] = "Origin, X-Requested-With, Content-Type, Accept";
+    var canRetryUnknownError;
+    var canRetryAnotherError;
+    var writeResponseLog;
+    var canRetry;
+
+    $locationProvider.html5Mode(constant.HTML5_MODE);
+    delete $httpProvider.defaults.headers["X-Requested-With"];
+    $httpProvider.defaults.headers["Content-Type"] = "application/x-www-form-urlencoded;charset=utf-8";
+    $httpProvider.defaults.headers["Accept"] = "application/x-www-form-urlencoded, application/json, text/javascript";
+    $httpProvider.defaults.headers["Access-Control-Allow-Methods"] = "GET, PUT, POST, DELETE, OPTION";
+    $httpProvider.defaults.headers["Access-Control-Allow-Origin"] = "*";
+    $httpProvider.defaults.headers["Access-Control-Allow-Headers"] = "Origin, X-Requested-With, Content-Type, Accept, Authorization";
     $httpProvider.defaults.useXDomain = true;
     $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|file|cdvfile):|data:image\//);
-    $httpProvider.defaults.transformRequest = [function (data) {
-        /**
-         * The workhorse; converts an object to x-www-form-urlencoded serialization.
-         * @param {Object} obj
-         * @return {String}
-         */
-        var param = function (obj) {
-            var query = "";
-            var name, value, fullSubName, subName, subValue, innerObj, i;
+    //$httpProvider.defaults.transformRequest = [function (data) {
+    //    /**
+    //     * The workhorse; converts an object to x-www-form-urlencoded serialization.
+    //     * @param {Object} obj
+    //     * @return {String}
+    //     */
 
-            for (name in obj) {
-                value = obj[name];
+    //    var param = function (obj) {
+    //        var query = "";
+    //        var name, value, fullSubName, subName, subValue, innerObj, i;
 
-                if (value instanceof Array) {
-                    for (i = 0; i < value.length; ++i) {
-                        subValue = value[i];
-                        fullSubName = name + "[" + i + "]";
-                        innerObj = {};
-                        innerObj[fullSubName] = subValue;
-                        query += param(innerObj) + "&";
-                    }
-                }
-                else if (value instanceof Object) {
-                    for (subName in value) {
-                        subValue = value[subName];
-                        fullSubName = name + "[" + subName + "]";
-                        innerObj = {};
-                        innerObj[fullSubName] = subValue;
-                        query += param(innerObj) + "&";
-                    }
-                }
-                else if (value !== undefined && value !== null) {
-                    query += encodeURIComponent(name) + "=" + encodeURIComponent(value) + "&";
-                }
-            }
+    //        for (name in obj) {
+    //            value = obj[name];
 
-            return query.length ? query.substr(0, query.length - 1) : query;
-        };
+    //            if (value instanceof Array) {
+    //                for (i = 0; i < value.length; ++i) {
+    //                    subValue = value[i];
+    //                    fullSubName = name + "[" + i + "]";
+    //                    innerObj = {};
+    //                    innerObj[fullSubName] = subValue;
+    //                    query += param(innerObj) + "&";
+    //                }
+    //            }
+    //            else if (value instanceof Object) {
+    //                for (subName in value) {
+    //                    subValue = value[subName];
+    //                    fullSubName = name + "[" + subName + "]";
+    //                    innerObj = {};
+    //                    innerObj[fullSubName] = subValue;
+    //                    query += param(innerObj) + "&";
+    //                }
+    //            }
+    //            else if (value !== undefined && value !== null) {
+    //                query += encodeURIComponent(name) + "=" + encodeURIComponent(value) + "&";
+    //            }
+    //        }
 
-        return angular.isObject(data) && String(data) !== "[object File]" ? param(data) : data;
-    }];
+    //        return query.length ? query.substr(0, query.length - 1) : query;
+    //    };
+
+    //    return angular.isObject(data) && String(data) !== "[object File]" ? param(data) : data;
+
+    //    //return angular.toJson(data);
+    //}];
+
     $httpProvider.interceptors.push(["$q", "$injector", "$timeout", function ($q, $injector, $timeout) {
         return {
             "request": function (request) {
-                request.timeout = Constant.HTTP_PROVIDER_SETTINGS.TIMEOUT;
+                request.timeout = constant.HTTP_PROVIDER_SETTINGS.TIMEOUT;
                 if (angular.isUndefined(request.retryCount)) {
                     request.retryCount = 0;
                 }
@@ -116,9 +125,7 @@
                 response.config.endDate = new Date().getTime();
                 writeResponseLog(response);
                 if (angular.isDefined(response.data.systemerror)) {
-                    // systemerrorが存在した場合はステータス200でもエラー扱い
-                    if (Constant.HTTP_PROVIDER_SETTINGS.RETRY_COUNT <= response.config.retryCount) {
-                        // リトライ回数の上限に達している
+                    if (constant.HTTP_PROVIDER_SETTINGS.RETRY_COUNT <= response.config.retryCount) {
                         response.statusText = angular.toJson(response.data.systemerror);
                         return $q.reject(response);
                     }
@@ -126,7 +133,7 @@
                     return $timeout(function () {
                         var $http = $injector.get("$http");
                         return $http(response.config);
-                    }, Constant.HTTP_PROVIDER_SETTINGS.RETRY_INTERVAL);
+                    }, constant.HTTP_PROVIDER_SETTINGS.RETRY_INTERVAL);
                 }
                 return response;
             },
@@ -138,44 +145,41 @@
                     return $timeout(function () {
                         var $http = $injector.get("$http");
                         return $http(rejection.config);
-                    }, Constant.HTTP_PROVIDER_SETTINGS.RETRY_INTERVAL);
+                    }, constant.HTTP_PROVIDER_SETTINGS.RETRY_INTERVAL);
                 }
                 return $q.reject(rejection);
             }
         }
     }]);
 
-    var canRetry = function (rejection) {
+    canRetry = function (rejection) {
         if (rejection.status === -1) {
             return canRetryUnknownError(rejection);
         }
         return canRetryAnotherError(rejection);
     };
-
-    var canRetryUnknownError = function (rejection) {
-        if (Constant.HTTP_PROVIDER_SETTINGS.TIMEOUT <= (rejection.config.endDate - rejection.config.startDate)) {
+    canRetryUnknownError = function (rejection) {
+        if (constant.HTTP_PROVIDER_SETTINGS.TIMEOUT <= (rejection.config.endDate - rejection.config.startDate)) {
             rejection.statusText = "timeout";
             return false;
         }
-        rejection.status = Constant.OFFLINE_STATUS;
+        rejection.status = constant.OFFLINE_STATUS;
         rejection.statusText = "offLine";
-        if (Constant.HTTP_PROVIDER_SETTINGS.RETRY_COUNT <= rejection.config.retryCount) {
+        if (constant.HTTP_PROVIDER_SETTINGS.RETRY_COUNT <= rejection.config.retryCount) {
             return false;
         }
         return true;
     };
-
-    var canRetryAnotherError = function (rejection) {
+    canRetryAnotherError = function (rejection) {
         if (rejection.status === 408) {
             return false;
         }
-        if (Constant.HTTP_PROVIDER_SETTINGS.RETRY_COUNT <= rejection.config.retryCount) {
+        if (constant.HTTP_PROVIDER_SETTINGS.RETRY_COUNT <= rejection.config.retryCount) {
             return false;
         }
         return true;
     };
-
-    var writeResponseLog = function (response) {
+    writeResponseLog = function (response) {
         console.log(response.config.url + ":" + (response.config.endDate - response.config.startDate) + "ms");
     };
     $ionicConfigProvider.navBar.alignTitle("left");
@@ -194,7 +198,7 @@
         .state("customer", {
             url: "/customer",
             abstract: true,
-            templateUrl: "templates/menu.html",
+            templateUrl: "components/customer/menu.html"
         })
         .state("customer.list", {
             url: "/list",
@@ -212,23 +216,32 @@
                 }
             }
         })
-
-        .state("app.order", {
+        .state("order", {
             url: "/order",
+            abstract: true,
+            templateUrl: "components/order/menu.html"
+        })
+        .state("order.create", {
+            url: "/order/create",
             views: {
                 "menuContent": {
                     templateUrl: "components/order/createOrder.html"
                 }
             }
         })
-     .state("takephoto", {
-         url: "/takephoto",
-         templateUrl: "components/order/takephoto.html"
-     })
-     .state("gallery", {
-         url: "/gallery",
-         templateUrl: "components/order/gallery.html"
-     })
+        .state("takephoto", {
+            url: "/takephoto",
+            templateUrl: "components/order/takephoto.html"
+        })
+        .state("gallery", {
+            url: "/gallery",
+            templateUrl: "components/order/gallery.html"
+        })
+        .state("messages",
+        {
+            url: "/messages",
+            templateUrl: "components/messages/message.html"
+        })
 
 
     //.state("register", {
@@ -285,6 +298,6 @@
     //      }
     //  })
     ;
-    $urlRouterProvider.otherwise("login");
+    $urlRouterProvider.otherwise("messages");
     //$urlRouterProvider.otherwise("takephoto");
 });

@@ -1,13 +1,13 @@
 (function() {
-  'use strict';
+  "use strict";
 
   angular
-    .module('greeneffect.common.service.cookiemanagement', ['greeneffect.constant'])
-    .factory('CookieManagementService', CookieManagementService);
+    .module("greeneffect.common.service.cookiemanagement", ["greeneffect.constant"])
+    .factory("cookieManagementService", cookieManagementService);
 
-  CookieManagementService.$inject = ['Constant', '$document'];
+  cookieManagementService.$inject = ["constant", "$document"];
 
-  function CookieManagementService(Constant, $document) {
+  function cookieManagementService(constant, $document) {
 
     var getCookieArray = function () {
       var result = {};
@@ -15,9 +15,9 @@
       if (angular.isUndefined(allCookies)) {
         return result;
       }
-      var cookies = allCookies.split('; ');
+      var cookies = allCookies.split("; ");
       for (var i = 0; i < cookies.length; i++) {
-        var cookie = cookies[i].split('=');
+        var cookie = cookies[i].split("=");
         result[cookie[0]] = cookie[1];
       }
       return result;
@@ -26,12 +26,12 @@
     var isCookieEmpty = function (sysCookieVal) {
       return angular.isUndefined(sysCookieVal) ||
         sysCookieVal === null ||
-        sysCookieVal === '';
+        sysCookieVal === "";
     }
 
     var CookieManagementService = {
       getCookieValue : function (key) {
-        var sysInfo = getCookieArray()[Constant.GE_COOKIE_KEY];
+        var sysInfo = getCookieArray()[constant.GE_COOKIE_KEY];
         var returnVal;
         if (isCookieEmpty(sysInfo)) {
           returnVal = undefined;
@@ -41,13 +41,13 @@
         return returnVal;
       },
       setCookieValue : function (key, val) {
-        var sysInfo = getCookieArray()[Constant.GE_COOKIE_KEY];
+        var sysInfo = getCookieArray()[constant.GE_COOKIE_KEY];
         if (angular.isUndefined(sysInfo)) {
           sysInfo = {};
         }
         var putVal = angular.fromJson(sysInfo);
         putVal[key] = val;
-        $document.cookie = (Constant.GE_COOKIE_KEY + '=' + angular.toJson(putVal));
+        $document.cookie = (constant.GE_COOKIE_KEY + "=" + angular.toJson(putVal));
       }
     };
 

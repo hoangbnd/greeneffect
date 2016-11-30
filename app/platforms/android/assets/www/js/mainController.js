@@ -5,7 +5,7 @@ angular.module('greeneffect.controller.main', [])
         var routeInfo = {
             currentRoute: $scope.routeSelected,
             allRoutes: $scope.routes,
-            allCustomer: $scope.allCustomer
+            customers: $scope.customers
         }
         sessionStorage.setItem(Constant.SS_KEY.ROUTE_INFO, angular.toJson(routeInfo));
         $location.path("#/app/map")

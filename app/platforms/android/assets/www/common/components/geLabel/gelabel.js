@@ -1,16 +1,16 @@
 (function () {
-  'use strict';
+  "use strict";
 
   angular
-    .module('greeneffect.common.components.geLabel', ['greeneffect.common.service.itemnamemanagement'])
-    .directive('geLabel', function() {
+    .module("greeneffect.common.components.geLabel", ["greeneffect.common.service.itemnamemanagement"])
+    .directive("geLabel", function() {
         return {
             restrict: "E",
-            controller: Controller,
-            templateUrl: 'common/components/geLabel/geLabel.html',
+            controller: controller,
+            templateUrl: "common/components/geLabel/geLabel.html",
             bindings: {
-                formId: '=',
-                itemId: '='
+                formId: "=",
+                itemId: "="
             },
             required: {
                 formId: true,
@@ -19,19 +19,19 @@
         }
     });
 
-  Controller.$inject = ['ItemNameManagementService'];
+  controller.$inject = ["ItemNameManagementService"];
 
   var ctrl;
 
-  function Controller(ItemNameManagementService) {
-    console.log('geLabel Controller Constructor');
+  function controller(itemNameManagementService) {
+    console.log("geLabel Controller Constructor");
     ctrl = this;
-    ctrl.service = ItemNameManagementService;
+    ctrl.service = itemNameManagementService;
   }
 
-  Controller.prototype.$onInit = function() {
-    console.log('geLabel  Controller $onInit');
+  controller.prototype.$onInit = function() {
+    console.log("geLabel  Controller $onInit");
     ctrl.service.setgeLabelName(ctrl);
-    ctrl.onInit = 'Success';
+    ctrl.onInit = "Success";
   };
 })();
