@@ -93,7 +93,7 @@
 
             }
         )
-        .controller("NotificationCtrl",
+        .controller("ListNotificateCtrl",
             function ($scope, messageServices) {
                 $scope.notificate = [];
                 //messageServices.getMessages().then(function (response) {
@@ -119,6 +119,13 @@
                     },
 
                 });
+
+                $scope.showNotificate = function(item) {
+                    item.show = !item.show;
+                    if (!item.isRead) {
+                        item.isRead = true;
+                    }
+                }
             }
        );
 })();

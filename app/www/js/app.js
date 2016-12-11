@@ -243,10 +243,10 @@
             url: "/messages",
             templateUrl: "components/messages/message.html"
         })
-      .state("notification",
+      .state("listNotificate",
         {
-            url: "/notification",
-            templateUrl: "components/messages/notification.html"
+            url: "/listNotificate",
+            templateUrl: "components/messages/listNotificate.html"
         })
 
 
