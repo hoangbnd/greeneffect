@@ -1,82 +1,127 @@
 (function () {
     "use strict";
     angular.module("greeneffect.controller.message",
-        [ ])
+         ["greeneffect.service.message"])
         .controller("MessageCtrl",
-           function ($scope) {
-            //data demo
-            sessionStorage.setItem("user", "anhnd");
-            //get UserId
-            $('#fromId').val(sessionStorage.getItem('user'));
-            var data=[{id:1, text:'AnhNguyen', email:'anhnd1503@gmail.com'},{id:2, text:"HoangNguyen", email: "hoangbnd@gmail.com"}];
-            $('#email').select2({
-             /* data:data,*/
-              ajax:{
-                //get user from server
-              }
-            });
-            // setdata to 
-            //get Data Upload
-            var subject;
-            var userFrom;
-            var userTo=[];
-            var messageContent;
+            function ($scope, messageServices) {
+                //data demo
+                sessionStorage.setItem("user", "anhnd");
+                //prepare data
+                $scope.currentUser = sessionStorage.getItem('user');
+                $scope.loading = false;
+                $scope.messageObj = {
+                    userFrom: $scope.currentUser,
+                    userTo: [],
+                    subject: '',
+                    messageContent: ''
+                };
 
-            $scope.uploadData = function(){
-              alert("Call uploadData Function");
+                // get list Receivers
+                var $selectBox = $('#email').select2({
+                    //data:data
+                    placeholder: 'Receivers',
+                    minimumInputLength: 0,
+                    escapeMarkup: function (m) {
+                        return m;
+                    },
+                    ajax: {
+                        dataType: 'json',
+                        url: "dummy/users.json",//TODO: dummy data
+                        data: function (params) {
+                            return {
+                                q: params.term, // search term
+                                page: params.page
+                            };
+                        },
+                        processResults: function (data, params) {
+                            params.page = params.page || 1;
+                            var results = [];
+                            if (data.IsSuccessful) {
+                                results = data.Data;
 
-              //get Data Upload
-                  subject = $('#subject').val();
-                  userFrom = $('#fromId').val();
+                            } else {
+                                // TODO: show messgage
+                            }
+                            return {
+                                results: results,
+                                // TODO: pagination
+                                // pagination: {
+                                //     more: (params.page * 30) < data.TotalCount
+                                // }
+                            };
+                        },
+                    }
+                });
+                // triger focus on input
+                $('#email').focus(function () {
+                    $selectBox.select2('open');
+                });
 
-              //
 
-              //alert (window.sessionStorage.getItem("user"));
+                $scope.uploadData = function () {
+                    $scope.loading = true;
+                    $scope.messageObj.userTo = [];
+                    /* get UserTo */
+                    $('#email :selected').each(function () {
+                        $scope.messageObj.userTo.push($(this).select2().data().data.email);
+                    });
+                    if ($scope.messageObj.userTo.length == 0) {
+                        //show message
+                        return;
+                    }
+                    console.log($scope.messageObj);
 
-              /* get UserTo */
-              $('#email :selected').each(function(){
-                userTo.push($(this).select2().data().data.email);
-              });
+                    //call api upload to server
+                    messageServices.sendMessage($scope.messageObj).then(function (response) {
+                        //Upload to server success
+                        $scope.loading = false;
+                        $scope.messageObj.subject = '';
+                        $scope.messageObj.userTo = [];
+                        $scope.messageObj.messageContent = "";
+                        $scope.message = "Message send success";
 
-              messageContent = $('#message-content').val();
-              var message = {
-                subject: subject,
-                userFrom: userFrom,
-                userTo: userTo,
-                messageContent: messageContent
-              }
-              //call api upload to server
-              uploadToServer(url, message).then(function(success){
-                  //Upload to server success
+                    }, function (err) {
+                        $scope.message = "Message send failure";
+                        $scope.loading = false;
+                        //upload to serve fail
+                    });
+                };
 
-              }, function(err){
-                //upload to serve fail
-              })
-            };
+                $scope.back = function () {
+                    alert("Back");
+                }
 
-            $scope.back = function(){
-              alert("Back");
             }
+        )
+        .controller("NotificationCtrl",
+            function ($scope, messageServices) {
+                $scope.notificate = [];
+                //messageServices.getMessages().then(function (response) {
+                //    if (response.IsSuccessful) {
+                //        $scope.notificate = response.Data;
+                //    } else {
+                //        $scope.message = response.Message;
+                //    }
+                //});
 
+                //TODO: dummy
+                $.ajax({
+                    method: 'GET',
+                    url: "dummy/notificate.json",
+                    dataType: 'json',
+                    cache: true,
+                    success: function (response) {
+                        if (response.IsSuccessful) {
+                            $scope.notificate = response.Data;
+                        } else {
+                            $scope.message = response.Message;
+                        }
+                    },
 
-            //userFuction
-            var uploadToServer = function(url, message){
-              $.ajax({
-                url: url,
-                type: 'post',
-                dataType: 'json',
-                success: function(data){
-                  //get result post data to server are success or fail
-                },
-                data: message
-              });
-            }       
-
-             
-            });
-
+                });
+            }
+       );
 })();
 
 
 
- 

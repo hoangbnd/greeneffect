@@ -3,6 +3,7 @@
     "ngSanitize",
     "ngCordova",
     "ionic",
+    "angularMoment",
     "greeneffect.constant",
     "greeneffect.service.user",
     "greeneffect.service.customer",
@@ -14,7 +15,7 @@
     "greeneffect.common.components.geMap",
     "greeneffect.common.service.messagemanagement",
     "greeneffect.controller.message"])
-.run(function ($ionicPlatform, $ionicPopup, $cordovaNetwork) {
+.run(function ($ionicPlatform, $ionicPopup, $cordovaNetwork, amMoment) {
     $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
@@ -39,7 +40,7 @@
         //        }
         //    });
         //}
-
+        amMoment.changeLocale('vi');
     });
 })
 .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $locationProvider, $httpProvider, $resourceProvider, constant, $compileProvider) {
@@ -241,6 +242,11 @@
         {
             url: "/messages",
             templateUrl: "components/messages/message.html"
+        })
+      .state("notification",
+        {
+            url: "/notification",
+            templateUrl: "components/messages/notification.html"
         })
 
 
