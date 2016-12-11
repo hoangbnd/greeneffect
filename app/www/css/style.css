@@ -523,6 +523,7 @@
 	width: 100%;
 	right: 0;
     min-height: 54px;
+    left: 0;
 	}
 .ser_input{
 	padding:10px 15px;
@@ -954,4 +955,12 @@
 
 .contact_us input:read-only {
     background: transparent
+}
+
+.order-item {
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    position: inherit !important;
+    
 }

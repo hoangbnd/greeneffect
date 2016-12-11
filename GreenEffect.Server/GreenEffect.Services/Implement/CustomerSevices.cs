@@ -47,7 +47,7 @@ namespace GreenEffect.Services.Implement
                 }
                 if (!string.IsNullOrEmpty(customersAddress))
                 {
-                    whCls.Add(c => c.Adress.Equals(customersAddress));
+                    whCls.Add(c => c.Address.Equals(customersAddress));
                 }
                 if (!string.IsNullOrEmpty(customersPhone))
                 {

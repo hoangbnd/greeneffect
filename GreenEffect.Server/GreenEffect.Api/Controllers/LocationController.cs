@@ -75,7 +75,7 @@ namespace GreenEffect.Api.Controllers
                     Disable = l.Disable,
                     DateTime = l.DateTime,
                     CustomerName = l.Customer.CustomerName,
-                    CustomerAddress = l.Customer.Adress,
+                    CustomerAddress = l.Customer.Address,
                     CustomerPhone = l.Customer.Phone,
                     UserId = model.UserId
                 }).ToList();

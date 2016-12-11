@@ -1,4 +1,4 @@
-﻿<ion-view view-title="Tạo đơn hàng" ng-controller="OrderController">
+﻿<ion-view view-title="Tạo đơn hàng" ng-controller="CreateOrderCtrl">
     <ion-content class="contact_us has-header">
         <form class="app_form">
             <p>
@@ -8,56 +8,45 @@
 
                 <label class="item item-input">
                     <i class="icon ion-android-person placeholder-icon"></i>
-                    <input type="text" placeholder="Tên khách hàng" readonly>
+                    <input type="text" placeholder="Tên khách hàng" value="{{customer.CustomerName}}" readonly>
                 </label>
                 <label class="item item-input">
                     <i class="icon ion-android-phone-portrait placeholder-icon"></i>
-                    <input type="text" placeholder="E-mail" readonly>
+                    <input type="text" placeholder="Số điện thoại" value="{{customer.Phone}}" readonly>
                 </label>
                 <label class="item item-input txt_msg">
                     <i class="icon ion-map placeholder-icon"></i>
-                    <textarea rows="5" placeholder="Message" readonly></textarea>
+                    <textarea rows="5" placeholder="Địa chỉ" readonly>{{customer.Address}}</textarea>
                 </label>
-                <!--<label class="item input-label">Chọn đơn hàng</label>
-                <label class="item item-input item-select">
-                    <i class="icon ion-information placeholder-icon"></i>
-                    <select class="select2"></select>
-                </label>-->
 
-                <a href="#" class="button button-block app_btn main_bg">
-                    Chọn đơn hàng
+                <a href="javascript:;" class="button button-block app_btn main_bg" ng-click="searchProduct();">
+                    Chọn sản phẩm
                 </a>
-                <div class="row">
-                    <div class="col-10">STT</div>
-                    <div class="col-80">Tên sản phẩm</div>
-                    <div class="col-10">SL</div>
-                </div>
-                <div class="order-items">
-                    <div class="order-item" collection-repeat="item in orderItems track by index"
-                         collection-item-width="'100%'" ng-click="">
-                        <div class="col-10">{{index}}</div>
-                        <div class="col-80">{{item.productName}}</div>
-                        <div class="col-10">{{item.quantity}}</div>
+                <div class="order-items" style="color: #ffffff; height: 150px; overflow: auto">
+                    <div class="row" ng-if="orderItems.length > 0">
+                        <div class="col-80">Tên sản phẩm</div>
+                        <div class="col-20">SL</div>
                     </div>
-                    <!--<table class="table">
-                        <thead>
-                            <tr>
-                                <td>
-                                    
-                                </td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        </thead>
-                        <tr collection-repeat="item in orderItems track by index"
-                            collection-item-width="'100%'" ng-click="">
-                            <td>{{index}}</td>
-                            <td>{{item.productName}}</td>
-                            <td>{{item.quantity}}</td>
-                        </tr>
-                    </table>-->
+
+                    <div class="order-item row" ng-repeat="item in orderItems">
+                        <div class="col-80">{{item.productName}}</div>
+                        <div class="col-20">
+                            <label class="item item-input">
+                                <input type="text" ng-value="{{item.quantity}}" />
+                            </label>
+                        </div>
+                    </div>
                 </div>
-                <a href="#" class="button button-block app_btn main_bg">
+                <div class="clearfix"></div>
+                <a href="javascript:;" class="button button-block app_btn main_bg" ng-click="takePhoto();">
+                    Chụp ảnh
+                </a>
+                <div class="row" ng-if="images.length > 0">
+                    <div class="col-33" ng-repeat="image in images">
+                        <img src="{{image}}" class="full-image" alt=""/>
+                    </div>                    
+                </div>
+                <a href="javascript:;" class="button button-block app_btn main_bg" ng-click="sendOrder()">
                     Send
                 </a>
             </div>

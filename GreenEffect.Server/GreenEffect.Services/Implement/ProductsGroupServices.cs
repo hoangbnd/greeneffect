@@ -15,22 +15,22 @@ namespace GreenEffect.Services.Implement
         {
             _productsGroupRepository = productsRepository;
         }
-         public ServiceResult<ICollection<ProductGroup>> GetAll(string groupname)
+         public ServiceResult<IPagedList<ProductGroup>> GetAll(string keyword, int pageIndex, int pageSize)
          {
              try
              {
                  var whCls = new List<Expression<Func<ProductGroup, bool>>>();
-                 if (!string.IsNullOrEmpty(groupname))
+                 if (!string.IsNullOrEmpty(keyword))
                  {
-                     whCls.Add(c => c.GroupName.Contains(groupname));
+                     whCls.Add(c => c.GroupName.Contains(keyword) || c.GroupCode.Contains(keyword));
                  }
-                 var productsgroup = _productsGroupRepository.FindAll(whCls, "Id desc");
+                 var productsgroup = _productsGroupRepository.Paging(whCls, "Id desc", pageIndex, pageSize);
 
-                 return new ServiceResult<ICollection<ProductGroup>>(productsgroup);
+                 return new ServiceResult<IPagedList<ProductGroup>>(productsgroup);
              }
              catch (Exception ex) 
              {
-                 return new ServiceResult<ICollection<ProductGroup>>(new[] { new RuleViolation("Exception", "Get data error :" + ex.Message) });
+                 return new ServiceResult<IPagedList<ProductGroup>>(new[] { new RuleViolation("Exception", "Get data error :" + ex.Message) });
              }
          }
 

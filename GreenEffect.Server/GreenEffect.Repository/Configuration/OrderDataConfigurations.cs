@@ -38,7 +38,7 @@ namespace GreenEffect.Repository.EF.Configuration
             Property(o => o.GroupCode);
             Property(o => o.GroupName);
             Property(o => o.Phone);
-            Property(o => o.Adress);
+            Property(o => o.Address);
             Property(o => o.CustomersCode);
             Property(o => o.CustomersName);
             Property(o => o.ObjectName);

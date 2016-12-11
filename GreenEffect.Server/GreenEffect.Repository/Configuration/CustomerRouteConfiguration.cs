@@ -16,7 +16,7 @@ namespace GreenEffect.Repository.EF.Configuration
             HasKey(r => r.Id);
             Property(r => r.CustomersCode);
             Property(r => r.CustomersName);
-            Property(r => r.Adress);
+            Property(r => r.Address);
             Property(r => r.Phone);
             Property(r => r.CustomersId);
             Property(r => r.UserId);

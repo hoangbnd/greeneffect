@@ -32,7 +32,7 @@ namespace GreenEffect.Api.Controllers
                     Id = r.Id,
                     CustomerCode = r.CustomersCode,
                     CustomerName = r.CustomersName,
-                    Adress = r.Adress,
+                    Address = r.Address,
                     Phone = r.Phone,
                     UserId = r.UserId,
                     CustomerId = r.CustomersId,

@@ -87,7 +87,7 @@
     <Compile Include="Implement\OrderDataServices.cs" />
     <Compile Include="Implement\OrderServices.cs" />
     <Compile Include="Implement\ProductsGroupServices.cs" />
-    <Compile Include="Implement\ProductsServices.cs" />
+    <Compile Include="Implement\ProductServices.cs" />
     <Compile Include="Implement\RouteSevices.cs" />
     <Compile Include="Implement\UserServices.cs" />
     <Compile Include="Interface\IAuthorityObjectServices.cs" />
@@ -99,7 +99,7 @@
     <Compile Include="Interface\IOrderDataServices.cs" />
     <Compile Include="Interface\IOrderServices.cs" />
     <Compile Include="Interface\IProductsGroupServices.cs" />
-    <Compile Include="Interface\IProductsServices.cs" />
+    <Compile Include="Interface\IProductServices.cs" />
     <Compile Include="Interface\IRouteSevice.cs" />
     <Compile Include="Interface\IUserServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

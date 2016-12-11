@@ -15,6 +15,8 @@ namespace GreenEffect.Repository.EF.Configuration
             Property(p => p.ProductGroupId);
             Property(p => p.Datetime);
             Property(p => p.Disable);
+
+            HasRequired(p => p.ProductGroup).WithMany().HasForeignKey(p => p.ProductGroupId);
         }
     }
 }

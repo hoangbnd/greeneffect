@@ -6,7 +6,7 @@
         "greeneffect.common.service.messagemanagement"
     ])
 
-    .controller("LoginCtrl", function ($scope, $ionicModal, $timeout, $location, $state, userServices, messageManagementService, constant) {
+    .controller("LoginCtrl", function ($scope, $ionicModal, $timeout, $location, userServices, messageManagementService, constant) {
 
         $scope.alertMsg = "";
         $scope.alertType = "warning";
@@ -15,7 +15,7 @@
         //$scope.loginData = {};
 
         //// Create the login modal that we will use later
-        $ionicModal.fromTemplateUrl("components/user/menumodal.html", {
+        $ionicModal.fromTemplateUrl("templates/menumodal.html", {
             scope: $scope
         }).then(function (modal) {
             $scope.modal = modal;
@@ -23,6 +23,8 @@
 
         // Perform the login action when the user submits the login form
         $scope.doLogin = function () {
+            //$location.path("#/customer/list");
+            //return;
             if (angular.isUndefined($scope.loginData) ||
                 angular.isUndefined($scope.loginData.username) ||
                 angular.equals($scope.loginData.username, "")) {
@@ -56,8 +58,7 @@
                 userInfo.IdenObj = data.Data.IdenObj;
                 userInfo.UserCode = data.Data.UserCode;
                 sessionStorage.setItem(constant.SS_KEY.USER_INFO, angular.toJson(userInfo));
-                //$location.path("/order/create");
-                $state.go("order.create");
+                $location.path("/customer/list");
             }).catch(function (error) {
                 $scope.displayAlert = true;
                 $scope.alertType = "warning";

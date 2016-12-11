@@ -9,20 +9,20 @@ using GreenEffect.Api.Models;
 
 namespace GreenEffect.Api.Controllers
 {
-    public class ProductsGroupController:ApiController
+    public class ProductGroupController:ApiController
     {
         private readonly IProductsGroupServices _productsGroupService;
 
-        public ProductsGroupController(IProductsGroupServices productsGroupService)
+        public ProductGroupController(IProductsGroupServices productsGroupService)
         {
             _productsGroupService = productsGroupService;
         }
-        public JsonModel<List<ProductsGroupApiModel>> GetAll(string groupname)
+        public JsonModel<List<ProductGroupApiModel>> GetAll(string groupname, int pageIndex, int pageSize)
         {
-            var productsgroup = _productsGroupService.GetAll(groupname);
+            var productsgroup = _productsGroupService.GetAll(groupname, pageIndex, pageSize);
             if (productsgroup.RuleViolations.IsNullOrEmpty())
             {
-                var listProductsGroup = productsgroup.Result.Select(g => new ProductsGroupApiModel
+                var listProductsGroup = productsgroup.Result.Select(g => new ProductGroupApiModel
                 {
                     Id = g.Id,
                     GroupCode = g.GroupCode,
@@ -31,13 +31,13 @@ namespace GreenEffect.Api.Controllers
                     Datetime=g.Datetime,
 
                 }).OrderByDescending(i => i.Id).ToList();
-                return new JsonModel<List<ProductsGroupApiModel>>
+                return new JsonModel<List<ProductGroupApiModel>>
                 {
                     IsSuccessful = true,
                     Data = listProductsGroup
                 };
             }
-            return new JsonModel<List<ProductsGroupApiModel>>
+            return new JsonModel<List<ProductGroupApiModel>>
             {
                 IsSuccessful = false,
                 Message = productsgroup.RuleViolations[0].ErrorMessage

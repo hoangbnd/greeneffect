@@ -280,8 +280,8 @@
     <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\OrderDataController.cs" />
-    <Compile Include="Controllers\ProductsController.cs" />
-    <Compile Include="Controllers\ProductsGroupController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\ProductGroupController.cs" />
     <Compile Include="Controllers\RouteController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -297,8 +297,8 @@
     <Compile Include="Models\MessageApiModel.cs" />
     <Compile Include="Models\OrderApiModel.cs" />
     <Compile Include="Models\OrderDataApiModel.cs" />
-    <Compile Include="Models\ProductsApiModel.cs" />
-    <Compile Include="Models\ProductsGroupApiModel.cs" />
+    <Compile Include="Models\ProductApiModel.cs" />
+    <Compile Include="Models\ProductGroupApiModel.cs" />
     <Compile Include="Models\RouteApiModel.cs" />
     <Compile Include="Models\UserApiModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -333,6 +333,7 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\DictionaryModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ComplexTypeModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
+    <None Include="Properties\PublishProfiles\ge.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

@@ -13,7 +13,7 @@
           URL: {
               TEMPLATE: "%protocol%://%domain%/%contentRoot%/%apiId%/%method%",
               PROTOCOL: "http",
-              DOMAIN: "192.168.1.141:17190",
+              DOMAIN: "192.168.1.119:17190",
               CONTENT_ROOT: "api",
               METHOD: "get"
           },

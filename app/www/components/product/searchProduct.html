@@ -1,0 +1,28 @@
+﻿<ion-modal-view class="search" ng-controller="ProductCtrl" style="height: 90%">
+    <ion-content class="ser_input">
+        
+        <label class="item item-input">
+            <input type="text" placeholder="Nhập tên sản phẩm..." ng-model="keyword" ng-change="searchProduct(keyword);">
+            <button class="button button-icon button-clear main_color" ng-click="searchProduct(keyword);">
+                <i class="ion-ios-search-strong"></i>
+            </button>
+        </label>
+
+        <div class="row">
+            <p ng-if="products.length == 0">Không có sản phẩm nào, vui lòng nhập lại lên</p>
+        </div>
+
+        <div class="row" ng-repeat="item in products" ng-click="chooseProduct(item);" style="color: #ffffff">
+            <div class="col-30">
+                <label class="input-label" style="width: 100%; color: #ffffff">
+                    {{item.ProductCode}}
+                </label>
+            </div>
+            <div class="col-70">
+                <label class="input-label" style="width: 100%; color: #ffffff">
+                    {{item.ProductName}}
+                </label>
+            </div>
+        </div>
+    </ion-content>
+</ion-modal-view>
