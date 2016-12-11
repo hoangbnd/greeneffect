@@ -7,7 +7,7 @@
             "greeneffect.common.service.messagemanagement"
         ])
         .controller("LstCustomerCtrl",
-            function ($scope, $ionicModal, $timeout, $location, messageManagementService, customerServices, constant) {
+            function ($scope, $ionicModal, $timeout, $location, messageManagementService, customerServices, constant, $state) {
                 $scope.alertMsg = "";
                 $scope.alertType = "warning";
                 $scope.displayAlert = false;
@@ -81,9 +81,10 @@
 
                 $scope.goToCreateOrder = function (customer) {
                     var orderInfo = {
-                        currentCustomer: customer
+                        customer: customer
                     }
                     sessionStorage.setItem(constant.SS_KEY.ORDER_INFO, angular.toJson(orderInfo));
+                    $state.go("order.create");
                 };
             })
         .controller("ViewOnMapCtrl",

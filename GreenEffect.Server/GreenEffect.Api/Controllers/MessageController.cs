@@ -18,18 +18,16 @@ namespace GreenEffect.Api.Controllers
         {
             _messageServices = messageServices;
         }
-        public JsonModel<List<MessageApiModel>> GetAll(int idenUser)
+        public JsonModel<List<MessageApiModel>> GetAll(int userId)
         {
-            var listmess = new List<MessageApiModel>();
-            var messager = _messageServices.GetAll(idenUser);
+            var messager = _messageServices.GetAll(userId);
             if (messager.RuleViolations.IsNullOrEmpty())
             {
-
-                listmess = messager.Result.Select(o => new MessageApiModel
+                var listmess = messager.Result.Select(o => new MessageApiModel
                 {
                     Id = o.Id,
                     FromId = o.FromId,
-                    ToId = o.ToId,
+                    ToIds = new[] { o.ToId },
                     IsRead = o.IsRead,
                     Content = o.Content,
                     DateTime = o.DateTime,
@@ -51,11 +49,11 @@ namespace GreenEffect.Api.Controllers
         [HttpPost]
         public JsonModel<MessageApiModel> Delete(MessageApiModel model)
         {
-           
-            var MessagerRs = _messageServices.GetById(model.Id);
-            if (MessagerRs.RuleViolations.IsNullOrEmpty())
+
+            var messagerRs = _messageServices.GetById(model.Id);
+            if (messagerRs.RuleViolations.IsNullOrEmpty())
             {
-                var mess = MessagerRs.Result;
+                var mess = messagerRs.Result;
                 var deleteResult = _messageServices.Delete(mess);
                 //kiemtra xoa
                 if (deleteResult.RuleViolations.IsNullOrEmpty())
@@ -64,14 +62,8 @@ namespace GreenEffect.Api.Controllers
                     return new JsonModel<MessageApiModel>
                     {
                         IsSuccessful = true,
-                        Data = new MessageApiModel
-                        {
-                            Id = mess.Id,
-                            FromId = mess.FromId,
-                            ToId = mess.ToId,
-                            IsRead = mess.IsRead,
-                            Content = mess.Content            
-                        }
+                        Data = null,
+                        Message = "Đã xóa thành công"
                     };
                 }
                 //delete khong thanh cong tra ve loi
@@ -85,9 +77,43 @@ namespace GreenEffect.Api.Controllers
             return new JsonModel<MessageApiModel>
             {
                 IsSuccessful = false,
-                Message = MessagerRs.RuleViolations[0].ErrorMessage
+                Message = messagerRs.RuleViolations[0].ErrorMessage
             };
         }
 
+        [HttpPost]
+        public JsonModel<MessageApiModel> Send(MessageApiModel model)
+        {
+            var msgs = new List<Message>();
+            foreach (var toId in model.ToIds)
+            {
+                var msg = new Message()
+                {
+                    Content = model.Content,
+                    DateTime = DateTime.Now,
+                    FromId = model.FromId,
+                    ToId = toId,
+                    IsRead = false
+                };
+                msgs.Add(msg);
+            }
+
+            var messagerRs = _messageServices.Create(msgs);
+            if (messagerRs.RuleViolations.IsNullOrEmpty())
+            {
+                return new JsonModel<MessageApiModel>
+                {
+                    IsSuccessful = true,
+                    Data = null,
+                    Message = "Gửi thành công"
+                };
+            }
+            //tra ve loi khi khong lay duoc
+            return new JsonModel<MessageApiModel>
+            {
+                IsSuccessful = false,
+                Message = messagerRs.RuleViolations[0].ErrorMessage
+            };
+        }
     }
 }

@@ -56,8 +56,7 @@
                 userInfo.IdenObj = data.Data.IdenObj;
                 userInfo.UserCode = data.Data.UserCode;
                 sessionStorage.setItem(constant.SS_KEY.USER_INFO, angular.toJson(userInfo));
-                //$location.path("/order/create");
-                $state.go("order.create");
+                $state.go("customer.list");
             }).catch(function (error) {
                 $scope.displayAlert = true;
                 $scope.alertType = "warning";

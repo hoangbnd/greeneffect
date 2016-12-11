@@ -29,7 +29,7 @@ namespace GreenEffect.DomainObject.Order
         public string GroupCode { get; set; }
         public string GroupName { get; set; }
         public string Phone { get; set; }
-        public string Adress { get; set; }
+        public string Address { get; set; }
         public string CustomersCode { get; set; }
         public string CustomersName { get; set; }
         public string ObjectName { get; set; }

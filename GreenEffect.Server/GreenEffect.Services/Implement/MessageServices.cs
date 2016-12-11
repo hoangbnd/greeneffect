@@ -29,6 +29,20 @@ namespace GreenEffect.Services.Implement
                 return new ServiceResult<Message>(new[] { new RuleViolation("Exception", "Get data error :" + e.Message) });
             }
         }
+
+        public ServiceResult<List<Message>> Create(List<Message> messages)
+        {
+            try
+            {
+                _messageRepository.Insert(messages);
+                return  new ServiceResult<List<Message>>(messages);
+            }
+            catch (Exception e)
+            {
+                return new ServiceResult<List<Message>>(new[] { new RuleViolation("Exception", "Get data error :" + e.Message) });
+            }
+        }
+
         public ServiceResult<ICollection<Message>> GetAll(int idenUser)
         {
             var whCls = new List<Expression<Func<Message, bool>>>();
