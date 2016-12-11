@@ -1,20 +1,20 @@
 (function() {
-  'use strict';
+  "use strict";
 
   angular
-    .module('greeneffect.common.service.urlcreator', [
-      'greeneffect.constant'
+    .module("greeneffect.common.service.urlcreator", [
+      "greeneffect.constant"
     ])
-    .factory('UrlCreatorService', function UrlCreatorService(Constant) {
+    .factory("urlCreatorService", function urlCreatorService(constant) {
 
         var urlcreatorService = {
             createUrl: function (apiId, method) {
-                var url = Constant.URL.TEMPLATE;
-                url = url.replace('%protocol%', Constant.URL.PROTOCOL);
-                url = url.replace('%domain%', Constant.URL.DOMAIN);
-                url = url.replace('%contentRoot%', Constant.URL.CONTENT_ROOT);
-                url = url.replace('%apiId%', apiId);
-                url = url.replace('%method%', method);
+                var url = constant.URL.TEMPLATE;
+                url = url.replace("%protocol%", constant.URL.PROTOCOL);
+                url = url.replace("%domain%", constant.URL.DOMAIN);
+                url = url.replace("%contentRoot%", constant.URL.CONTENT_ROOT);
+                url = url.replace("%apiId%", apiId);
+                url = url.replace("%method%", method);
                 return url;
             }
         };

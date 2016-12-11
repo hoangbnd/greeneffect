@@ -1,48 +1,33 @@
 ﻿(function () {
-    'use strict';
+    "use strict";
 
-    angular.module('greeneffect.service.customer', [
-            'ngResource',
-            'greeneffect.constant',
-            'greeneffect.common.service.urlcreator'
+    angular.module("greeneffect.service.customer", [
+            "ngResource",
+            "greeneffect.constant",
+            "greeneffect.common.service.urlcreator"
     ])
-        .factory('customerServices', [
-            '$resource',
-            '$q',
-            '$exceptionHandler',
-            'Constant', 
-            'UrlCreatorService',
-            function CustomerServices($resource, $q, $exceptionHandler, Constant, UrlCreatorService) {
-                var CustomerServicesFactory = {
+        .factory("customerServices", [
+            "$resource",
+            "$q",
+            "$exceptionHandler",
+            "constant", 
+            "urlCreatorService",
+            function($resource, $q, $exceptionHandler, constant, urlCreatorService) {
+                var customerServicesFactory = {
                     getRoutes: getRoutes,
                     getCustomers: getCustomers,
-                };
-                return CustomerServicesFactory;
+                    getLocations: getLocations
+            };
+                return customerServicesFactory;
 
                 ///////////////////////////////////////////////
 
-                //function getRoute() {
-                //    var deferred = $q.defer();
-                //    $q.all([
-                //        getRoutes()
-                //    ]).then(function (data) {
-                //        deferred.resolve(data[0]);
-                //        return data[0];
-                //    }).catch(function (error) {
-                //        deferred.reject(error);
-                //        return error;
-                //    });
-
-                //    return deferred.promise;
-                //}
-
                 function getCustomers() {
-                    //var sessionData = angular.fromJson(sessionStorage.getItem(Constant.SS_KEY.USER_INFO));
+                    var userInfo = angular.fromJson(sessionStorage.getItem(constant.SS_KEY.USER_INFO));
                     var body = {};
-                    //body['idenUser'] = sessionData['id'];
-                    body['idenUser'] = '1';
+                    body["UserId"] = userInfo.Id;
 
-                    return $resource(UrlCreatorService.createUrl('customers', 'GetByUser'), {
+                    return $resource(urlCreatorService.createUrl("Customer", "GetByUser"), {
                         save: {
                             transformResponse: function (data) {
                                 return angular.fromJson(data);
@@ -52,19 +37,31 @@
                 }
 
                 function getRoutes() {
-                    //var sessionData = angular.fromJson(sessionStorage.getItem(Constant.SS_KEY.USER_INFO));
+                    var userInfo = angular.fromJson(sessionStorage.getItem(constant.SS_KEY.USER_INFO));
                     var body = {};
-                    //body['idenUser'] = sessionData['id'];
-                    body['idenUser'] = '1';
-
-                    return $resource(UrlCreatorService.createUrl('route', 'GetByUser'), {
+                    body["UserId"] = userInfo.Id;
+                    
+                    return $resource(urlCreatorService.createUrl("Route", "GetByUser"), {
                         save: {
                             transformResponse: function (data) {
                                 return angular.fromJson(data);
                             }
                         }
-                    }).save(body).$promise;
+                    }).save(angular.toJson(body)).$promise;
                 }
 
+                function getLocations() {
+                    var userInfo = angular.fromJson(sessionStorage.getItem(constant.SS_KEY.USER_INFO));
+                    var body = {};
+                    body["UserId"] = userInfo.Id;
+
+                    return $resource(urlCreatorService.createUrl("Location", "GetByUser"), {
+                        save: {
+                            transformResponse: function (data) {
+                                return angular.fromJson(data);
+                            }
+                        }
+                    }).save(angular.toJson(body)).$promise;
+                }
             }]);
 })();

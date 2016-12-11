@@ -1,17 +1,17 @@
 (function () {
-    'use strict';
+    "use strict";
 
     angular
-      .module('greeneffect.common.service.messagemanagement', ['greeneffect.constant'])
-      .factory('MessageManagementService', MessageManagementService);
+      .module("greeneffect.common.service.messagemanagement", ["greeneffect.constant"])
+      .factory("messageManagementService", messageManagementService);
 
-    MessageManagementService.$inject = ['Constant'];
+    messageManagementService.$inject = ["constant"];
 
-    function MessageManagementService(Constant) {
+    function messageManagementService(constant) {
 
         var MessageManagementService = {
             getMessage: function (messageId, messageParams) {
-                var msg = Constant.MSG[messageId];
+                var msg = constant.MSG[messageId];
                 if (angular.isUndefined(msg)) {
                     return null;
                 }
@@ -24,7 +24,7 @@
 
         function messageReplace(msg, messageParams) {
             for (var i = 0; i < messageParams.length; i++) {
-                msg = msg.replace('{' + i + '}', messageParams[i]);
+                msg = msg.replace("{" + i + "}", messageParams[i]);
             }
             return msg;
         }

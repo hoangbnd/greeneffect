@@ -6,10 +6,12 @@
     "greeneffect.constant",
     "greeneffect.service.user",
     "greeneffect.service.customer",
+    "greeneffect.service.product",
     "greeneffect.controller.main",
     "greeneffect.controller.user",
     "greeneffect.controller.order",
     "greeneffect.controller.customer",
+    "greeneffect.controller.product",
     "greeneffect.common.components.geAlert",
     "greeneffect.common.components.geMap",
     "greeneffect.common.service.messagemanagement"])
@@ -221,7 +223,7 @@
             templateUrl: "components/order/menu.html"
         })
         .state("order.create", {
-            url: "/order/create",
+            url: "/create",
             views: {
                 "menuContent": {
                     templateUrl: "components/order/createOrder.html"
