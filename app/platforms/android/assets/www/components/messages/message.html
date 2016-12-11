@@ -1,0 +1,39 @@
+<div id="messages" ng-controller="MessageCtrl">
+<ion-header-bar align-title="center" class="bar-positive message-header">
+  <div class="buttons">
+    <!-- <button class="button" >Left Button</button> -->
+    <i class="icon ion-arrow-return-left message-button message-back"></i>
+
+  </div>
+  <h1 class="title"></h1>
+  <div class="buttons" ng-click="sendMessage()">
+    <i class="icon ion-navigate message-send message-button"></i>  
+  </div>
+</ion-header-bar>
+<ion-content class="message has-header" >
+    
+    <form class="app_form">
+      <label for="email"> 
+        <strong> Gửi đến </strong>
+         <select  class="js-example-basic-multiple js-states form-control" id="email" multiple="multiple" ></select>
+
+      </label>  
+      <label for="subject" > 
+        <strong> Chủ đề  </strong>
+        <input  type="text" class="message-item" id="subject"  placeholder="Nhap chu de gui" >
+      </label>
+      <label for="message-content" > 
+        <strong> Noi dung  </strong>
+        <textarea  id="message-content" class="message-item" placeholder="Noi dung tin nhan"></textarea>
+        </label>
+             
+    </form>
+    <ge-alert type="alertType" message="alertMsg" display="displayAlert" close-event="closeAlertEvent()"></ge-alert>
+</ion-content>
+  </div>
+
+  <style>
+      .bar.bar-positive {
+       background: #303030;
+}
+  </style>

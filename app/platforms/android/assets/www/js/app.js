@@ -12,7 +12,8 @@
     "greeneffect.controller.customer",
     "greeneffect.common.components.geAlert",
     "greeneffect.common.components.geMap",
-    "greeneffect.common.service.messagemanagement"])
+    "greeneffect.common.service.messagemanagement",
+    "greeneffect.controller.message"])
 .run(function ($ionicPlatform, $ionicPopup, $cordovaNetwork) {
     $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -197,7 +198,7 @@
         .state("customer", {
             url: "/customer",
             abstract: true,
-            templateUrl: "templates/menu.html"
+            templateUrl: "components/customer/menu.html"
         })
         .state("customer.list", {
             url: "/list",
@@ -215,7 +216,7 @@
                 }
             }
         })
-
+        .state("order", {
         //.state("app.order", {
         //    url: "/order",
         //    views: {
@@ -231,6 +232,11 @@
         .state("gallery", {
             url: "/gallery",
             templateUrl: "components/order/gallery.html"
+        })
+        .state("messages",
+        {
+            url: "/messages",
+            templateUrl: "components/messages/message.html"
         })
 
 
@@ -288,6 +294,6 @@
     //      }
     //  })
     ;
-    $urlRouterProvider.otherwise("login");
+    $urlRouterProvider.otherwise("messages");
     //$urlRouterProvider.otherwise("takephoto");
 });

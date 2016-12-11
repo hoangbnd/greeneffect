@@ -1,0 +1,66 @@
+﻿<ion-view view-title="Tạo đơn hàng" ng-controller="OrderController">
+    <ion-content class="contact_us has-header">
+        <form class="app_form">
+            <p>
+                Tạo đơn hàng
+            </p>
+            <div class="list list-inset">
+
+                <label class="item item-input">
+                    <i class="icon ion-android-person placeholder-icon"></i>
+                    <input type="text" placeholder="Tên khách hàng" readonly>
+                </label>
+                <label class="item item-input">
+                    <i class="icon ion-android-phone-portrait placeholder-icon"></i>
+                    <input type="text" placeholder="E-mail" readonly>
+                </label>
+                <label class="item item-input txt_msg">
+                    <i class="icon ion-map placeholder-icon"></i>
+                    <textarea rows="5" placeholder="Message" readonly></textarea>
+                </label>
+                <!--<label class="item input-label">Chọn đơn hàng</label>
+                <label class="item item-input item-select">
+                    <i class="icon ion-information placeholder-icon"></i>
+                    <select class="select2"></select>
+                </label>-->
+
+                <a href="#" class="button button-block app_btn main_bg">
+                    Chọn đơn hàng
+                </a>
+                <div class="row">
+                    <div class="col-10">STT</div>
+                    <div class="col-80">Tên sản phẩm</div>
+                    <div class="col-10">SL</div>
+                </div>
+                <div class="order-items">
+                    <div class="order-item" collection-repeat="item in orderItems track by index"
+                         collection-item-width="'100%'" ng-click="">
+                        <div class="col-10">{{index}}</div>
+                        <div class="col-80">{{item.productName}}</div>
+                        <div class="col-10">{{item.quantity}}</div>
+                    </div>
+                    <!--<table class="table">
+                        <thead>
+                            <tr>
+                                <td>
+                                    
+                                </td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </thead>
+                        <tr collection-repeat="item in orderItems track by index"
+                            collection-item-width="'100%'" ng-click="">
+                            <td>{{index}}</td>
+                            <td>{{item.productName}}</td>
+                            <td>{{item.quantity}}</td>
+                        </tr>
+                    </table>-->
+                </div>
+                <a href="#" class="button button-block app_btn main_bg">
+                    Send
+                </a>
+            </div>
+        </form>
+    </ion-content>
+</ion-view>
