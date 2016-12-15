@@ -50,7 +50,7 @@
     <Compile Include="Customer\CustomersRoute.cs" />
     <Compile Include="Customer\Customer.cs" />
     <Compile Include="Message\Message.cs" />
-    <Compile Include="Order\OrderData.cs" />
+    <Compile Include="Order\OrderItem.cs" />
     <Compile Include="Order\Order.cs" />
     <Compile Include="Products\ProductGroup.cs" />
     <Compile Include="Products\Product.cs" />

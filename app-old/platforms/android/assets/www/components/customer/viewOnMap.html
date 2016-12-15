@@ -1,0 +1,32 @@
+﻿<ion-view view-title="Green Effect">
+    <ion-content class="home_page show_map" ng-controller="ViewOnMapCtrl">
+        <div class="list list-route">
+            <label class="item item-input item-select sel_item main_color">
+                <select ng-model="routeSelected" ng-change="selectRoute(routeSelected)"
+                        ng-options="route as route.RouteName for route in routes track by route.Id">
+                    <option value="" ng-if="false"></option>
+                </select>
+            </label>
+        </div>
+        <!-- Map -->
+        <ge-map locations="locations"></ge-map>
+        <!-- Alert -->
+        <ge-alert type="alertType" message="alertMsg" display="displayAlert" close-event="closeAlertEvent()"></ge-alert>
+    </ion-content>
+</ion-view>
+
+<style>
+    .home_page.show_map .list.list-route {
+        padding: 0 15px 25px;
+        position: absolute;
+        width: 100%;
+        background: rgb(43, 43, 43);
+        z-index: 999;
+        -ms-opacity: 0.75;
+        opacity: 0.75;
+    }
+
+    .home_page.show_map .sel_item.item-select {
+        width: 100%;
+    }
+</style>

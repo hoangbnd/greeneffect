@@ -1,0 +1,64 @@
+  <ion-header-bar align-title="left" class="main_header">
+        <h1 class="title">Sign up</h1>
+        <div class="buttons">
+            <a href="#/login" class="button button-icon back_arr main_color"><i class="ion-chevron-left"></i></a>
+            <button class="button button-icon setting_btn main_bg" ng-click="opensetting_modal()"><i class="ion-gear-b"></i></button>
+        </div>
+  </ion-header-bar>
+  <ion-content class="content_bg register_page">
+   <form class="app_form">
+        <div class="profile_img">
+          <img src="img/profile.png"/>
+          <span class="main_bg"><i class="ion-camera"></i></span>
+        </div>
+        <div class="list list-inset">
+            <label class="item item-input">
+                <i class="icon ion-android-person placeholder-icon"></i>
+                <input type="text" placeholder="Username">
+            </label>
+            <label class="item item-input">
+                <i class="icon ion-email placeholder-icon"></i>
+                <input type="text" placeholder="E-mail">
+            </label>
+            <label class="item item-input">
+                <i class="icon ion-ios-locked placeholder-icon"></i>
+                <input type="password" placeholder="Password">
+            </label>
+            
+            <div class="row">
+              <div class="col col-50">
+                <label class="item item-input item-select sel_city">
+                <select>
+                    <option value="Country">Country</option>
+                    <option value="China">China</option>
+                    <option value="America">America</option>
+                    </select>
+                </label>
+              </div>
+              <div class="col col-50">
+                <label class="item item-input item-select sel_city">
+                <select>
+                    <option value="Country">City</option>
+                    <option value="China">China</option>
+                    <option value="America">America</option>
+                    </select>
+                </label>
+              </div>
+            </div>
+            
+            <div class="radio_design">
+                <div class="option_radio">
+                    <input name="type" type="radio" id="single" checked="checked">
+                    <label for="single"><span><i class="ion-checkmark main_color"></i></span>Job seeker</label>
+                </div>
+                <div class="option_radio">
+                    <input name="type" type="radio" id="maried">
+                    <label for="maried"><span><i class="ion-checkmark main_color"></i></span>Researcher employee</label>
+                </div>
+            </div>
+        </div>
+            <a href="#/app/home" class="button button-block app_btn main_bg" ng-click="openwelcome()">
+            Sign up
+            </a> 
+     </form>   
+  </ion-content>

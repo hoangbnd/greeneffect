@@ -78,7 +78,7 @@
     <Compile Include="Configuration\LocationConfiguration.cs" />
     <Compile Include="Configuration\MessageConfiguration.cs" />
     <Compile Include="Configuration\OrderConfiguration.cs" />
-    <Compile Include="Configuration\OrderDataConfigurations.cs" />
+    <Compile Include="Configuration\OrderItemConfigurations.cs" />
     <Compile Include="Configuration\ProductConfigurations.cs" />
     <Compile Include="Configuration\ProductGroupConfiguration.cs" />
     <Compile Include="Configuration\RouteConfigurations.cs" />

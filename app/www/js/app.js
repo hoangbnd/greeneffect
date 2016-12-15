@@ -8,6 +8,7 @@
     "greeneffect.service.user",
     "greeneffect.service.customer",
     "greeneffect.service.product",
+    "greeneffect.service.order",
     "greeneffect.controller.main",
     "greeneffect.controller.user",
     "greeneffect.controller.order",
@@ -63,7 +64,7 @@
     $httpProvider.defaults.headers["Accept"] = "application/x-www-form-urlencoded, application/json, text/javascript";
     $httpProvider.defaults.headers["Access-Control-Allow-Methods"] = "GET, PUT, POST, DELETE, OPTION";
     $httpProvider.defaults.headers["Access-Control-Allow-Origin"] = "*";
-    $httpProvider.defaults.headers["Access-Control-Allow-Headers"] = "Origin, X-Requested-With, Content-Type, Accept, Authorization";
+    $httpProvider.defaults.headers["Access-Control-Allow-Headers"] = "Origin, X-Requested-With, Content-Type, Accept, Authorization, X-File-Name";
     $httpProvider.defaults.useXDomain = true;
     $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|file|cdvfile):|data:image\//);
     //$httpProvider.defaults.transformRequest = [function (data) {
@@ -188,124 +189,62 @@
     $ionicConfigProvider.navBar.alignTitle("left");
     $ionicConfigProvider.backButton.text("").previousTitleText("");
     $stateProvider
-        //.state("app", {
-        //    url: "/app",
-        //    abstract: true,
-        //    templateUrl: "templates/menu.html",
-        //})
-        .state("login", {
+        .state("login",
+        {
             url: "/login",
-            templateUrl: "components/user/login.html",
+            templateUrl: "screens/user/login.html",
             controller: "LoginCtrl"
         })
-        .state("customer", {
+        .state("customer",
+        {
             url: "/customer",
             abstract: true,
-            templateUrl: "components/customer/menu.html"
+            templateUrl: "screens/customer/menu.html"
         })
-        .state("customer.list", {
+        .state("customer.list",
+        {
             url: "/list",
             views: {
                 "menuContent": {
-                    templateUrl: "components/customer/customerList.html"
+                    templateUrl: "screens/customer/customerList.html"
                 }
             }
         })
-        .state("customer.map", {
+        .state("customer.map",
+        {
             url: "/map",
             views: {
                 "menuContent": {
-                    templateUrl: "components/customer/viewOnMap.html"
+                    templateUrl: "screens/customer/viewOnMap.html"
                 }
             }
         })
-        .state("order", {
+        .state("order",
+        {
             url: "/order",
             abstract: true,
-            templateUrl: "components/order/menu.html"
+            templateUrl: "screens/order/menu.html"
         })
-        .state("order.create", {
+        .state("order.create",
+        {
             url: "/create",
             views: {
                 "menuContent": {
-                    templateUrl: "components/order/createOrder.html"
+                    templateUrl: "screens/order/createOrder.html"
                 }
             }
-        })
-        .state("takephoto", {
-            url: "/takephoto",
-            templateUrl: "components/order/takephoto.html"
-        })
-        .state("gallery", {
-            url: "/gallery",
-            templateUrl: "components/order/gallery.html"
         })
         .state("messages",
         {
             url: "/messages",
-            templateUrl: "components/messages/message.html"
+            templateUrl: "screens/messages/message.html"
         })
-      .state("listNotificate",
+        .state("listNotificate",
         {
             url: "/listNotificate",
-            templateUrl: "components/messages/listNotificate.html"
-        })
+            templateUrl: "screens/messages/listNotificate.html"
+        });
 
-
-    //.state("register", {
-    //    url: "/register",
-    //    templateUrl: "templates/register.html"
-    //})
-
-    //.state("app", {
-    //    url: "/app",
-    //    abstract: true,
-    //    templateUrl: "templates/menu.html",
-    //    controller: "AppCtrl"
-    //})
-
-    //.state("app.home", {
-    //    url: "/home",
-    //    views: {
-    //        "menuContent": {
-    //            templateUrl: "templates/home.html"
-    //        }
-    //    }
-    //})
-    // .state("app.notification", {
-    //     url: "/notification",
-    //     views: {
-    //         "menuContent": {
-    //             templateUrl: "templates/notification.html"
-    //         }
-    //     }
-    // })
-
-    // .state("app.category", {
-    //     url: "/category",
-    //     views: {
-    //         "menuContent": {
-    //             templateUrl: "templates/category.html"
-    //         }
-    //     }
-    // })
-    // .state("app.detail", {
-    //     url: "/detail",
-    //     views: {
-    //         "menuContent": {
-    //             templateUrl: "templates/detail.html"
-    //         }
-    //     }
-    // })
-    //  .state("app.contact", {
-    //      url: "/contact",
-    //      views: {
-    //          "menuContent": {
-    //              templateUrl: "templates/contact.html"
-    //          }
-    //      }
-    //  })
-    ;
-    $urlRouterProvider.otherwise("messages");
+    $urlRouterProvider.otherwise("login");
     //$urlRouterProvider.otherwise("takephoto");
 });

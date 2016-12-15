@@ -1,0 +1,25 @@
+#gallery_content{
+	margin: auto;
+	
+	width: 100%;
+	height: 1000px;
+	
+}
+.gallery_item{
+	margin: auto;	
+	width: 33%;
+	border: 1px solid white;
+	background-color: gray;
+	float: left;
+	display: block;
+}
+.gallery_item img {
+	width: 100%;
+	height: 100%;
+	display: block;
+	position: relative;
+	}
+.gallery_item input[type='checkbox']{
+	position: absolute;
+	z-index: 9999;
+}

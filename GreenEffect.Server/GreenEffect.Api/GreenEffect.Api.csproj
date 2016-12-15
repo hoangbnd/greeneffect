@@ -296,7 +296,7 @@
     <Compile Include="Models\LocationApiModel.cs" />
     <Compile Include="Models\MessageApiModel.cs" />
     <Compile Include="Models\OrderApiModel.cs" />
-    <Compile Include="Models\OrderDataApiModel.cs" />
+    <Compile Include="Models\OrderItemApiModel.cs" />
     <Compile Include="Models\ProductApiModel.cs" />
     <Compile Include="Models\ProductGroupApiModel.cs" />
     <Compile Include="Models\RouteApiModel.cs" />
