@@ -18,12 +18,16 @@
               transclude: false
           };
       });
-    controller = function ($scope, $cordovaGeolocation, $ionicLoading) {
+    controller = function ($scope, $cordovaGeolocation, $ionicLoading, $state) {
+        $scope.alertMsg = "";
+        $scope.alertType = "warning";
+        $scope.displayAlert = false;
 
         var myLocation;
 
         var map = initMap();
-
+        var newMarkers = [];
+        var markerCluster;
         $scope.$watch("locations", function () {
             addMarker(map);
         });
@@ -96,9 +100,9 @@
         }
 
         function addMarker(map) {
+            clearOverlays();
             if (angular.isUndefined($scope.locations)) return;
             var i;
-            var newMarkers = [];
             for (i = 0; i < $scope.locations.length; i++) {
                 var pictureLabel = document.createElement("img");
                 pictureLabel.src = "img/property-types/single-family.png";
@@ -128,7 +132,7 @@
                 boxText.innerHTML =
                     "<div class='infobox-inner'>" +
                         "<div class='infobox-description'>" +
-                            "<div class='infobox-title'><a href='/order/create'>" + $scope.locations[i].CustomerName + "</a></div>" +
+                            "<div class='infobox-title'><a href='#/order/create'>" + $scope.locations[i].CustomerName + "</a></div>" +
                             "<div class='infobox-location'>" + $scope.locations[i].CustomerAddress + "</div>" +
                             "<div class='infobox-phone'>" + $scope.locations[i].CustomerPhone + "</div>" +
                         "</div>" +
@@ -143,7 +147,7 @@
                         newMarkers[i].infobox.open(map, this);
                     }
                 })(marker, i));
-
+                
             }
             var clusterStyles = [
                 {
@@ -152,7 +156,7 @@
                     width: 37
                 }
             ];
-            var markerCluster = new MarkerClusterer(map, newMarkers, { styles: clusterStyles, maxZoom: 15 });
+            markerCluster = new MarkerClusterer(map, newMarkers, { styles: clusterStyles, maxZoom: 15 });
             $("body").addClass("loaded");
             setTimeout(function () {
                 $("body").removeClass("has-fullscreen-map");
@@ -160,10 +164,10 @@
             $("#map").removeClass("fade-map");
 
             //  Dynamically show/hide markers --------------------------------------------------------------
-
             google.maps.event.addListener(map, "idle", function () {
 
                 for (var i = 0; i < $scope.locations.length; i++) {
+                    if (!map.getBounds()) continue;
                     if (map.getBounds().contains(newMarkers[i].getPosition())) {
                         newMarkers[i].setVisible(true); // <- Uncomment this line to use dynamic displaying of markers
 
@@ -177,6 +181,17 @@
                     }
                 }
             });
+
+           function clearOverlays() {
+               var i;
+               for (i = 0; i < newMarkers.length; i++) {
+                   newMarkers[i].setVisible(false);
+                   newMarkers[i].setMap(null);
+                   markerCluster[i].setMap(null);
+                }
+               newMarkers.length = 0;
+               newMarkers = [];
+           }
         }
 
         function findMyLocation(map) {
@@ -188,18 +203,50 @@
                 timeout: 20000,
                 maximumAge: 0
             };
-            $cordovaGeolocation.getCurrentPosition(posOptions).then(function (position) {
-                var myLatLng = { lat: position.coords.latitude, lng: position.coords.longitude };
-                myLocation = new google.maps.Marker({ map: map, position: myLatLng, title: "Bạn đang ở đây" });
-                var center = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-                map.panTo(center);
-                $("#map").removeClass("fade-map");
-                $ionicLoading.hide();
-            }, function (err) {
-                $scope.displayAlert = true;
-                $scope.alertType = "warning";
-                $scope.alertMsg = "Hãy chắc chắn bạn đã bật GPS.";
-            });
+
+            var permissions = cordova.plugins.permissions;
+            permissions.hasPermission(permissions.ACCESS_FINE_LOCATION, checkPermissionCallback, null);
+
+            function checkPermissionCallback(status) {
+                
+                if (!status.hasPermission) {
+                    var errorCallback = function() {
+                        $scope.displayAlert = true;
+                        $scope.alertType = "warning";
+                        $scope.alertMsg = "Hãy chắc chắn bạn đã bật GPS.";
+                    }
+                    permissions.requestPermission(permissions.ACCESS_FINE_LOCATION,
+                        function(status) {
+                            if (!status.hasPermission) {
+                                errorCallback();
+                                $state.goBack();
+                            } else {
+                                getCurrentPosition();
+                            }
+                            
+                        },
+                        errorCallback);
+                } else {
+                    getCurrentPosition();
+                }
+            }
+
+            function getCurrentPosition() {
+                $cordovaGeolocation.getCurrentPosition(posOptions).then(function (position) {
+                    var myLatLng = { lat: position.coords.latitude, lng: position.coords.longitude };
+                    myLocation = new google.maps.Marker({ map: map, position: myLatLng, title: "Bạn đang ở đây" });
+                    var center = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                    map.panTo(center);
+                    $("#map").removeClass("fade-map");
+                    $ionicLoading.hide();
+                }, function (err) {
+                    console.log(err);
+                    $ionicLoading.hide();
+                    $scope.displayAlert = true;
+                    $scope.alertType = "warning";
+                    $scope.alertMsg = "Hãy chắc chắn bạn đã bật GPS.";
+                });
+            }
         }
     };
 })();

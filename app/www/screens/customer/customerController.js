@@ -11,8 +11,13 @@
                 $scope.alertMsg = "";
                 $scope.alertType = "warning";
                 $scope.displayAlert = false;
+
+                $scope.routes = [];
+                $scope.customers = [];
+                $scope.customersShow = [];
+                $scope.routeSelected = null;
+                $scope.showMap = false;
                 // Form data for the login modal
-                //$scope.loginData = {};
                 customerServices.getRoutes().then(function (data) {
                     if (!data.IsSuccessful) {
                         $scope.displayAlert = true;
@@ -31,7 +36,7 @@
                             return;
                         }
                         $scope.customers = dataCus.Data;
-                        $scope.customers = $scope.customers.filter(function (item) {
+                        $scope.customersShow = $scope.customers.filter(function (item) {
                             if (angular.equals(item.RouteId, $scope.routeSelected.Id)) {
                                 return true;
                             }
@@ -56,13 +61,10 @@
                     return;
                 });
 
-                $scope.selectRoute = function (route) {
+                $scope.selectRoute = function () {
                     if (angular.isDefined($scope.customers) && $scope.customers != null && $scope.customers.length > 0) {
-                        $scope.customers = $scope.customers.filter(function (item) {
-                            if (angular.equals(item.RouteId, $scope.routeSelected.Id)) {
-                                return true;
-                            }
-                            return false;
+                        $scope.customersShow = $scope.customers.filter(function (item) {
+                            return angular.equals(item.RouteId, $scope.routeSelected.Id);
                         });
 
                         var routeInfo = {
@@ -86,20 +88,60 @@
                     sessionStorage.setItem(constant.SS_KEY.ORDER_INFO, angular.toJson(orderInfo));
                     $state.go("order.create");
                 };
+
             })
         .controller("ViewOnMapCtrl",
-            function ($scope, $ionicModal, $timeout, $location, $state,messageManagementService, customerServices, constant) {
-                var routeInfo = angular.fromJson(sessionStorage.getItem(constant.SS_KEY.ROUTE_INFO));
-                $scope.routes = routeInfo.allRoutes;
-                $scope.routeSelected = routeInfo.currentRoute;
-                $scope.customers = routeInfo.customers;
+            function ($scope, $ionicModal, $timeout, $location, $state, messageManagementService, customerServices, constant) {
+                $scope.alertMsg = "";
+                $scope.alertType = "warning";
+                $scope.displayAlert = false;
+                //$scope.routes = [];
+                //$scope.customers = [];
+                //$scope.routeSelected = null;
+
+                //var routeInfo = angular.fromJson(sessionStorage.getItem(constant.SS_KEY.ROUTE_INFO));
+                //$scope.routes = routeInfo.allRoutes;
+                //$scope.routeSelected = routeInfo.currentRoute;
+                //$scope.customers = routeInfo.customers;
+                //var customersShow = $scope.customers.filter(function (item) {
+                //    return angular.equals(item.RouteId, $scope.routeSelected.Id);
+                //});
                 customerServices.getLocations().then(function (data) {
                     if (data.IsSuccessful) {
+                        //$scope.allLocations = data.Data;
+                        //$scope.locations = $scope.allLocations.filter(function (item) {
+                        //    for (var i = 0; i < customersShow.length; i ++) {
+                        //        if (item.CustomerId == customersShow[i].Id) {
+                        //            return true;
+                        //        }
+                        //    }
+                        //    return false;
+                        //});
                         $scope.locations = data.Data;
                     } else {
+                        //$scope.allLocations = [];
                         $scope.locations = [];
                     }
                 });
+
+                //$scope.selectRoute = function () {
+                //    if (angular.isDefined($scope.customers) && $scope.customers != null && $scope.customers.length > 0) {
+                //        customersShow = $scope.customers.filter(function (item) {
+                //            if (angular.equals(item.RouteId, $scope.routeSelected.Id)) {
+                //                return true;
+                //            }
+                //            return false;
+                //        });
+                //        $scope.locations = $scope.allLocations.filter(function (item) {
+                //            for (var i = 0; i < customersShow.length; i++) {
+                //                if (item.CustomerId === customersShow[i].Id) {
+                //                    return true;
+                //                }
+                //            }
+                //            return false;
+                //        });
+                //    }
+                //};
 
                 $scope.closeAlertEvent = function () {
                     $state.go("customer.list");

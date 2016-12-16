@@ -11,15 +11,6 @@
         $scope.alertMsg = "";
         $scope.alertType = "warning";
         $scope.displayAlert = false;
-        // Form data for the login modal
-        //$scope.loginData = {};
-
-        //// Create the login modal that we will use later
-        $ionicModal.fromTemplateUrl("screens/user/menumodal.html", {
-            scope: $scope
-        }).then(function (modal) {
-            $scope.modal = modal;
-        });
 
         // Perform the login action when the user submits the login form
         $scope.doLogin = function () {
@@ -58,7 +49,17 @@
                 sessionStorage.setItem(constant.SS_KEY.USER_INFO, angular.toJson(userInfo));
                 $state.go("customer.list");
             }).catch(function (e) {
-                if (e.statusText == "")
+                $scope.displayAlert = true;
+                $scope.alertType = "warning";
+                console.log(e)
+                if (e.statusText && e.statusText == "timeout") {
+                    $scope.alertMsg = "Không có kết nối đến máy chủ. Vui lòng thử lại sau.";
+                    return;
+                }
+                if (e.statusText && e.statusText == "offline") {
+                    $scope.alertMsg = "Không có kết nối internet. Vui lòng thử lại sau.";
+                    return;
+                }
                 $scope.displayAlert = true;
                 $scope.alertType = "warning";
                 $scope.alertMsg = messageManagementService.getMessage("E001");

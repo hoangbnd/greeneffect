@@ -28,7 +28,7 @@ namespace GreenEffect.Api.Controllers
         }
 
         [System.Web.Http.HttpPost]
-        public JsonModel<OrderApiModel> Create()
+        public JsonModel<OrderApiModel> Create(OrderApiModel model)
         {
             NameValueCollection nvc = HttpContext.Current.Request.Form;
             foreach (var key in nvc.AllKeys)
@@ -36,7 +36,7 @@ namespace GreenEffect.Api.Controllers
                 var name = HttpContext.Current.Request.Form[key];
             }
             //var model = JsonConvert.DeserializeObject<OrderApiModel>(nvc["model"]); 
-            var model = new OrderApiModel();
+            //var model = new OrderApiModel();
             if (model != null)//check null
             {
                 var order = new Order
@@ -66,7 +66,8 @@ namespace GreenEffect.Api.Controllers
                 var orderResult = _orderServices.Create(order);
                 if (orderResult.RuleViolations.IsNullOrEmpty())
                 {
-                    order.Images = SaveImages(orderResult.Result.Id, model.Files);
+                    //order.Images = SaveImages(orderResult.Result.Id, model.Files);
+                    order.Images = "";
                     var updateResult = _orderServices.Update(order);
                     //kiem tra ket qua update
                     if (updateResult.RuleViolations.IsNullOrEmpty())

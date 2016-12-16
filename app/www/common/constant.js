@@ -14,9 +14,10 @@
                 URL: {
                     TEMPLATE: "%protocol%://%domain%/%contentRoot%/%apiId%/%method%",
                     PROTOCOL: "http",
-                    DOMAIN: "localhost:17190",
+                    //DOMAIN: "localhost:17190",
+                    DOMAIN: "hoangnh.somee.com",
                     CONTENT_ROOT: "api",
-                    METHOD: "get"
+                    METHOD: "post"
                 },
                 HTML5_MODE: false,
                 SS_KEY: {

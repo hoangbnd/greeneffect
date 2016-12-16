@@ -1,4 +1,4 @@
-﻿<ion-view view-title="Tạo đơn hàng" ng-controller="CreateOrderCtrl">
+﻿<ion-view view-title="Tạo đơn hàng" ng-controller="OrderCtrl">
     <ion-content class="contact_us has-header">
         <form class="app_form">
             <p>
@@ -32,7 +32,7 @@
                         <div class="col-80">{{item.productName}}</div>
                         <div class="col-20">
                             <label class="item item-input">
-                                <input type="text" ng-model="item.quantity" />
+                                <input type="text" ng-model="item.quantity"/>
                             </label>
                         </div>
                     </div>
@@ -44,12 +44,13 @@
                 <div class="row" ng-if="images.length > 0">
                     <div class="col-33" ng-repeat="image in images">
                         <img src="{{image}}" class="full-image" alt=""/>
-                    </div>                    
+                    </div>
                 </div>
                 <a href="javascript:;" class="button button-block app_btn main_bg" ng-click="sendOrder()">
                     Gửi
                 </a>
             </div>
         </form>
+        <ge-alert type="alertType" message="alertMsg" display="displayAlert" close-event="closeAlertEvent()"></ge-alert>
     </ion-content>
 </ion-view>

@@ -7,8 +7,11 @@
         "greeneffect.common.service.messagemanagement",
         "greeneffect.common.service.urlcreator"])
 
-    .controller("CreateOrderCtrl", function ($scope, $ionicModal, $cordovaGeolocation, $http,
+    .controller("OrderCtrl", function ($scope, $ionicModal, $cordovaGeolocation, $http, $state, $ionicPopup,
         constant, selectedProduct, messageManagementService, urlCreatorService, orderServices) {
+        $scope.alertMsg = "";
+        $scope.alertType = "warning";
+        $scope.displayAlert = false;
         $scope.orderItems = [];
         var orderInfo = angular.fromJson(sessionStorage.getItem(constant.SS_KEY.ORDER_INFO));
         $scope.customer = orderInfo.customer;
@@ -43,8 +46,18 @@
 
         $scope.takePhoto = function () {
             orderInfo.images = [];
+            $ionicPopup.confirm({
+                title: "Tạo đơn hàng",
+                content: "Vui lòng chụp 3 ảnh để đưa vào đơn hàng."
+            }).then(function (result) {
+                if (result) {
+                    // start image capture
+                    navigator.device.capture.captureImage(captureSuccess, captureError, { limit: 3 });
+                }
+            });
+
             // capture callback
-            var captureSuccess = function (mediaFiles) {
+            function captureSuccess(mediaFiles) {
                 var i, len;
                 for (i = 0, len = mediaFiles.length; i < len; i += 1) {
                     orderInfo.images.push(mediaFiles[i].fullPath);
@@ -53,39 +66,31 @@
             };
 
             // capture error callback
-            var captureError = function (error) {
+            function captureError(error) {
 
                 $scope.displayAlert = true;
                 $scope.alertType = "warning";
                 switch (error.code) {
                     case CaptureError.CAPTURE_NO_MEDIA_FILES:
-                        $scope.alertMsg = messageManagementService.getMessage("E001");
+                        $scope.alertMsg = "Chưa chụp ảnh nào";
                         break;
                     case CaptureError.CAPTURE_INTERNAL_ERR:
-                        $scope.alertMsg = messageManagementService.getMessage("E001");
+                        $scope.alertMsg = "Có lỗi trong quá trình chụp ảnh";
                         break;
                     case CaptureError.CAPTURE_APPLICATION_BUSY:
-                        $scope.alertMsg = messageManagementService.getMessage("E001");
-                        break;
-                    case CaptureError.CAPTURE_INVALID_ARGUMENT:
-                        $scope.alertMsg = messageManagementService.getMessage("E001");
-                        break;
-                    case CaptureError.CAPTURE_NO_MEDIA_FILES:
-                        $scope.alertMsg = messageManagementService.getMessage("E001");
+                        $scope.alertMsg = "Ứng dụng chụp ảnh đang được sử dụng bởi phần mềm khác.";
                         break;
                     case CaptureError.CAPTURE_PERMISSION_DENIED:
-                        $scope.alertMsg = messageManagementService.getMessage("E001");
+                        $scope.alertMsg = "Vui lòng kiểm tra lại quyền sử dụng camera của phần mềm";
                         break;
                     case CaptureError.CAPTURE_NOT_SUPPORTED:
-                        $scope.alertMsg = messageManagementService.getMessage("E001");
+                        $scope.alertMsg = "Thiết bị không được hỗ trợ chụp ảnh";
                         break;
                 }
 
                 return;
             };
 
-            // start image capture
-            navigator.device.capture.captureImage(captureSuccess, captureError, { limit: 3 });
         }
 
         $scope.sendOrder = function () {
@@ -99,7 +104,7 @@
             $cordovaGeolocation.getCurrentPosition(posOptions).then(function (position) {
                 orderInfo.latitude = position.coords.latitude;
                 orderInfo.longitude = position.coords.longitude;
-                //sessionStorage.setItem(constant.SS_KEY.ORDER_INFO, angular.toJson(orderInfo));
+                sessionStorage.setItem(constant.SS_KEY.ORDER_INFO, angular.toJson(orderInfo));
                 var userInfo = angular.fromJson(sessionStorage.getItem(constant.SS_KEY.USER_INFO));
                 orderInfo.userId = userInfo.Id;
                 //var data = new FormData();
@@ -109,8 +114,8 @@
                 //data.append("longitude", orderInfo.longitude);
                 //data.append("orderItems", orderInfo.orderItems);
                 var files = [];
-                for (var i in $scope.images) {
-                    window.requestLocalFileSystemURL(i,
+                for (var i = 0; i < $scope.images.length; i++) {
+                    window.resolveLocalFileSystemURL($scope.images[i],
                         function (fileEntry) {
                             fileEntry.file(function (file) {
                                 files.push(file);
@@ -131,12 +136,19 @@
 
                 orderServices.sendOrder().then(function (res) {
                     if (res.IsSuccessful) {
+                        $scope.displayAlert = true;
+                        $scope.alertType = "success";
                         $scope.alertMsg = messageManagementService.getMessage("S001");
+                        $state.go("customer.list");
                     } else {
                         $scope.displayAlert = true;
                         $scope.alertType = "warning";
                         $scope.alertMsg = res.Message;
                     }
+                }).catch(function (e) {
+                    $scope.displayAlert = true;
+                    $scope.alertType = "warning";
+                    $scope.alertMsg = messageManagementService.getMessage("E001");
                 });
                 //var body = {};
                 //body["userId"] = userInfo.Id;

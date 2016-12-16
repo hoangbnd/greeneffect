@@ -1,13 +1,13 @@
 ﻿<ion-view view-title="Green Effect">
     <ion-content class="home_page show_map" ng-controller="ViewOnMapCtrl">
-        <div class="list list-route">
+        <!--<div class="list list-route">
             <label class="item item-input item-select sel_item main_color">
-                <select ng-model="routeSelected" ng-change="selectRoute(routeSelected)"
+                <select ng-model="routeSelected" ng-change="selectRoute()"
                         ng-options="route as route.RouteName for route in routes track by route.Id">
                     <option value="" ng-if="false"></option>
                 </select>
             </label>
-        </div>
+        </div>-->
         <!-- Map -->
         <ge-map locations="locations"></ge-map>
         <!-- Alert -->

@@ -2,20 +2,20 @@
     <ion-content class="home_page" ng-controller="LstCustomerCtrl">
         <div class="list list-route">
             <label class="item item-select sel_item main_color">
-                <select ng-model="routeSelected" ng-change="selectRoute(routeSelected)"
+                <select ng-model="routeSelected" ng-change="selectRoute()"
                         ng-options="route as route.RouteName for route in routes track by route.Id">
                     <option value="" ng-if="false"></option>
                 </select>
             </label>
         </div>
         <div class="home_list"
-             collection-repeat="item in customers"
-             collection-item-width="'100%'" ng-click="">
+             collection-repeat="item in customersShow"
+             collection-item-width="'100%'" >
             <div class="list_content">
                 <div class="row">
                     <div class="col col-25">
                         <div class="thumb">
-                            <img src="/img/user-icon-white.png"/>
+                            <img src="img/user-icon-white.png"/>
                         </div>
                     </div>
                     <div class="col col-75">
