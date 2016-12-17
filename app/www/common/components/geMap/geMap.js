@@ -2,7 +2,10 @@
     "use strict";
     var controller;
     angular
-      .module("greeneffect.common.components.geMap", ["ngCordova"])
+      .module("greeneffect.common.components.geMap", [
+          "ngCordova",
+          "greeneffect.constant"
+      ])
       .directive("geMap", function () {
           return {
               restrict: "E",
@@ -18,9 +21,9 @@
               transclude: false
           };
       });
-    controller = function ($scope, $cordovaGeolocation, $ionicLoading, $state) {
+    controller = function ($scope, $cordovaGeolocation, $ionicLoading, $state, constant) {
         $scope.alertMsg = "";
-        $scope.alertType = "warning";
+        $scope.alertType = constant.MSG_TYPE.WARNING;
         $scope.displayAlert = false;
 
         var myLocation;
@@ -82,7 +85,7 @@
                         findMyLocation(map);
                     } else {
                         $scope.displayAlert = true;
-                        $scope.alertType = "warning";
+                        $scope.alertType = constant.MSG_TYPE.WARNING;
                         $scope.alertMsg = "Hãy chắc chắn bạn đã bật GPS";
                     }
                 });
@@ -212,7 +215,7 @@
                 if (!status.hasPermission) {
                     var errorCallback = function() {
                         $scope.displayAlert = true;
-                        $scope.alertType = "warning";
+                        $scope.alertType = constant.MSG_TYPE.WARNING;
                         $scope.alertMsg = "Hãy chắc chắn bạn đã bật GPS.";
                     }
                     permissions.requestPermission(permissions.ACCESS_FINE_LOCATION,
@@ -243,7 +246,7 @@
                     console.log(err);
                     $ionicLoading.hide();
                     $scope.displayAlert = true;
-                    $scope.alertType = "warning";
+                    $scope.alertType = constant.MSG_TYPE.WARNING;
                     $scope.alertMsg = "Hãy chắc chắn bạn đã bật GPS.";
                 });
             }

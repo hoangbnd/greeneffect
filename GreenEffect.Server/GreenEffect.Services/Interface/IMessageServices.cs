@@ -9,8 +9,10 @@ namespace GreenEffect.Services.Interface
 {
     public interface IMessageServices
     {
-        ServiceResult<ICollection<Message>> GetAll(int userId);
+        ServiceResult<int> CountNewNotice(int userId);
+        ServiceResult<PagedList<Message>> GetAll(int userId, int pageIndex, int pageSize);
         ServiceResult<Message> Delete(Message message);
+        ServiceResult<Message> Update(Message message);
         ServiceResult<Message> GetById(int id);
         ServiceResult<List<Message>> Create(List<Message> messages);
     }

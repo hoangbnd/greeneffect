@@ -7,7 +7,7 @@
             "greeneffect.common.service.messagemanagement"
         ])
         .controller("ProductCtrl",
-            function ($scope, $ionicModal, $timeout, $location, messageManagementService, productServices, selectedProduct) {
+            function ($scope, $ionicModal, $timeout, $location, messageManagementService, productServices, selectedProduct, constant) {
 
                 $scope.searchProduct = function (keyword) {
                     if (keyword.length < 3) return;
@@ -15,7 +15,7 @@
                             .then(function (data) {
                                 if (!data.IsSuccessful) {
                                     $scope.displayAlert = true;
-                                    $scope.alertType = "warning";
+                                    $scope.alertType = constant.MSG_TYPE.WARNING;
                                     $scope.alertMsg = data.Message;
                                     return;
                                 }
@@ -23,7 +23,7 @@
                             })
                             .catch(function (error) {
                                 $scope.displayAlert = true;
-                                $scope.alertType = "warning";
+                                $scope.alertType = constant.MSG_TYPE.WARNING;
                                 $scope.alertMsg = messageManagementService.getMessage("E001");
                                 return;
                             });

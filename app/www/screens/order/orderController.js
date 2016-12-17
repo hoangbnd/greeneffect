@@ -10,7 +10,7 @@
     .controller("OrderCtrl", function ($scope, $ionicModal, $cordovaGeolocation, $http, $state, $ionicPopup,
         constant, selectedProduct, messageManagementService, urlCreatorService, orderServices) {
         $scope.alertMsg = "";
-        $scope.alertType = "warning";
+        $scope.alertType = constant.MSG_TYPE.WARNING;
         $scope.displayAlert = false;
         $scope.orderItems = [];
         var orderInfo = angular.fromJson(sessionStorage.getItem(constant.SS_KEY.ORDER_INFO));
@@ -69,7 +69,7 @@
             function captureError(error) {
 
                 $scope.displayAlert = true;
-                $scope.alertType = "warning";
+                $scope.alertType = constant.MSG_TYPE.WARNING;
                 switch (error.code) {
                     case CaptureError.CAPTURE_NO_MEDIA_FILES:
                         $scope.alertMsg = "Chưa chụp ảnh nào";
@@ -137,17 +137,17 @@
                 orderServices.sendOrder().then(function (res) {
                     if (res.IsSuccessful) {
                         $scope.displayAlert = true;
-                        $scope.alertType = "success";
+                        $scope.alertType = constant.MSG_TYPE.SUCCESS;
                         $scope.alertMsg = messageManagementService.getMessage("S001");
                         $state.go("customer.list");
                     } else {
                         $scope.displayAlert = true;
-                        $scope.alertType = "warning";
+                        $scope.alertType = constant.MSG_TYPE.WARNING;
                         $scope.alertMsg = res.Message;
                     }
                 }).catch(function (e) {
                     $scope.displayAlert = true;
-                    $scope.alertType = "warning";
+                    $scope.alertType = constant.MSG_TYPE.WARNING;
                     $scope.alertMsg = messageManagementService.getMessage("E001");
                 });
                 //var body = {};
@@ -187,7 +187,7 @@
                 //});
             }, function (err) {
                 $scope.displayAlert = true;
-                $scope.alertType = "warning";
+                $scope.alertType = constant.MSG_TYPE.WARNING;
                 $scope.alertMsg = "Hãy chắc chắn bạn đã bật GPS.";
             });
         }

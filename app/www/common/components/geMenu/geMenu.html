@@ -19,7 +19,7 @@
                 CATEGORIES
             </ion-item>-->
             <ion-item href="#/message/list" ng-click="closemenumodal()">
-                Tin nhắn<span class="badge">3</span>
+                Tin nhắn<span class="badge" ng-if="newNotice > 0">{{newNotice}}</span>
             </ion-item>
             <!--<ion-item href="#/app/home" ng-click="closemenumodal()">
                 FAVOURITE

@@ -233,12 +233,21 @@
         .state("message.send",
         {
             url: "/send",
-            templateUrl: "screens/message/message.html"
+            views: {
+                "menuContent": {
+                    templateUrl: "screens/message/message.html"
+                }
+            }
+            
         })
         .state("message.list",
         {
             url: "/list",
-            templateUrl: "screens/message/listNotificate.html"
+            views: {
+                "menuContent": {
+                    templateUrl: "screens/message/listNotificate.html"
+                }
+            }
         });
 
     $urlRouterProvider.otherwise("login");

@@ -15,6 +15,20 @@ namespace GreenEffect.Services.Implement
         {
             _messageRepository = messageRepository;
         }
+
+        public ServiceResult<Message> Update(Message message)
+        {
+            try
+            {
+                _messageRepository.Update(message);
+                return new ServiceResult<Message>(message);
+            }
+            catch (Exception ex)
+            {
+                return new ServiceResult<Message>(new[] { new RuleViolation("Ex", "Update data error:" + ex.Message) });
+            }
+        }
+
         public ServiceResult<Message> GetById(int id)
         {
             try
@@ -35,7 +49,7 @@ namespace GreenEffect.Services.Implement
             try
             {
                 _messageRepository.Insert(messages);
-                return  new ServiceResult<List<Message>>(messages);
+                return new ServiceResult<List<Message>>(messages);
             }
             catch (Exception e)
             {
@@ -43,18 +57,31 @@ namespace GreenEffect.Services.Implement
             }
         }
 
-        public ServiceResult<ICollection<Message>> GetAll(int idenUser)
+        public ServiceResult<int> CountNewNotice(int userId)
         {
-            var whCls = new List<Expression<Func<Message, bool>>>();
-            whCls.Add(a => a.ToId == idenUser );
+            var whCls = new List<Expression<Func<Message, bool>>> { a => a.IsRead == false };
             try
             {
-                var messager = _messageRepository.FindAll(whCls);
-                return new ServiceResult<ICollection<Message>>(messager);
+                var messages = _messageRepository.Count(whCls);
+                return new ServiceResult<int>(messages);
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                return new ServiceResult<ICollection<Message>>();
+                return new ServiceResult<int>(new[] { new RuleViolation("Exception", "Get data error :" + e.Message) });
+            }
+        }
+
+        public ServiceResult<PagedList<Message>> GetAll(int idenUser, int pageIndex, int pageSize)
+        {
+            var whCls = new List<Expression<Func<Message, bool>>> { a => a.ToId == idenUser };
+            try
+            {
+                var messages = _messageRepository.Paging(whCls, "Id desc", pageIndex, pageSize);
+                return new ServiceResult<PagedList<Message>>(messages);
+            }
+            catch (Exception e)
+            {
+                return new ServiceResult<PagedList<Message>>(new[] { new RuleViolation("Exception", "Get data error :" + e.Message) });
             }
         }
         public ServiceResult<Message> Delete(Message message)
@@ -66,13 +93,7 @@ namespace GreenEffect.Services.Implement
             }
             catch (Exception ex)
             {
-
-                return new ServiceResult<Message>(new[]
-                                                              {
-                                                                  new RuleViolation("Ex",
-                                                                                    "Update data error:" +
-                                                                                    ex.Message)
-               });
+                return new ServiceResult<Message>(new[] { new RuleViolation("Ex", "Update data error:" + ex.Message) });
             }
         }
     }

@@ -5,7 +5,10 @@
         function ($resource, $q, $exceptionHandler, constant, urlCreatorService) {
             var messageServicesFactory = {
                 sendMessage: sendMessage,
-                getMessages: getMessages
+                getMessages: getMessages,
+                getNewNotice: getNewNotice,
+                readMessage: readMessage,
+                deleteMessage: deleteMessage
             };
             return messageServicesFactory;
             ///////////////////////////////////////////////
@@ -32,6 +35,46 @@
                         }
                     }
                 }).save(data).$promise;
+            }
+
+            function getNewNotice() {
+                var body = {};
+                var userInfo = angular.fromJson(sessionStorage.getItem(constant.SS_KEY.USER_INFO));
+                body["userId"] = userInfo.Id;
+
+                return $resource(urlCreatorService.createUrl("Message", "Get"), {
+                    save: {
+                        transformResponse: function (data) {
+                            return angular.fromJson(data);
+                        }
+                    }
+                }).save(body).$promise;
+            }
+
+            function readMessage(msgId) {
+                var body = {};
+                body["Id"] = msgId;
+
+                return $resource(urlCreatorService.createUrl("Message", "Read"), {
+                    save: {
+                        transformResponse: function (data) {
+                            return angular.fromJson(data);
+                        }
+                    }
+                }).save(body).$promise;
+            }
+
+            function deleteMessage(msgId) {
+                var body = {};
+                body["Id"] = msgId;
+
+                return $resource(urlCreatorService.createUrl("Message", "Delete"), {
+                    save: {
+                        transformResponse: function (data) {
+                            return angular.fromJson(data);
+                        }
+                    }
+                }).save(body).$promise;
             }
         }
     ]);

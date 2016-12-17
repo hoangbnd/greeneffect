@@ -85,10 +85,6 @@
                     });
                 };
 
-                $scope.back = function () {
-                    alert("Back");
-                }
-
             }
         )
         .controller("ListNotificateCtrl",
@@ -123,6 +119,12 @@
                     if (!item.isRead) {
                         item.isRead = true;
                     }
+                    messageServices.readMessage(item.Id);
+                }
+
+                $scope.delete = function (item) {
+                    $scope.notificate = $scope.notificate.splice($scope.notificate.indexOf(item), 1);
+                    messageServices.deleteMessage(item.Id);
                 }
             }
        );

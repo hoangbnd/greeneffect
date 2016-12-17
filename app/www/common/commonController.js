@@ -3,11 +3,13 @@
     angular.module("greeneffect.controller.common",
         [
             "greeneffect.constant",
-            "greeneffect.common.service.messagemanagement"
+            "greeneffect.common.service.messagemanagement",
+            "greeneffect.service.message"
         ])
-        
+
         .controller("CommonCtrl",
-        function ($scope, $ionicModal, $state, constant) {
+        function ($scope, $ionicModal, $state, $interval, constant, messageServices) {
+            $scope.newNotice = 0;
             var userInfo = angular.fromJson(sessionStorage.getItem(constant.SS_KEY.USER_INFO));
             $scope.username = userInfo.username;
 
@@ -15,7 +17,8 @@
                 $scope.menumodal = modal;
             }, {
                 scope: $scope,
-                animation: 'slide-in-up'
+                animation: 'slide-in-up',
+                backdropClickToClose: true
             });
             $scope.openmenumodal = function () {
                 $scope.menumodal.show();
@@ -39,6 +42,22 @@
 
             }
 
-            
+            $interval(getNotification, constant.NOTICE_RETRY_INTERVAL);
+
+            function getNotification() {
+                //messageServices.getNewNotice().then(function (response) {
+                //    if (response.IsSuccessful) {
+                //        $scope.newNotice = response.Data;
+                //        if ($scope.newNotice > 0 && !$scope.menumodal.isShown()) {
+                //            $scope.menumodal.show();
+                //        }
+                //    } else {
+                //        $scope.newNotice = 0;
+                //    }
+                //});
+
+                $scope.newNotice = Math.floor(Math.random() * 10) + 1;
+            }
+
         });
 })();
