@@ -2,18 +2,21 @@
     <ion-side-menu-content>
         <ion-nav-bar class="bar-stable main_header">
 
-            <ion-nav-back-button class="button button-icon button-clear main_back main_color">
+            <!--<ion-nav-back-button class="button button-icon button-clear main_back main_color">
                 <i class="ion-chevron-left"></i>
-            </ion-nav-back-button>
+            </ion-nav-back-button>-->
 
             <ion-nav-buttons side="left">
                 <button class="button button-icon button-clear ion-navicon main_color" ng-click="openmenumodal()" style="display:block"></button>
             </ion-nav-buttons>
             <ion-nav-buttons side="right" >
+                
+                <a class="button button-icon button-clear main_color" href="#/message/list">
+                    <i class="ion-android-list"></i>
+                </a>
                 <a class="button button-icon button-clear main_color" href="#/message/send">
                     <i class="ion-android-add-circle"></i>
                 </a>
-
             </ion-nav-buttons>
         </ion-nav-bar>
         <ion-nav-view name="menuContent"></ion-nav-view>
