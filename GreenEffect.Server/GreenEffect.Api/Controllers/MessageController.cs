@@ -22,7 +22,6 @@ namespace GreenEffect.Api.Controllers
         [HttpPost]
         public JsonModel<int> Get(MessageApiModel model)
         {
-            var rs = new BasePagedModel<MessageApiModel>();
             if (model == null)
             {
                 return new JsonModel<int>
@@ -47,23 +46,23 @@ namespace GreenEffect.Api.Controllers
             };
         }
         [HttpPost]
-        public JsonModel<BasePagedModel<MessageApiModel>> GetAll(MessageApiModel model, int pageIndex)
+        public JsonModel<ICollection<MessageApiModel>> GetAll(MessageApiModel model)
         {
-            var rs = new BasePagedModel<MessageApiModel>();
             if (model == null)
             {
-                return new JsonModel<BasePagedModel<MessageApiModel>>
+                return new JsonModel<ICollection<MessageApiModel>>
                 {
                     IsSuccessful = false,
                     Message = "Có lỗi trong quá trình xử lý. Vui lòng đăng nhập lại."
                 };
             }
-            var messageRs = _messageServices.GetAll(model.UserId, pageIndex, 20);
+            var messageRs = _messageServices.GetAll(model.UserId);
             if (messageRs.RuleViolations.IsNullOrEmpty())
             {
+                var msgs = new List<MessageApiModel>();
                 if (messageRs.Result != null)
                 {
-                    var data = messageRs.Result.Select(o => new MessageApiModel
+                    msgs = messageRs.Result.Select(o => new MessageApiModel
                     {
                         Id = o.Id,
                         FromId = o.FromId,
@@ -74,16 +73,15 @@ namespace GreenEffect.Api.Controllers
                         DateTime = o.DateTime,
 
                     }).OrderByDescending(i => i.Id).ToList();
-                    rs.Data = data;
                 }
 
-                return new JsonModel<BasePagedModel<MessageApiModel>>
+                return new JsonModel<ICollection<MessageApiModel>>
                 {
                     IsSuccessful = true,
-                    Data = rs
+                    Data = msgs
                 };
             }
-            return new JsonModel<BasePagedModel<MessageApiModel>>
+            return new JsonModel<ICollection<MessageApiModel>>
             {
                 IsSuccessful = false,
                 Message = messageRs.RuleViolations[0].ErrorMessage

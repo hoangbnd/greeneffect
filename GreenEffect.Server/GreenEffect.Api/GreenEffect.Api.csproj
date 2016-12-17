@@ -289,6 +289,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AuthorityObjectApiModel.cs" />
+    <Compile Include="Models\BasePagedModel.cs" />
     <Compile Include="Models\BaseJsonModel.cs" />
     <Compile Include="Models\CustomerRouteApiModel.cs" />
     <Compile Include="Models\CustomerApiModel.cs" />
@@ -304,6 +305,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\Settings-local.txt" />
     <Content Include="App_Data\Settings.txt" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap.css" />

@@ -7,7 +7,7 @@
             "greeneffect.common.service.messagemanagement"
         ])
         .controller("LstCustomerCtrl",
-            function ($scope, $ionicModal, $timeout, $location, messageManagementService, customerServices, constant, $state) {
+            function ($scope, $ionicModal, $timeout, $location, $ionicLoading, messageManagementService, customerServices, constant, $state) {
                 $scope.alertMsg = "";
                 $scope.alertType = constant.MSG_TYPE.WARNING;
                 $scope.displayAlert = false;
@@ -17,7 +17,9 @@
                 $scope.customersShow = [];
                 $scope.routeSelected = null;
                 $scope.showMap = false;
-
+                $ionicLoading.show({
+                    template: "<ion-spinner icon='bubbles'></ion-spinner><br/>Đang tải dữ liệu!"
+                });
                 customerServices.getRoutes().then(function (data) {
                     if (!data.IsSuccessful) {
                         $scope.displayAlert = true;
@@ -48,13 +50,16 @@
                             customers: $scope.customers
                         }
                         sessionStorage.setItem(constant.SS_KEY.ROUTE_INFO, angular.toJson(routeInfo));
+                        $ionicLoading.hide();
                     }).catch(function (error) {
+                        $ionicLoading.hide();
                         $scope.displayAlert = true;
                         $scope.alertType = constant.MSG_TYPE.WARNING;
                         $scope.alertMsg = messageManagementService.getMessage("E001");
                         return;
                     });
                 }).catch(function (error) {
+                    $ionicLoading.hide();
                     $scope.displayAlert = true;
                     $scope.alertType = constant.MSG_TYPE.WARNING;
                     $scope.alertMsg = messageManagementService.getMessage("E001");
@@ -91,17 +96,20 @@
 
             })
         .controller("ViewOnMapCtrl",
-            function ($scope, $ionicModal, $timeout, $location, $state, messageManagementService, customerServices, constant) {
+            function ($scope, $ionicModal, $timeout, $location, $state, $ionicLoading, messageManagementService, customerServices, constant) {
                 $scope.alertMsg = "";
                 $scope.alertType = constant.MSG_TYPE.WARNING;
                 $scope.displayAlert = false;
-
+                $ionicLoading.show({
+                    template: "<ion-spinner icon='bubbles'></ion-spinner><br/>Đang tải dữ liệu!"
+                });
                 customerServices.getLocations().then(function (data) {
                     if (data.IsSuccessful) {
                         $scope.locations = data.Data;
                     } else {
                         $scope.locations = [];
                     }
+                    $ionicLoading.hide();
                 });
 
                 $scope.closeAlertEvent = function () {

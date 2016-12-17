@@ -84,6 +84,20 @@ namespace GreenEffect.Services.Implement
                 return new ServiceResult<PagedList<Message>>(new[] { new RuleViolation("Exception", "Get data error :" + e.Message) });
             }
         }
+
+        public ServiceResult<ICollection<Message>> GetAll(int idenUser)
+        {
+            var whCls = new List<Expression<Func<Message, bool>>> { a => a.ToId == idenUser };
+            try
+            {
+                var messages = _messageRepository.FindAll(whCls, "Id desc");
+                return new ServiceResult<ICollection<Message>>(messages);
+            }
+            catch (Exception e)
+            {
+                return new ServiceResult<ICollection<Message>>(new[] { new RuleViolation("Exception", "Get data error :" + e.Message) });
+            }
+        }
         public ServiceResult<Message> Delete(Message message)
         {
             try

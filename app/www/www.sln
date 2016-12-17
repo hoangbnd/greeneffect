@@ -7,20 +7,21 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "www", ".", "{FA113F37-4485-
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_20412"
-		Debug.AspNetCompiler.PhysicalPath = "E:\greeneffect\app\www\"
+		Debug.AspNetCompiler.PhysicalPath = "..\www\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_20412\"
 		Debug.AspNetCompiler.Updateable = "true"
 		Debug.AspNetCompiler.ForceOverwrite = "true"
 		Debug.AspNetCompiler.FixedNames = "false"
 		Debug.AspNetCompiler.Debug = "True"
 		Release.AspNetCompiler.VirtualPath = "/localhost_20412"
-		Release.AspNetCompiler.PhysicalPath = "E:\greeneffect\app\www\"
+		Release.AspNetCompiler.PhysicalPath = "..\www\"
 		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_20412\"
 		Release.AspNetCompiler.Updateable = "true"
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "20412"
+		SlnRelativePath = "..\www\"
 	EndProjectSection
 EndProject
 Global
