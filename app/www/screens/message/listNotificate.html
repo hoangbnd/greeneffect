@@ -1,24 +1,21 @@
-﻿<ion-view view-title="Notifications" ng-controller="ListNotificateCtrl">
-  <ion-header-bar align-title="center" class="bar-positive message-header">
-    <div class="buttons" ng-click="back()">
-      <button class="button"><i class="icon ion-arrow-return-left message-button message-back"></i></button>
-    </div>
-    <h1 class="title"> Tin nhắn </h1>
-  </ion-header-bar>
-  <ion-content class="notification">
-    <div class="notificat_list"
-         ng-repeat="item in notificate" ng-click="showNotificate(item)">
-      <div class="main_bg line"></div>
-      <div class="notificat_content">
-        <p>
-          <strong ng-if="!item.isRead">{{item.title}}</strong>
-          <span ng-if="item.isRead">{{item.title}}</span>
-          <small> - {{item.fromUser}}</small>
-        </p>
-        <p class="main_color time">{{item.time | date : 'dd/MM/yyyy'}}</p>
-          <p ng-if="item.show">"{{item.content}}"</p>
-          <a class="pull-right" ng-click="delete(item)"><i class="ion ion-android-remove"></i></a>
-      </div>
-    </div>
-  </ion-content>
+﻿<ion-view view-title="Tin nhắn" ng-controller="ListNotificateCtrl">
+    <ion-content class="notification">
+        <div class="notificat_list"
+             ng-repeat="item in notificate" >
+            <div class="main_bg line"></div>
+            <div class="notificat_content">
+                <p ng-click="showNotificate(item)">
+                    <strong ng-if="!item.isRead">{{item.title}}</strong>
+                    <span ng-if="item.isRead">{{item.title}}</span>
+                    <small> - {{item.fromUser}}</small>
+                </p>
+                <p class="main_color time">
+                    {{item.time | date : 'dd/MM/yyyy'}}
+                    <a class="main_color" style="float: right" ng-click="delete(item)"><i class="ion-trash-a"></i></a>
+                </p>
+                <p ng-if="item.show">"{{item.content}}"</p>
+
+            </div>
+        </div>
+    </ion-content>
 </ion-view>

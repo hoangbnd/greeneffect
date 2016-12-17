@@ -1,26 +1,20 @@
-﻿<ion-view view-title="Send message" ng-controller="MessageCtrl">
-  <ion-header-bar align-title="center" class="bar-positive message-header">
-    <div class="buttons" ng-click="back()">
-      <button class="button"><i class="icon ion-arrow-return-left message-button message-back"></i></button>
-    </div>
-    <h1 class="title">Gửi tin nhắn </h1>
-  </ion-header-bar>
+﻿<ion-view view-title="Gửi tin nhắn" ng-controller="MessageCtrl">
   <ion-content class="message has-header contact_us">
     <form class="app_form" id="sendMessage" name="sendMessage" ng-submit="uploadData()">
 
       <div class="list list-inset">
         <label class="item item-input">
-          <i class="icon ion-android-person placeholder-icon"></i>
-          <input type="text" placeholder="Your subject" required="" ng-model="messageObj.subject">
+          <i class="icon ion-clipboard placeholder-icon"></i>
+          <input type="text" placeholder="Tiêu đề" required="" ng-model="messageObj.subject">
         </label>
         <label class="item item-input">
-          <i class="icon ion-email placeholder-icon"></i>
+          <i class="icon ion-android-person placeholder-icon"></i>
           <!--<input type="email" placeholder="E-mail">-->
-          <select class="js-example-basic-multiple js-email form-control" id="email" name="receivers" multiple="multiple"></select>
+          <select class="js-example-basic-multiple js-email form-control" id="email" name="toIds" multiple="multiple"></select>
         </label>
         <label class="item item-input txt_msg">
-          <i class="icon ion-edit placeholder-icon"></i>
-          <textarea ng-model="messageObj.messageContent" name="messageContent" rows="5" placeholder="Message" ng-required="true"></textarea>
+          <i class="icon ion-chatbox placeholder-icon"></i>
+          <textarea ng-model="messageObj.messageContent" name="content" rows="5" placeholder="Nội dung" ng-required="true"></textarea>
           <!--Message Required Landline Phone-->
         </label>
         <button ng-disable="sendMessage.$invalid" class="button button-block app_btn main_bg">

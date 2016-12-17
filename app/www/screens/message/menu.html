@@ -1,4 +1,4 @@
-<ion-side-menus enable-menu-with-back-views="true">
+<ion-side-menus enable-menu-with-back-views="true" ng-controller="CommonCtrl">
     <ion-side-menu-content>
         <ion-nav-bar class="bar-stable main_header">
 
@@ -9,10 +9,11 @@
             <ion-nav-buttons side="left">
                 <button class="button button-icon button-clear ion-navicon main_color" ng-click="openmenumodal()" style="display:block"></button>
             </ion-nav-buttons>
-            <ion-nav-buttons side="right">
-                <a class="button button-icon button-clear main_color" href="#/customer/list">
-                    <i class="ion-chevron-left"></i>
+            <ion-nav-buttons side="right" >
+                <a class="button button-icon button-clear main_color" href="#/message/send">
+                    <i class="ion-android-add-circle"></i>
                 </a>
+
             </ion-nav-buttons>
         </ion-nav-bar>
         <ion-nav-view name="menuContent"></ion-nav-view>

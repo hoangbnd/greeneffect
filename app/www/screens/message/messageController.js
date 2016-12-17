@@ -1,9 +1,12 @@
 ﻿(function () {
     "use strict";
     angular.module("greeneffect.controller.message",
-         ["greeneffect.service.message"])
+         [
+             "greeneffect.service.message",
+             "greeneffect.constant"
+         ])
         .controller("MessageCtrl",
-            function ($scope, messageServices) {
+            function ($scope, constant, messageServices) {
                 //prepare data
                 $scope.currentUser = angular.fromJson(sessionStorage.getItem(constant.SS_KEY.USER_INFO));
                 $scope.loading = false;
@@ -15,15 +18,15 @@
                 };
 
                 // get list Receivers
-                var $selectBox = $('#email').select2({
+                var $selectBox = $("#email").select2({
                     //data:data
-                    placeholder: 'Người nhận',
+                    placeholder: "Người nhận",
                     minimumInputLength: 0,
                     escapeMarkup: function (m) {
                         return m;
                     },
                     ajax: {
-                        dataType: 'json',
+                        dataType: "json",
                         url: "dummy/users.json",//TODO: dummy data
                         data: function (params) {
                             return {
@@ -51,7 +54,7 @@
                     }
                 });
                 // triger focus on input
-                $('#email').focus(function () {
+                $("#email").focus(function () {
                     $selectBox.select2('open');
                 });
 
@@ -60,7 +63,7 @@
                     $scope.loading = true;
                     $scope.messageObj.userTo = [];
                     /* get UserTo */
-                    $('#email :selected').each(function () {
+                    $("#email :selected").each(function () {
                         $scope.messageObj.userTo.push($(this).select2().data().data.email);
                     });
                     if ($scope.messageObj.userTo.length == 0) {
@@ -123,7 +126,7 @@
                 }
 
                 $scope.delete = function (item) {
-                    $scope.notificate = $scope.notificate.splice($scope.notificate.indexOf(item), 1);
+                    $scope.notificate.splice($scope.notificate.indexOf(item), 1);
                     messageServices.deleteMessage(item.Id);
                 }
             }
