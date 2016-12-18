@@ -16,6 +16,7 @@ namespace GreenEffect.Repository.EF.Configuration
             Property(o => o.FromId);
             Property(o => o.ToId);
             Property(o => o.IsRead);
+            Property(o => o.Title);
             Property(o => o.Content);
             Property(o => o.DateTime);
          }

@@ -18,45 +18,85 @@ namespace GreenEffect.Api.Controllers
         {
             _messageServices = messageServices;
         }
-        public JsonModel<List<MessageApiModel>> GetAll(int idenUser)
+
+        [HttpPost]
+        public JsonModel<int> Get(MessageApiModel model)
         {
-            var listmess = new List<MessageApiModel>();
-            var messager = _messageServices.GetAll(idenUser);
-            if (messager.RuleViolations.IsNullOrEmpty())
+            if (model == null)
             {
-
-                listmess = messager.Result.Select(o => new MessageApiModel
+                return new JsonModel<int>
                 {
-                    Id = o.Id,
-                    FromId = o.FromId,
-                    ToId = o.ToId,
-                    IsRead = o.IsRead,
-                    Content = o.Content,
-                    DateTime = o.DateTime,
-
-                }).OrderByDescending(i => i.Id).ToList();
-                return new JsonModel<List<MessageApiModel>>
-                {
-                    IsSuccessful = true,
-                    Data = listmess
+                    IsSuccessful = false,
+                    Message = "Có lỗi trong quá trình xử lý. Vui lòng đăng nhập lại."
                 };
             }
-            return new JsonModel<List<MessageApiModel>>
+            var messageRs = _messageServices.CountNewNotice(model.UserId);
+            if (messageRs.RuleViolations.IsNullOrEmpty())
+            {
+               return new JsonModel<int>
+                {
+                    IsSuccessful = true,
+                    Data = messageRs.Result
+               };
+            }
+            return new JsonModel<int>
             {
                 IsSuccessful = false,
-                Message = messager.RuleViolations[0].ErrorMessage
+                Message = messageRs.RuleViolations[0].ErrorMessage
             };
         }
-        //Update Password
         [HttpPost]
-        public JsonModel<MessageApiModel> Delete(MessageApiModel model)
+        public JsonModel<ICollection<MessageApiModel>> GetAll(MessageApiModel model)
         {
-           
-            var MessagerRs = _messageServices.GetById(model.Id);
-            if (MessagerRs.RuleViolations.IsNullOrEmpty())
+            if (model == null)
             {
-                var mess = MessagerRs.Result;
-                var deleteResult = _messageServices.Delete(mess);
+                return new JsonModel<ICollection<MessageApiModel>>
+                {
+                    IsSuccessful = false,
+                    Message = "Có lỗi trong quá trình xử lý. Vui lòng đăng nhập lại."
+                };
+            }
+            var messageRs = _messageServices.GetAll(model.UserId);
+            if (messageRs.RuleViolations.IsNullOrEmpty())
+            {
+                var msgs = new List<MessageApiModel>();
+                if (messageRs.Result != null)
+                {
+                    msgs = messageRs.Result.Select(o => new MessageApiModel
+                    {
+                        Id = o.Id,
+                        FromId = o.FromId,
+                        ToIds = new[] { o.ToId },
+                        IsRead = o.IsRead,
+                        Title = o.Title,
+                        Content = o.Content,
+                        DateTime = o.DateTime,
+
+                    }).OrderByDescending(i => i.Id).ToList();
+                }
+
+                return new JsonModel<ICollection<MessageApiModel>>
+                {
+                    IsSuccessful = true,
+                    Data = msgs
+                };
+            }
+            return new JsonModel<ICollection<MessageApiModel>>
+            {
+                IsSuccessful = false,
+                Message = messageRs.RuleViolations[0].ErrorMessage
+            };
+        }
+        [HttpPost]
+        public JsonModel<MessageApiModel> Read(MessageApiModel model)
+        {
+
+            var messagerRs = _messageServices.GetById(model.Id);
+            if (messagerRs.RuleViolations.IsNullOrEmpty())
+            {
+                var mess = messagerRs.Result;
+                mess.IsRead = true;
+                var deleteResult = _messageServices.Update(mess);
                 //kiemtra xoa
                 if (deleteResult.RuleViolations.IsNullOrEmpty())
                 {
@@ -64,14 +104,7 @@ namespace GreenEffect.Api.Controllers
                     return new JsonModel<MessageApiModel>
                     {
                         IsSuccessful = true,
-                        Data = new MessageApiModel
-                        {
-                            Id = mess.Id,
-                            FromId = mess.FromId,
-                            ToId = mess.ToId,
-                            IsRead = mess.IsRead,
-                            Content = mess.Content            
-                        }
+                        Data = null
                     };
                 }
                 //delete khong thanh cong tra ve loi
@@ -85,9 +118,74 @@ namespace GreenEffect.Api.Controllers
             return new JsonModel<MessageApiModel>
             {
                 IsSuccessful = false,
-                Message = MessagerRs.RuleViolations[0].ErrorMessage
+                Message = messagerRs.RuleViolations[0].ErrorMessage
+            };
+        }
+        //Update Password
+        [HttpPost]
+        public JsonModel<MessageApiModel> Delete(MessageApiModel model)
+        {
+
+            var messagerRs = _messageServices.GetById(model.Id);
+            if (messagerRs.RuleViolations.IsNullOrEmpty())
+            {
+                var mess = messagerRs.Result;
+                var deleteResult = _messageServices.Delete(mess);
+                //kiemtra xoa
+                if (deleteResult.RuleViolations.IsNullOrEmpty())
+                {
+                    //neu xoa thanh cong thi tra ve du lieu con lai
+                    return new JsonModel<MessageApiModel>
+                    {
+                        IsSuccessful = true,
+                        Data = null,
+                        Message = "Đã xóa thành công"
+                    };
+                }
+                //delete khong thanh cong tra ve loi
+                return new JsonModel<MessageApiModel>
+                {
+                    IsSuccessful = false,
+                    Message = deleteResult.RuleViolations[0].ErrorMessage
+                };
+            }
+            //tra ve loi khi khong lay duoc
+            return new JsonModel<MessageApiModel>
+            {
+                IsSuccessful = false,
+                Message = messagerRs.RuleViolations[0].ErrorMessage
             };
         }
 
+        [HttpPost]
+        public JsonModel<MessageApiModel> Send(MessageApiModel model)
+        {
+            var msgs = model.ToIds.Select(toId => new Message()
+            {
+                Content = model.Content,
+                DateTime = DateTime.Now,
+                FromId = model.FromId,
+                Title = model.Title,
+                ToId = toId,
+                IsRead = false
+            }).ToList();
+
+            var messagerRs = _messageServices.Create(msgs);
+            if (messagerRs.RuleViolations.IsNullOrEmpty())
+            {
+                return new JsonModel<MessageApiModel>
+                {
+                    IsSuccessful = true,
+                    Data = null,
+                    Message = "Gửi thành công"
+                };
+            }
+            //tra ve loi khi khong lay duoc
+            return new JsonModel<MessageApiModel>
+            {
+                IsSuccessful = false,
+                Message = messagerRs.RuleViolations[0].ErrorMessage
+            };
+        }
     }
 }

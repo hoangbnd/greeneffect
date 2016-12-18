@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEffect.Api", "GreenEffect.Api\GreenEffect.Api.csproj", "{6EAA1A55-14E3-4A9F-97B6-1DD58BC894CF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEffect.DomainObject", "GreenEffect.DomainObject\GreenEffect.DomainObject.csproj", "{BE9B2169-24BF-4136-A39E-48844E8E486B}"
@@ -12,13 +14,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenEffect.Web.Framework", "GreenEffect.Web.Framework\GreenEffect.Web.Framework.csproj", "{A7C7A746-2B9A-489E-BAB8-24943A4EEF73}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVCCore", "Core\MVCCore.csproj", "{D3084904-7182-476A-A4C3-3DC5857A23FB}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{7884E8F4-010B-459B-A13A-48AF3D2E7745}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

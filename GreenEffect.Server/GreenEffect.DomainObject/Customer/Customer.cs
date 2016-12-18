@@ -8,7 +8,7 @@ namespace GreenEffect.DomainObject.Customer
     {
         public string CustomerCode { get; set; }
         public string CustomerName { get; set; }
-        public string Adress { get; set; }
+        public string Address { get; set; }
         public string Phone { get; set; }
         public int UserId { get; set; }
         public int RouteId { get; set; }

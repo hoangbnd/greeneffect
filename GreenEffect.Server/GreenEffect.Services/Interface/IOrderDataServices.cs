@@ -9,9 +9,6 @@ namespace GreenEffect.Services.Interface
 {
     public interface IOrderDataServices
     {
-        ServiceResult<OrderData> GetById(int id);
-        ServiceResult<ICollection<OrderData>> GetByUser(int IdenUser, int disable);
-        ServiceResult<ICollection<OrderData>> GetByOrder(string OrderName, int disable);
-        ServiceResult<ICollection<OrderData>> GetByRoute(int IdenRouter, int disable);
+        ServiceResult<OrderItem> GetById(int id);
     }
 }

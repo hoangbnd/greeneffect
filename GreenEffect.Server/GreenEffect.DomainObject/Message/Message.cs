@@ -12,6 +12,7 @@ namespace GreenEffect.DomainObject.Message
         public int FromId { get; set; }
         public int ToId { get; set; }
         public bool IsRead { get; set; }
+        public string Title { get; set; }
         public string Content { get; set; }
         public DateTime DateTime { get; set; }
 

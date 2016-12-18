@@ -35,7 +35,7 @@ namespace GreenEffect.Api.Controllers
                         Id = customersResult.Result.Id,
                         CustomerCode = customersResult.Result.CustomerCode,
                         CustomerName = customersResult.Result.CustomerName,
-                        Adress = customersResult.Result.Adress,
+                        Address = customersResult.Result.Address,
                         Phone = customersResult.Result.Phone,
                         RouteId = customersResult.Result.RouteId,
                         UserId = customersResult.Result.UserId,
@@ -64,7 +64,7 @@ namespace GreenEffect.Api.Controllers
                     Id = c.Id,
                     CustomerCode = c.CustomerCode,
                     CustomerName = c.CustomerName,
-                    Adress = c.Adress,
+                    Address = c.Address,
                     Phone = c.Phone,
                     RouteId = c.RouteId,
                     UserId = c.UserId,
@@ -89,7 +89,7 @@ namespace GreenEffect.Api.Controllers
         public JsonModel<List<CustomerApiModel>> Get(string searchCustomersCode, string searchCustomersName, string customersAddress, string customersPhone)
         {
             var listUsers = new List<CustomerApiModel>();
-            // get customers by ID,NAME,ADRESS,PHONE
+            // get customers by ID,NAME,ADDRESS,PHONE
             var customersResult = _customerSevices.GetAll(searchCustomersCode, searchCustomersName, customersAddress, customersPhone);
             if (customersResult.RuleViolations.IsNullOrEmpty())
             {
@@ -98,7 +98,7 @@ namespace GreenEffect.Api.Controllers
                     Id = c.Id,
                     CustomerCode = c.CustomerCode,
                     CustomerName = c.CustomerName,
-                    Adress = c.Adress,
+                    Address = c.Address,
                     Phone = c.Phone,
                     RouteId = c.RouteId,
                     UserId = c.UserId
@@ -128,7 +128,7 @@ namespace GreenEffect.Api.Controllers
                     Id = c.Id,
                     CustomerCode = c.CustomerCode,
                     CustomerName = c.CustomerName,
-                    Adress = c.Adress,
+                    Address = c.Address,
                     Phone = c.Phone,
                     RouteId = c.RouteId,
                     UserId = c.UserId
@@ -166,7 +166,7 @@ namespace GreenEffect.Api.Controllers
                     Id = c.Id,
                     CustomerCode = c.CustomerCode,
                     CustomerName = c.CustomerName,
-                    Adress = c.Adress,
+                    Address = c.Address,
                     Phone = c.Phone,
                     RouteId = c.RouteId,
                     UserId = c.UserId
@@ -196,7 +196,7 @@ namespace GreenEffect.Api.Controllers
                 {
                     CustomerCode = model.CustomerCode,
                     CustomerName = model.CustomerName,
-                    Adress = model.Adress,
+                    Address = model.Address,
                     Phone = model.Phone,
                     UserId = model.UserId,
                     RouteId = model.RouteId,
@@ -214,7 +214,7 @@ namespace GreenEffect.Api.Controllers
                             Id = customersResult.Result.Id,
                             CustomerCode = customersResult.Result.CustomerCode,
                             CustomerName = customersResult.Result.CustomerName,
-                            Adress = customersResult.Result.Adress,
+                            Address = customersResult.Result.Address,
                             Phone = customersResult.Result.Phone,
                             RouteId = customersResult.Result.RouteId,
                             UserId = customersResult.Result.UserId

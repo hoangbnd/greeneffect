@@ -12,7 +12,6 @@ namespace GreenEffect.Api.Models
         public string RouteName { get; set; }
         public int UserId { get; set; }
         public DateTime DateTime { get; set; }
-        public bool IsSuccessful { get; set; }
-        public string Messenger { get; set; }
+
     }
 }

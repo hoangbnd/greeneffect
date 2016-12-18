@@ -14,5 +14,7 @@ namespace GreenEffect.DomainObject.Products
         public int ProductGroupId { get; set; }
         public int Disable { get; set; }
         public DateTime Datetime { get; set; }
+
+        public virtual ProductGroup ProductGroup { get; set; }
     }
 }

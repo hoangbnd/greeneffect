@@ -1,0 +1,27 @@
+﻿<ion-view view-title="Gửi tin nhắn" ng-controller="MessageCtrl">
+  <ion-content class="message has-header contact_us">
+    <form class="app_form" id="sendMessage" name="sendMessage" ng-submit="uploadData()">
+
+      <div class="list list-inset">
+        <label class="item item-input">
+          <i class="icon ion-clipboard placeholder-icon"></i>
+          <input type="text" placeholder="Tiêu đề" required="" ng-model="messageObj.subject">
+        </label>
+        <label class="item item-input">
+          <i class="icon ion-android-person placeholder-icon"></i>
+          <!--<input type="email" placeholder="E-mail">-->
+          <select class="js-example-basic-multiple js-email form-control" id="email" name="toIds" multiple="multiple" ></select>
+        </label>
+        <label class="item item-input txt_msg">
+          <i class="icon ion-chatbox placeholder-icon"></i>
+          <textarea ng-model="messageObj.messageContent" name="content" rows="5" placeholder="Nội dung" ng-required="true"></textarea>
+          <!--Message Required Landline Phone-->
+        </label>
+        <button ng-disable="sendMessage.$invalid" class="button button-block app_btn main_bg">
+            <span ng-if="loading">Đang</span> Gửi
+        </button>
+        <p ng-if="message">{{message}}</p>
+      </div>
+    </form>
+  </ion-content>
+</ion-view>

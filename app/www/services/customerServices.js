@@ -47,7 +47,7 @@
                                 return angular.fromJson(data);
                             }
                         }
-                    }).save(angular.toJson(body)).$promise;
+                    }).save(body).$promise;
                 }
 
                 function getLocations() {
@@ -61,7 +61,7 @@
                                 return angular.fromJson(data);
                             }
                         }
-                    }).save(angular.toJson(body)).$promise;
+                    }).save(body).$promise;
                 }
             }]);
 })();

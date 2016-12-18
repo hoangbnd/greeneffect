@@ -1,0 +1,37 @@
+﻿<ion-modal-view class="modal_menu animated slideInDown">
+    <ion-header-bar class="menu_head main_bg">
+        <div class="row">
+            <div class="col col-25">
+                <img src="img/profile.png" />
+            </div>
+            <div class="col col-75">
+                <h3>{{username}}</h3>
+                <p ng-click="signOut();">Đăng xuất</p>
+            </div>
+        </div>
+    </ion-header-bar>
+    <ion-content class="menu_app main_bg">
+        <ion-list>
+            <ion-item href="#/customer/list" ng-click="closemenumodal()">
+                Danh sách khách hàng
+            </ion-item>
+            <!--<ion-item href="#/app/category" ng-click="closemenumodal()">
+                CATEGORIES
+            </ion-item>-->
+            <ion-item href="#/message/list" ng-click="closemenumodal()">
+                Tin nhắn<span class="badge" ng-if="newNotice > 0">{{newNotice}}</span>
+            </ion-item>
+            <!--<ion-item href="#/app/home" ng-click="closemenumodal()">
+                FAVOURITE
+            </ion-item>-->
+            <!--<ion-item href="#/app/contact" ng-click="closemenumodal()">
+                CONTACT US
+            </ion-item>-->
+        </ion-list>
+    </ion-content>
+    <!--<ion-footer-bar class="main_bg menu_footer">
+        <ion-toggle>
+            Job seeker
+        </ion-toggle>
+    </ion-footer-bar>-->
+</ion-modal-view>
