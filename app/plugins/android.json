@@ -7,43 +7,42 @@
         "files": {}
     },
     "installed_plugins": {
-        "cordova-plugin-console": {
-            "PACKAGE_NAME": "com.ionicframework.app173342"
-        },
         "cordova-plugin-device": {
-            "PACKAGE_NAME": "com.ionicframework.app173342"
-        },
-        "cordova-plugin-splashscreen": {
-            "PACKAGE_NAME": "com.ionicframework.app173342"
-        },
-        "cordova-plugin-statusbar": {
-            "PACKAGE_NAME": "com.ionicframework.app173342"
+            "PACKAGE_NAME": "com.ionicframework.myapp575665"
         },
         "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.ionicframework.app173342"
+            "PACKAGE_NAME": "com.ionicframework.myapp575665"
         },
         "ionic-plugin-keyboard": {
-            "PACKAGE_NAME": "com.ionicframework.app173342"
+            "PACKAGE_NAME": "com.ionicframework.myapp575665"
         },
-        "cordova-plugin-network-information": {
-            "PACKAGE_NAME": "com.ionicframework.app173342"
+        "cordova-plugin-media-capture": {
+            "PACKAGE_NAME": "com.ionicframework.myapp575665"
         },
         "cordova-plugin-geolocation": {
-            "PACKAGE_NAME": "com.ionicframework.app173342"
+            "PACKAGE_NAME": "com.ionicframework.myapp575665"
         },
-        "cordova-plugin-file": {
-            "PACKAGE_NAME": "com.ionicframework.app173342"
+        "cordova-plugin-network-information": {
+            "PACKAGE_NAME": "com.ionicframework.myapp575665"
         },
+<<<<<<< HEAD
         "cordova-plugin-media-capture": {
             "PACKAGE_NAME": "com.ionicframework.app173342"
         },
         "cordova-plugin-camera": {
             "PACKAGE_NAME": "com.ionicframework.app173342"
+=======
+        "cordova-plugin-android-permissions": {
+            "PACKAGE_NAME": "com.ionicframework.myapp575665"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "com.ionicframework.myapp575665"
+>>>>>>> d705318e8a5450ce9a24cc1215d25db4a22d109d
         }
     },
     "dependent_plugins": {
         "cordova-plugin-compat": {
-            "PACKAGE_NAME": "com.ionicframework.app173342"
+            "PACKAGE_NAME": "com.ionicframework.myapp575665"
         }
     }
 }

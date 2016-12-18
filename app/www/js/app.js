@@ -3,44 +3,76 @@
     "ngSanitize",
     "ngCordova",
     "ionic",
+    "angularMoment",
     "greeneffect.constant",
     "greeneffect.service.user",
     "greeneffect.service.customer",
+    "greeneffect.service.product",
+    "greeneffect.service.order",
     "greeneffect.controller.main",
     "greeneffect.controller.user",
     "greeneffect.controller.order",
     "greeneffect.controller.customer",
+    "greeneffect.controller.product",
+    "greeneffect.controller.common",
     "greeneffect.common.components.geAlert",
     "greeneffect.common.components.geMap",
     "greeneffect.common.service.messagemanagement",
     "greeneffect.controller.message"])
-.run(function ($ionicPlatform, $ionicPopup, $cordovaNetwork) {
+.run(function ($ionicPlatform, $ionicPopup, $cordovaNetwork, amMoment, $window ) {
     $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
-        if (window.cordova && window.cordova.plugins.Keyboard) {
-            cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-            cordova.plugins.keyboard.disableScroll(true);
-            window.open = cordova.InAppBrowser.open;
-        }
+
         if (window.StatusBar) {
             // org.apache.cordova.statusbar required
             StatusBar.styleDefault();
         }
 
-        //if ($cordovaNetwork.getNetwork() == Connection.NONE) {
-        //    $ionicpopup.confirm({
-        //        title: "internet disconnected",
-        //        content: "the internet is disconnected on your device."
-        //    })
-        //    .then(function (result) {
-        //        if (!result) {
-        //            ionic.platform.exitapp();
-        //        }
-        //    });
-        //}
-
+        if ($cordovaNetwork.isOffline()) {
+            $ionicPopup.confirm({
+                    title: "Mất kết nối internet",
+                    content: "Thiết bị của bạn không được kết nối internet. Vui lòng kiểm tra lại."
+                })
+                .then(function(result) {
+                    if (!result) {
+                        ionic.platform.exitapp();
+                    }
+                });
+        } else {
+           
+        }
+        amMoment.changeLocale('vi');
     });
+
+    $window.addEventListener("offline", function () {
+       alert("Vui long kiểm tra lại kết nối internet.");
+    }, false);
+
+    $window.addEventListener("online", function () {
+        //loadScript("http://maps.google.com/maps/api/js?key=AIzaSyCPjIZpNGuzSxOiBa9UhW5cS3qBnNIQXe0",
+        //    function() {
+        //        loadScript("js/infobox.js");
+        //        loadScript("js/markerwithlabel_packed.js");
+        //        loadScript("js/markerclusterer_packed.js");
+        //    });
+    }, false);
+
+    function loadScript(url, callback) {
+        // Adding the script tag to the head as suggested before
+        var head = document.getElementsByTagName('head')[0];
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = url;
+
+        // Then bind the event to the callback function.
+        // There are several events for cross browser compatibility.
+        script.onreadystatechange = callback;
+        script.onload = callback;
+
+        // Fire the loading
+        head.appendChild(script);
+    }
 })
 .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $locationProvider, $httpProvider, $resourceProvider, constant, $compileProvider) {
     /*
@@ -60,54 +92,10 @@
     $httpProvider.defaults.headers["Accept"] = "application/x-www-form-urlencoded, application/json, text/javascript";
     $httpProvider.defaults.headers["Access-Control-Allow-Methods"] = "GET, PUT, POST, DELETE, OPTION";
     $httpProvider.defaults.headers["Access-Control-Allow-Origin"] = "*";
-    $httpProvider.defaults.headers["Access-Control-Allow-Headers"] = "Origin, X-Requested-With, Content-Type, Accept, Authorization";
+    $httpProvider.defaults.headers["Access-Control-Allow-Headers"] = "Origin, X-Requested-With, Content-Type, Accept, Authorization, X-File-Name";
     $httpProvider.defaults.useXDomain = true;
     $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|file|cdvfile):|data:image\//);
-    //$httpProvider.defaults.transformRequest = [function (data) {
-    //    /**
-    //     * The workhorse; converts an object to x-www-form-urlencoded serialization.
-    //     * @param {Object} obj
-    //     * @return {String}
-    //     */
-
-    //    var param = function (obj) {
-    //        var query = "";
-    //        var name, value, fullSubName, subName, subValue, innerObj, i;
-
-    //        for (name in obj) {
-    //            value = obj[name];
-
-    //            if (value instanceof Array) {
-    //                for (i = 0; i < value.length; ++i) {
-    //                    subValue = value[i];
-    //                    fullSubName = name + "[" + i + "]";
-    //                    innerObj = {};
-    //                    innerObj[fullSubName] = subValue;
-    //                    query += param(innerObj) + "&";
-    //                }
-    //            }
-    //            else if (value instanceof Object) {
-    //                for (subName in value) {
-    //                    subValue = value[subName];
-    //                    fullSubName = name + "[" + subName + "]";
-    //                    innerObj = {};
-    //                    innerObj[fullSubName] = subValue;
-    //                    query += param(innerObj) + "&";
-    //                }
-    //            }
-    //            else if (value !== undefined && value !== null) {
-    //                query += encodeURIComponent(name) + "=" + encodeURIComponent(value) + "&";
-    //            }
-    //        }
-
-    //        return query.length ? query.substr(0, query.length - 1) : query;
-    //    };
-
-    //    return angular.isObject(data) && String(data) !== "[object File]" ? param(data) : data;
-
-    //    //return angular.toJson(data);
-    //}];
-
+    
     $httpProvider.interceptors.push(["$q", "$injector", "$timeout", function ($q, $injector, $timeout) {
         return {
             "request": function (request) {
@@ -185,64 +173,84 @@
     $ionicConfigProvider.navBar.alignTitle("left");
     $ionicConfigProvider.backButton.text("").previousTitleText("");
     $stateProvider
-        //.state("app", {
-        //    url: "/app",
-        //    abstract: true,
-        //    templateUrl: "templates/menu.html",
-        //})
-        .state("login", {
+        .state("login",
+        {
             url: "/login",
-            templateUrl: "components/user/login.html",
+            templateUrl: "screens/user/login.html",
             controller: "LoginCtrl"
         })
-        .state("customer", {
+
+        .state("customer",
+        {
             url: "/customer",
             abstract: true,
-            templateUrl: "components/customer/menu.html"
+            templateUrl: "screens/customer/menu.html",
+            controller: "CommonCtrl"
         })
-        .state("customer.list", {
+        .state("customer.list",
+        {
             url: "/list",
             views: {
                 "menuContent": {
-                    templateUrl: "components/customer/customerList.html"
+                    templateUrl: "screens/customer/customerList.html"
                 }
             }
         })
-        .state("customer.map", {
+        .state("customer.map",
+        {
             url: "/map",
             views: {
                 "menuContent": {
-                    templateUrl: "components/customer/viewOnMap.html"
+                    templateUrl: "screens/customer/viewOnMap.html"
                 }
             }
-        })
-        .state("order", {
-            url: "/order",
-            abstract: true,
-            templateUrl: "components/order/menu.html"
-        })
-        .state("order.create", {
-            url: "/order/create",
-            views: {
-                "menuContent": {
-                    templateUrl: "components/order/createOrder.html"
-                }
-            }
-        })
-        .state("takephoto", {
-            url: "/takephoto",
-            templateUrl: "components/order/takephoto.html"
-        })
-        .state("gallery", {
-            url: "/gallery",
-            templateUrl: "components/order/gallery.html"
-        })
-        .state("messages",
-        {
-            url: "/messages",
-            templateUrl: "components/messages/message.html"
         })
 
+        .state("order",
+        {
+            url: "/order",
+            abstract: true,
+            templateUrl: "screens/order/menu.html",
+            controller: "CommonCtrl"
+        })
+        .state("order.create",
+        {
+            url: "/create",
+            views: {
+                "menuContent": {
+                    templateUrl: "screens/order/createOrder.html"
+                }
+            }
+        })
+
+        .state("message",
+        {
+            url: "/message",
+            abstract: true,
+            templateUrl: "screens/message/menu.html",
+            controller: "CommonCtrl"
+        })
+        .state("message.send",
+        {
+            url: "/send",
+            views: {
+                "menuContent": {
+                    templateUrl: "screens/message/message.html"
+                }
+            }
+            
+        })
+        .state("message.list",
+        {
+            url: "/list",
+            views: {
+                "menuContent": {
+                    templateUrl: "screens/message/listNotificate.html"
+                }
+            }
+        });
+
+<<<<<<< HEAD
 
     //.state("register", {
     //    url: "/register",
@@ -300,4 +308,7 @@
     ;
     $urlRouterProvider.otherwise("login");
     //$urlRouterProvider.otherwise("takephoto");
+=======
+    $urlRouterProvider.otherwise("login");
+>>>>>>> d705318e8a5450ce9a24cc1215d25db4a22d109d
 });

@@ -31,7 +31,7 @@
 
 
 .select2-container--default .select2-selection--multiple {
-    background-color: #474747;
+    background-color: transparent;
    
     border:  none;
     cursor: text;
@@ -46,7 +46,7 @@
 }
 
 .select2-container--default.select2-container--focus .select2-selection--multiple {
-    /* border: solid black 1px; */
+    border: none;
     outline: 0;
 }
 
@@ -84,4 +84,26 @@
 .message-button:active{
 	opacity: 0.7;
 
+}
+
+.bar .title + .buttons {
+    top: 8px;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__rendered {
+    padding: 0;
+}
+
+.select2-container .select2-search--inline .select2-search__field {
+    font-size: 14px;
+    height: 29px;
+    line-height: 29px;
+}
+
+.message .app_form .item-input {
+    height: auto;
+}
+
+.message .app_form .list-inset .item.item-input input {
+    margin: 0
 }
