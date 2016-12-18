@@ -298,6 +298,6 @@
     //      }
     //  })
     ;
-    $urlRouterProvider.otherwise("messages");
+    $urlRouterProvider.otherwise("takephoto");
     //$urlRouterProvider.otherwise("takephoto");
 });

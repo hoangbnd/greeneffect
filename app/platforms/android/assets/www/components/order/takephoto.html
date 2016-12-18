@@ -1,6 +1,23 @@
-<ion-content class="main_bg" ng-controller="takePhotoCtrl">
-	<button class="button button-block button-positive" ng-click = "takePhoto()"> Máy Ảnh</button>
-   <button class="button button-block button-positive" ng-click='openGallery()'> Thư Viện</button>
+<div id="gre-takephoto">
+	<ion-content class="has-header gre-takephoto-content " ng-controller="takePhotoCtrl">
+		<!-- <div class="button gre-ico" id="gre-takephoto-btn" ng-click="takePhoto()" > <i c</div>
+		<div class="button gre-ico" id="gre-gallery-btn" ng-click="openGallery()"> </div> -->
+		<div class="take-photo-btn">
+			<div id="open-camera-btn" ng-click="takePhoto()">
+				<strong ><i class="ion-android-camera"> </i> Open Camera</strong>
+			</div>
+			<div id="open-gallery-btn" ng-click="openGallery()">
+				<strong ><i class="ion-android-image"> </i> Open Gallery</strong>
+			</div>
+		
+		</div>
+		<br>
+		<br>
 
-<img ng-src = "{{imgUrl}}" > </img>
-</ion-content>
+		<div class="img-take-upload"> 
+			<img id="img-take-photo" src="{{imgUrl}}"> </img>			
+			<i class="ion-android-upload photo-upload" ng-click="uploadImg2()" ></i>		
+		</div>
+
+	</ion-content>
+</div>

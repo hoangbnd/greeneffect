@@ -1,62 +1,77 @@
 (function () {
     "use strict";
     angular.module("greeneffect.controller.message",
-        ["ngCordova" ])
+        [ ])
         .controller("MessageCtrl",
-           function ($scope,  $cordovaEmailComposer, $ionicPlatform) {
+           function ($scope) {
+            //data demo
+            sessionStorage.setItem("user", "anhnd");
+            //get UserId
+            $('#fromId').val(sessionStorage.getItem('user'));
             var data=[{id:1, text:'AnhNguyen', email:'anhnd1503@gmail.com'},{id:2, text:"HoangNguyen", email: "hoangbnd@gmail.com"}];
-            $ionicPlatform.ready(function(){
+            $('#email').select2({
+             /* data:data,*/
+              ajax:{
+                //get user from server
+              }
+            });
+            // setdata to 
+            //get Data Upload
+            var subject;
+            var userFrom;
+            var userTo=[];
+            var messageContent;
 
-                            
-                 $("#email").select2({
-                placeholder: "Nhap email",
-                data: data,
-                tags: true,
-                tokenSeparators: [',',' '] 
+            $scope.uploadData = function(){
+              alert("Call uploadData Function");
+
+              //get Data Upload
+                  subject = $('#subject').val();
+                  //userFrom = $('#fromId').val();
+                  userFrom = sessionStorage.getItem('key');
+              //
+
+              //alert (window.sessionStorage.getItem("user"));
+
+              /* get UserTo */
+              $('#email :selected').each(function(){
+                userTo.push($(this).select2().data().data.email);
               });
-                 $scope.sendMessage = function(){
-                    alert($cordovaEmailComposer);
-                 }
 
-            });
-            /*var data=[{id:1, text:'AnhNguyen', email:'anhnd1503@gmail.com'},{id:2, text:"HoangNguyen", email: "hoangbnd@gmail.com"}];
-            $("#email").select2({
-              placeholder: "Nhap email",
-              data: data,
-              tags: true,
-              tokenSeparators: [',',' '] 
-            });
-            $scope.sendMessage = function($cordovaEmailComposer){
-            var email = $('#email');
-            var subject = $('#subject');
-            var messageContent = $('#message-content');
-            var maillist = [];
-            $('#email :selected').each(function(){
-              maillist.push($(this).select2().data().data.email);
-            });
-              
-          
-             
-              //send email
+              messageContent = $('#message-content').val();
+              var message = {
+                subject: subject,
+                userFrom: userFrom,
+                userTo: userTo,
+                messageContent: messageContent
+              }
+              //call api upload to server
+              uploadToServer(url, message).then(function(success){
+                  //Upload to server success
 
-              document.addEventListener('deviceready', function(){
-                alert($cordovaEmailComposer);
-              }, false);
+              }, function(err){
+                //upload to serve fail
+              })
+            };
+
+            $scope.back = function(){
+              alert("Back");
+            }
 
 
-            }*/
-                 /*      var data=[{id:1, text:'AnhNguyen', email:'anhnd1503@gmail.com'},{id:2, text:"HoangNguyen", email: "hoangbnd@gmail.com"}];
-             var emailadd = $('.emailadd').find('select');
-             emailadd.css({"width": "100%","background-color":"gray"});
-             emailadd.addClass('email');
-             console.log(emailadd);
-             emailadd.select2({
-              data:data,
-              tokenSeparators: [',',' '],
-              tags: true,
-              allowClear: true
+            //userFuction
+            var uploadToServer = function(url, message){
+              $.ajax({
+                url: url,
+                type: 'post',
+                dataType: 'json',
+                success: function(data){
+                  //get result post data to server are success or fail
+                },
+                data: message
+              });
+            }       
 
-             });*/
              
             });
 
@@ -64,4 +79,3 @@
 
 
 
- 

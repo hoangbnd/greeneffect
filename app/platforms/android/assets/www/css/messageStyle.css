@@ -8,9 +8,23 @@
 	width: 100%;
 	background-color: #474747;
 	border: none;
+	
+}
+.mess-lbl{
+	color: green;
+	font-size: 18px;
+	font-weight: bold;
+}
+#subject{
+	color: white;	
+}
+#fromId{
+	color: white;
+	background-color: #474747;
 }
 #message-content{
 	height: 300px;
+	color: white;
 }
 
 /* style for select 2 */
@@ -45,7 +59,7 @@
 
 
 .bar.bar-positive {
-    background-color: 303030;
+    background-color: #303030;
 }
 /*.message-send{
 	font-size: 30px;

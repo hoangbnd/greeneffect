@@ -27,8 +27,8 @@
 
               //get Data Upload
                   subject = $('#subject').val();
-                  userFrom = $('#fromId').val();
-
+                  //userFrom = $('#fromId').val();
+                  userFrom = sessionStorage.getItem('key');
               //
 
               //alert (window.sessionStorage.getItem("user"));
@@ -79,4 +79,3 @@
 
 
 
- 
