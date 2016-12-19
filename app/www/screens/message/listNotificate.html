@@ -5,15 +5,15 @@
             <div class="main_bg line"></div>
             <div class="notificat_content">
                 <p ng-click="showNotificate(item)">
-                    <strong ng-if="!item.isRead">{{item.title}}</strong>
-                    <span ng-if="item.isRead">{{item.title}}</span>
-                    <small> - {{item.fromUser}}</small>
+                    <strong ng-if="!item.IsRead">{{item.Title}}</strong>
+                    <span ng-if="item.IsRead">{{item.Title}}</span>
+                    <small> - {{item.FromUserName}}</small>
                 </p>
                 <p class="main_color time">
-                    {{item.time | date : 'dd/MM/yyyy'}}
+                    {{item.DateTime | date : 'dd/MM/yyyy'}}
                     <a class="main_color" style="float: right" ng-click="delete(item)"><i class="ion-trash-a"></i></a>
                 </p>
-                <p ng-if="item.show">"{{item.content}}"</p>
+                <p ng-if="item.show">"{{item.Content}}"</p>
 
             </div>
         </div>

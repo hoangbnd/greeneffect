@@ -1,0 +1,2 @@
+﻿﻿DataProvider: sqlserver
+DataConnectionString: Data Source=103.18.7.211;Initial Catalog=tritoan_H1712_app;Persist Security Info=True;User ID=tritoan_H1712_app;Password=lc8L#i34;Max Pool Size=100;

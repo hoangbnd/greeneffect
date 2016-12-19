@@ -3,31 +3,32 @@
     angular.module("greeneffect.controller.message",
          [
              "greeneffect.service.message",
-             "greeneffect.constant"
+             "greeneffect.constant",
+              "greeneffect.common.service.urlcreator"
          ])
         .controller("MessageCtrl",
-            function ($scope, constant, messageServices) {
+            function ($scope, constant, messageServices, urlCreatorService) {
                 //prepare data
                 $scope.currentUser = angular.fromJson(sessionStorage.getItem(constant.SS_KEY.USER_INFO));
                 $scope.loading = false;
                 $scope.messageObj = {
-                    userFrom: $scope.currentUser.Id,
-                    userTo: [],
-                    subject: '',
-                    messageContent: ''
+                    fromId: $scope.currentUser.Id,
+                    toIds: [],
+                    title: "",
+                    content: ""
                 };
 
                 // get list Receivers
                 var $selectBox = $("#email").select2({
-                    //data:data
                     placeholder: "Người nhận",
                     minimumInputLength: 0,
                     escapeMarkup: function (m) {
                         return m;
                     },
                     ajax: {
+                        method: "get",
                         dataType: "json",
-                        url: "dummy/users.json",//TODO: dummy data
+                        url: urlCreatorService.createUrl("user", "GetUsers"),
                         data: function (params) {
                             return {
                                 q: params.term, // search term
@@ -38,19 +39,18 @@
                             params.page = params.page || 1;
                             var results = [];
                             if (data.IsSuccessful) {
-                                results = data.Data;
-
+                                data.Data.forEach(function(item) {
+                                    item.text = item.UserName;
+                                    item.id = item.Id;
+                                    results.push(item);
+                                });
                             } else {
-                                // TODO: show messgage
+                                results = [];
                             }
                             return {
-                                results: results,
-                                // TODO: pagination
-                                // pagination: {
-                                //     more: (params.page * 30) < data.TotalCount
-                                // }
+                                results: results
                             };
-                        },
+                        }
                     }
                 });
                 // triger focus on input
@@ -61,24 +61,24 @@
 
                 $scope.uploadData = function () {
                     $scope.loading = true;
-                    $scope.messageObj.userTo = [];
+                    $scope.messageObj.toIds = [];
                     /* get UserTo */
                     $("#email :selected").each(function () {
-                        $scope.messageObj.userTo.push($(this).select2().data().data.email);
+                        $scope.messageObj.toIds.push($(this).select2().data().data.id);
                     });
-                    if ($scope.messageObj.userTo.length == 0) {
+                    if ($scope.messageObj.toIds.length == 0) {
                         //show message
                         return;
                     }
                     console.log($scope.messageObj);
-
+                    sessionStorage.setItem(constant.SS_KEY.MSG_INFO, angular.toJson($scope.messageObj));
                     //call api upload to server
-                    messageServices.sendMessage($scope.messageObj).then(function (response) {
+                    messageServices.sendMessage().then(function (response) {
                         //Upload to server success
                         $scope.loading = false;
-                        $scope.messageObj.subject = '';
-                        $scope.messageObj.userTo = [];
-                        $scope.messageObj.messageContent = "";
+                        $scope.messageObj.title = '';
+                        $scope.messageObj.toIds = [];
+                        $scope.messageObj.content = "";
                         $scope.message = "Message send success";
 
                     }, function (err) {
@@ -93,34 +93,18 @@
         .controller("ListNotificateCtrl",
             function ($scope, messageServices) {
                 $scope.notificate = [];
-                //messageServices.getMessages().then(function (response) {
-                //    if (response.IsSuccessful) {
-                //        $scope.notificate = response.Data;
-                //    } else {
-                //        $scope.message = response.Message;
-                //    }
-                //});
-
-                //TODO: dummy
-                $.ajax({
-                    method: 'GET',
-                    url: "dummy/notificate.json",
-                    dataType: 'json',
-                    cache: true,
-                    success: function (response) {
-                        if (response.IsSuccessful) {
-                            $scope.notificate = response.Data;
-                        } else {
-                            $scope.message = response.Message;
-                        }
+                messageServices.getMessages().then(function (response) {
+                    if (response.IsSuccessful) {
+                        $scope.notificate = response.Data;
+                    } else {
+                        $scope.message = response.Message;
                     }
-
                 });
 
                 $scope.showNotificate = function(item) {
                     item.show = !item.show;
-                    if (!item.isRead) {
-                        item.isRead = true;
+                    if (!item.IsRead) {
+                        item.IsRead = true;
                     }
                     messageServices.readMessage(item.Id);
                 }

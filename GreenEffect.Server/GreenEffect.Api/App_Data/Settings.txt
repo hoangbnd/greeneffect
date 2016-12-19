@@ -1,2 +1,2 @@
 ﻿DataProvider: sqlserver
-DataConnectionString: workstation id=hoangnh.mssql.somee.com;packet size=4096;user id=hoangbnd_SQLLogin_1;pwd=9dwz6a1iwv;data source=hoangnh.mssql.somee.com;persist security info=False;initial catalog=hoangnh
+DataConnectionString: Data Source=(local);Initial Catalog=mobile;Persist Security Info=True;User ID=greeneffect;Password=greeneffect123;Max Pool Size=100;

@@ -15,7 +15,7 @@
                 TEMPLATE: "%protocol%://%domain%/%contentRoot%/%apiId%/%method%",
                 PROTOCOL: "http",
                 //DOMAIN: "localhost:17190",
-                DOMAIN: "hoangnh.somee.com",
+                DOMAIN: "demo.oristarcorp.vn",
                 CONTENT_ROOT: "api",
                 METHOD: "post"
             },
@@ -23,9 +23,11 @@
             SS_KEY: {
                 USER_INFO: "geUserInfo",
                 SYSTEM_EXCEPTION: "geSystemException",
-                HT0401F04_PARAM: "ht0401f04_param",
+                MSG_INFO: "geMessageInfo",
                 ROUTE_INFO: "geRouteInfo",
-                ORDER_INFO: "geOrderInfo"
+                ORDER_INFO: "geOrderInfo",
+                QUERY_USER: "geQueryUser"
+
             },
             GE_COOKIE_KEY: "GEUSERINFO",
             GE_USER_INFO_KEY: {

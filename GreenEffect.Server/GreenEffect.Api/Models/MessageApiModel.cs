@@ -9,6 +9,7 @@ namespace GreenEffect.Api.Models
     {
         public int Id { get; set; }
         public int FromId { get; set; }
+        public string FromUserName { get; set; }
         public int[] ToIds { get; set; }
         public int UserId { get; set; }
         public string Title { get; set; }

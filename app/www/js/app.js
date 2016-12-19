@@ -250,65 +250,6 @@
             }
         });
 
-<<<<<<< HEAD
-
-    //.state("register", {
-    //    url: "/register",
-    //    templateUrl: "templates/register.html"
-    //})
-
-    //.state("app", {
-    //    url: "/app",
-    //    abstract: true,
-    //    templateUrl: "templates/menu.html",
-    //    controller: "AppCtrl"
-    //})
-
-    //.state("app.home", {
-    //    url: "/home",
-    //    views: {
-    //        "menuContent": {
-    //            templateUrl: "templates/home.html"
-    //        }
-    //    }
-    //})
-    // .state("app.notification", {
-    //     url: "/notification",
-    //     views: {
-    //         "menuContent": {
-    //             templateUrl: "templates/notification.html"
-    //         }
-    //     }
-    // })
-
-    // .state("app.category", {
-    //     url: "/category",
-    //     views: {
-    //         "menuContent": {
-    //             templateUrl: "templates/category.html"
-    //         }
-    //     }
-    // })
-    // .state("app.detail", {
-    //     url: "/detail",
-    //     views: {
-    //         "menuContent": {
-    //             templateUrl: "templates/detail.html"
-    //         }
-    //     }
-    // })
-    //  .state("app.contact", {
-    //      url: "/contact",
-    //      views: {
-    //          "menuContent": {
-    //              templateUrl: "templates/contact.html"
-    //          }
-    //      }
-    //  })
-    ;
     $urlRouterProvider.otherwise("login");
-    //$urlRouterProvider.otherwise("takephoto");
-=======
-    $urlRouterProvider.otherwise("login");
->>>>>>> d705318e8a5450ce9a24cc1215d25db4a22d109d
+
 });

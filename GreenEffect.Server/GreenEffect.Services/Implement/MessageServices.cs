@@ -59,7 +59,7 @@ namespace GreenEffect.Services.Implement
 
         public ServiceResult<int> CountNewNotice(int userId)
         {
-            var whCls = new List<Expression<Func<Message, bool>>> { a => a.IsRead == false };
+            var whCls = new List<Expression<Func<Message, bool>>> { a => !a.IsRead, a => a.ToId == userId };
             try
             {
                 var messages = _messageRepository.Count(whCls);
@@ -90,7 +90,7 @@ namespace GreenEffect.Services.Implement
             var whCls = new List<Expression<Func<Message, bool>>> { a => a.ToId == idenUser };
             try
             {
-                var messages = _messageRepository.FindAll(whCls, "Id desc");
+                var messages = _messageRepository.FindAll(whCls, 50, "Id desc");
                 return new ServiceResult<ICollection<Message>>(messages);
             }
             catch (Exception e)

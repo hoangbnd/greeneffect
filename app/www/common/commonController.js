@@ -45,18 +45,16 @@
             $interval(getNotification, constant.NOTICE_RETRY_INTERVAL);
 
             function getNotification() {
-                //messageServices.getNewNotice().then(function (response) {
-                //    if (response.IsSuccessful) {
-                //        $scope.newNotice = response.Data;
-                //        if ($scope.newNotice > 0 && !$scope.menumodal.isShown()) {
-                //            $scope.menumodal.show();
-                //        }
-                //    } else {
-                //        $scope.newNotice = 0;
-                //    }
-                //});
-
-                $scope.newNotice = Math.floor(Math.random() * 10) + 1;
+                messageServices.getNewNotice().then(function (response) {
+                    if (response.IsSuccessful) {
+                        $scope.newNotice = response.Data;
+                        if ($scope.newNotice > 0 && !$scope.menumodal.isShown()) {
+                            $scope.menumodal.show();
+                        }
+                    } else {
+                        $scope.newNotice = 0;
+                    }
+                });
             }
 
         });

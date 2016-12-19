@@ -11,7 +11,7 @@ namespace GreenEffect.Repository.EF.Configuration
     {
         public MessageConfiguration()
         {
-            ToTable("viewall_messager");
+            ToTable("Message");
             HasKey(o => o.Id); 
             Property(o => o.FromId);
             Property(o => o.ToId);
@@ -19,7 +19,9 @@ namespace GreenEffect.Repository.EF.Configuration
             Property(o => o.Title);
             Property(o => o.Content);
             Property(o => o.DateTime);
-         }
+
+            HasRequired(o => o.User).WithMany(m => m.Messages).HasForeignKey(o => o.FromId);
+        }
 
     }
 }

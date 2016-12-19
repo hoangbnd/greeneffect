@@ -14,7 +14,8 @@
             "urlCreatorService",
             function($resource, $q, $exceptionHandler, constant, urlCreatorService) {
                 var userServicesFactory = {
-                    login: login
+                    login: login,
+                    searchUser: searchUser
                 };
                 return userServicesFactory;
 
@@ -50,5 +51,8 @@
                     }).save(body).$promise;
                 }
 
+                function searchUser() {
+                    var query = sessionStorage.getItem(constant.SS_KEY.QUERY_USER);
+                }
             }]);
 })();

@@ -16,15 +16,16 @@
                 userServices,
                 messageManagementService,
                 constant) {
-                $ionicLoading.show({
-                    template: "<ion-spinner icon='bubbles'></ion-spinner><br/>Đang đăng nhập!"
-                });
+                
                 $scope.alertMsg = "";
                 $scope.alertType = constant.MSG_TYPE.WARNING;
                 $scope.displayAlert = false;
 
                 // Perform the login action when the user submits the login form
                 $scope.doLogin = function () {
+                    $ionicLoading.show({
+                        template: "<ion-spinner icon='bubbles'></ion-spinner><br/>Đang đăng nhập!"
+                    });
                     if (angular.isUndefined($scope.loginData) ||
                         angular.isUndefined($scope.loginData.username) ||
                         angular.equals($scope.loginData.username, "")) {

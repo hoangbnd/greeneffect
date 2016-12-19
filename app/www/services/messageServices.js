@@ -17,7 +17,7 @@
                 var userInfo = angular.fromJson(sessionStorage.getItem(constant.SS_KEY.USER_INFO));
                 var body = {};
                 body["UserId"] = userInfo.Id;
-                return $resource(urlCreatorService.createUrl("Message", "GetMessages"), {
+                return $resource(urlCreatorService.createUrl("Message", "GetAll"), {
                     save: {
                         transformResponse: function (data) {
                             return angular.fromJson(data);
@@ -27,7 +27,10 @@
             }
 
 
-            function sendMessage(data) {
+            function sendMessage() {
+                var data = angular.fromJson(sessionStorage.getItem(constant.SS_KEY.MSG_INFO));
+                var userInfo = angular.fromJson(sessionStorage.getItem(constant.SS_KEY.USER_INFO));
+                data.fromId = userInfo.Id;
                 return $resource(urlCreatorService.createUrl("Message", "Send"), {
                     save: {
                         transformResponse: function (body) {

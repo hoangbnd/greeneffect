@@ -5,7 +5,7 @@
       <div class="list list-inset">
         <label class="item item-input">
           <i class="icon ion-clipboard placeholder-icon"></i>
-          <input type="text" placeholder="Tiêu đề" required="" ng-model="messageObj.subject">
+          <input type="text" placeholder="Tiêu đề" required="" ng-model="messageObj.title">
         </label>
         <label class="item item-input">
           <i class="icon ion-android-person placeholder-icon"></i>
@@ -14,7 +14,7 @@
         </label>
         <label class="item item-input txt_msg">
           <i class="icon ion-chatbox placeholder-icon"></i>
-          <textarea ng-model="messageObj.messageContent" name="content" rows="5" placeholder="Nội dung" ng-required="true"></textarea>
+          <textarea ng-model="messageObj.content" name="content" rows="5" placeholder="Nội dung" ng-required="true"></textarea>
           <!--Message Required Landline Phone-->
         </label>
         <button ng-disable="sendMessage.$invalid" class="button button-block app_btn main_bg">

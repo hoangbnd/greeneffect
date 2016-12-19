@@ -16,5 +16,8 @@ namespace GreenEffect.DomainObject.Message
         public string Content { get; set; }
         public DateTime DateTime { get; set; }
 
+        public virtual User.User User { get; set; }
+
+
     }
 }

@@ -1,2 +1,0 @@
-﻿DataProvider: sqlserver
-DataConnectionString: Data Source=(local);Initial Catalog=mobile;Persist Security Info=True;User ID=greeneffect;Password=greeneffect123;Max Pool Size=100;

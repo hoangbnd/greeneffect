@@ -66,12 +66,13 @@ namespace GreenEffect.Api.Controllers
                     {
                         Id = o.Id,
                         FromId = o.FromId,
+                        FromUserName = o.User.UserName,
                         ToIds = new[] { o.ToId },
                         IsRead = o.IsRead,
                         Title = o.Title,
                         Content = o.Content,
                         DateTime = o.DateTime,
-
+                        
                     }).OrderByDescending(i => i.Id).ToList();
                 }
 

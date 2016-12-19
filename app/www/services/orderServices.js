@@ -35,6 +35,7 @@
                     return $resource(urlCreatorService.createUrl("Order", "Create"), {
                         save: {
                             transformResponse: function (data) {
+                                console.log(data);
                                 return angular.fromJson(data);
                             }
                         }

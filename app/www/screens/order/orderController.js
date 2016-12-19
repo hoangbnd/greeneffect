@@ -107,21 +107,16 @@
                 sessionStorage.setItem(constant.SS_KEY.ORDER_INFO, angular.toJson(orderInfo));
                 var userInfo = angular.fromJson(sessionStorage.getItem(constant.SS_KEY.USER_INFO));
                 orderInfo.userId = userInfo.Id;
-                //var data = new FormData();
-                //data.append("userId", userInfo.Id);
-                //data.append("customerId", orderInfo.customer.Id);
-                //data.append("latitude", orderInfo.latitude);
-                //data.append("longitude", orderInfo.longitude);
-                //data.append("orderItems", orderInfo.orderItems);
+                
                 var files = [];
-                for (var i = 0; i < $scope.images.length; i++) {
-                    window.resolveLocalFileSystemURL($scope.images[i],
-                        function (fileEntry) {
-                            fileEntry.file(function (file) {
-                                files.push(file);
-                            });
-                        });
-                }
+                //for (var i = 0; i < $scope.images.length; i++) {
+                //    window.resolveLocalFileSystemURL($scope.images[i],
+                //        function (fileEntry) {
+                //            fileEntry.file(function (file) {
+                //                files.push(file);
+                //            });
+                //        });
+                //}
                 //data.append("files", files);
                 //var xhr = new XMLHttpRequest();
                 //xhr.open("POST", urlCreatorService.createUrl("Order", "Create2"));
@@ -134,57 +129,64 @@
                 //xhr.send(data);
 
 
-                orderServices.sendOrder().then(function (res) {
-                    if (res.IsSuccessful) {
-                        $scope.displayAlert = true;
-                        $scope.alertType = constant.MSG_TYPE.SUCCESS;
-                        $scope.alertMsg = messageManagementService.getMessage("S001");
-                        $state.go("customer.list");
-                    } else {
-                        $scope.displayAlert = true;
-                        $scope.alertType = constant.MSG_TYPE.WARNING;
-                        $scope.alertMsg = res.Message;
-                    }
-                }).catch(function (e) {
-                    $scope.displayAlert = true;
-                    $scope.alertType = constant.MSG_TYPE.WARNING;
-                    $scope.alertMsg = messageManagementService.getMessage("E001");
-                });
+                //orderServices.sendOrder().then(function (res) {
+                //    if (res.IsSuccessful) {
+                //        $scope.displayAlert = true;
+                //        $scope.alertType = constant.MSG_TYPE.SUCCESS;
+                //        $scope.alertMsg = messageManagementService.getMessage("S001");
+                //        $state.go("customer.list");
+                //    } else {
+                //        $scope.displayAlert = true;
+                //        $scope.alertType = constant.MSG_TYPE.WARNING;
+                //        $scope.alertMsg = res.Message;
+                //    }
+                //}).catch(function (e) {
+                //    $scope.displayAlert = true;
+                //    $scope.alertType = constant.MSG_TYPE.WARNING;
+                //    $scope.alertMsg = messageManagementService.getMessage("E001");
+                //});
+                var data = new FormData();
+                data.append("userId", userInfo.Id);
+                data.append("customerId", orderInfo.customer.Id);
+                data.append("latitude", orderInfo.latitude);
+                data.append("longitude", orderInfo.longitude);
+                data.append("orderItems", orderInfo.orderItems);
+                //data.append("files", files[0]);
                 //var body = {};
                 //body["userId"] = userInfo.Id;
                 //body["customerId"] = orderInfo.customer.Id;
                 //body["latitude"] = orderInfo.latitude;
                 //body["longitude"] = orderInfo.longitude;
                 //body["orderItems"] = orderInfo.orderItems;
-                //$http({
-                //    method: 'POST',
-                //    url: urlCreatorService.createUrl("Order", "Create"),
+                $http({
+                    method: 'POST',
+                    url: urlCreatorService.createUrl("Order", "Create2"),
 
-                //    headers: {
-                //        'Content-Type': false,
-                //        'Accept': 'application/json'
-                //    },
-                //    transformRequest: function (data) {
-                //        var formData = new FormData();
-                //        //need to convert our json object to a string version of json otherwise
-                //        // the browser will do a 'toString()' on the object which will result 
-                //        // in the value '[Object object]' on the server.
-                //        formData.append("model", angular.toJson(data.model));
-                //        //now add all of the assigned files
-                //        for (var i = 0; i < data.files; i++) {
-                //            //add each file to the form data and iteratively name them
-                //            formData.append("file" + i, data.files[i]);
-                //        }
-                //        return formData;
-                //    },
-                //    //Create an object that contains the model and files which will be transformed
-                //    // in the above transformRequest method
-                //    data: { model: body, files: files }
-                //}).success(function (data, status, headers, config) {
-                //    alert("success!");
-                //}).error(function (data, status, headers, config) {
-                //    alert("failed!");
-                //});
+                    headers: {
+                        'Content-Type': "application/x-www-form-urlencoded",
+                        'Accept': "application/json"
+                    },
+                    //transformRequest: function (data) {
+                    //    var formData = new FormData();
+                    //    //need to convert our json object to a string version of json otherwise
+                    //    // the browser will do a 'toString()' on the object which will result 
+                    //    // in the value '[Object object]' on the server.
+                    //    formData.append("model", angular.toJson(data.model));
+                    //    //now add all of the assigned files
+                    //    for (var i = 0; i < data.files; i++) {
+                    //        //add each file to the form data and iteratively name them
+                    //        formData.append("file" + i, data.files[i]);
+                    //    }
+                    //    return formData;
+                    //},
+                    //Create an object that contains the model and files which will be transformed
+                    // in the above transformRequest method
+                    data: data
+                }).success(function (data, status, headers, config) {
+                    alert("success!");
+                }).error(function (data, status, headers, config) {
+                    alert("failed!");
+                });
             }, function (err) {
                 $scope.displayAlert = true;
                 $scope.alertType = constant.MSG_TYPE.WARNING;
