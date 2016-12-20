@@ -1,6 +1,6 @@
 ﻿<ion-view view-title="Tạo đơn hàng" ng-controller="OrderCtrl">
     <ion-content class="contact_us has-header">
-        <form class="app_form">
+        <form class="app_form" method="POST" enctype="m">
             <p>
                 Tạo đơn hàng
             </p>
@@ -18,7 +18,9 @@
                     <i class="icon ion-map placeholder-icon"></i>
                     <textarea rows="5" placeholder="Địa chỉ" readonly>{{customer.Address}}</textarea>
                 </label>
-
+              <label class="item item-input txt_msg" ng-if="isUnableCapture">
+                <input type="file" onchange="angular.element(this).scope().uploadFile(this.files)" multiple="multiple" accept="image/*" />
+              </label>
                 <a href="javascript:;" class="button button-block app_btn main_bg" ng-click="searchProduct();">
                     Chọn sản phẩm
                 </a>
@@ -38,9 +40,9 @@
                     </div>
                 </div>
                 <div class="clearfix"></div>
-                <a href="javascript:;" class="button button-block app_btn main_bg" ng-click="takePhoto();">
-                    Chụp ảnh
-                </a>
+              <a href="javascript:;" ng-if="!isUnableCapture" class="button button-block app_btn main_bg" ng-click="takePhoto();">
+                Chụp ảnh
+              </a>
                 <div class="row" ng-if="images.length > 0">
                     <div class="col-33" ng-repeat="image in images">
                         <img src="{{image}}" class="full-image" alt=""/>

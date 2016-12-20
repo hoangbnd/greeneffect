@@ -139,13 +139,26 @@ namespace GreenEffect.Api.Controllers
                             {
 
                             }
+                            if (key.ToLower() == "files")
+                            {
+                                model.ImageUrls = new List<string>();
+                                var urls = val.Split(',').Where(url => url != "").ToArray();
+                                if (urls.Length > 0 && urls.Length%2 == 0)
+                                {
+                                    for (var i = 0; i < urls.Length; i=i+2)
+                                    {
+                                        model.ImageUrls.Add(string.Format("{0},{1}", urls[i],urls[i + 1]));
+                                    }
+                                }
+                                //TODO: save file to disk
+                            }
                         }
                 }
                 // This illustrates how to get the file names for uploaded files.
-                foreach (var file in provider.FileData)
-                {
-                    model.Files2.Add(file);
-                }
+                //foreach (var file in provider.FileData)
+                //{
+                //    model.Files2.Add(file);
+                //}
 
                 var order = new Order
                 {

@@ -15,6 +15,7 @@ namespace GreenEffect.Api.Models
         public string Latitude { get; set; }
         public ICollection<OrderItemApiModel> OrderItems { get; set; }
         public string Images { get; set; }
+        public ICollection<string> ImageUrls { get; set; }
         public ICollection<MultipartFileData> Files2 { get; set; }
         public ICollection<HttpPostedFileBase> Files { get; set; }
         public DateTime Datetime { get; set; }
